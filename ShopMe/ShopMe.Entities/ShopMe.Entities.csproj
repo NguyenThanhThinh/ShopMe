@@ -54,14 +54,42 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Capacity.cs" />
+    <Compile Include="Models\DanhSachGoiSanPham.cs" />
+    <Compile Include="Models\Districts.cs" />
+    <Compile Include="Models\Error.cs" />
+    <Compile Include="Models\Feedback.cs" />
+    <Compile Include="Models\Group.cs" />
+    <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\OrderDetail.cs" />
+    <Compile Include="Models\PearsonScore.cs" />
+    <Compile Include="Models\Post.cs" />
+    <Compile Include="Models\PostCategory.cs" />
+    <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\ProductBrand.cs" />
+    <Compile Include="Models\ProductCategory.cs" />
+    <Compile Include="Models\ProductDetail.cs" />
+    <Compile Include="Models\ProductShowViewModel.cs" />
+    <Compile Include="Models\ProductUnit.cs" />
+    <Compile Include="Models\Provinces.cs" />
+    <Compile Include="Models\Role.cs" />
+    <Compile Include="Models\RoleGroup.cs" />
+    <Compile Include="Models\Slide.cs" />
+    <Compile Include="Models\SystemConfig.cs" />
+    <Compile Include="Models\ThongTinHoTro.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserBarnd.cs" />
+    <Compile Include="Models\UserBrand.cs" />
+    <Compile Include="Models\UserCategory.cs" />
+    <Compile Include="Models\UserGroup.cs" />
+    <Compile Include="Models\UserRating.cs" />
+    <Compile Include="Models\UserRatingAverage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
