@@ -1,0 +1,419 @@
+﻿@using ShopMe.Domains.Extensions
+
+@using Microsoft.AspNet.Identity
+@using Microsoft.Owin.Security
+
+@{
+    string user = User.Identity.GetUserName();
+    string userName = user.Truncate(10, true);
+    string url = Request.Url.PathAndQuery;
+    var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
+}
+<style>
+    .login__title {
+        background: url(/Assets/client/images/icon1.png) no-repeat;
+        min-height: 36px;
+        padding: 0 0 0 50px;
+    }
+
+    abbr[title] { border-bottom: 0px dotted !important; }
+
+    .login__title h2 {
+        font-size: 30px;
+        font-weight: 500;            
+    }
+
+    .login__title p span {
+        display: block;
+        float: left;
+        margin-right: 3px;
+    }
+
+    .login__title p a {
+        color: #00b7f1;
+        display: block;
+        float: left;
+    }
+
+    .login__boder { border-color: #00b7f1; }
+
+    .res__setwith { width: 400px !important; }
+
+    .login__title1 {
+        background: url(/Assets/client/images/icon2.png) no-repeat;
+        min-height: 36px;
+        padding: 0 0 0 50px;
+    }
+
+    .login__title1 h2 {
+        font-size: 30px;
+        font-weight: 500;
+    }
+
+    .login__title1 p span {
+        display: block;
+        float: left;
+        margin-right: 3px;
+    }
+
+    .login__title1 p a {
+        color: #00b7f1;
+        display: block;
+        float: left;
+    }
+
+    .login__boder1 { border-color: #00b7f1; }
+</style>
+
+<header id="header" class="type_5">
+
+<!-- - - - - - - - - - - - - - Bottom part - - - - - - - - - - - - - - - - -->
+
+<div class="bottom_part">
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="main_header_row">
+
+                <div class="col-sm-3">
+
+                    <!-- - - - - - - - - - - - - - Logo - - - - - - - - - - - - - - - - -->
+
+                    <a href="/trang-chu.html" class="logo">
+
+                        <img src="~/Content/images/logo.png" alt="">
+
+                    </a>
+
+                    <!-- - - - - - - - - - - - - - End of logo - - - - - - - - - - - - - - - - -->
+
+                </div><!--/ [col]-->
+
+                <div class="col-lg-6 col-md-5 col-sm-5">
+
+                    <!-- - - - - - - - - - - - - - Call to action - - - - - - - - - - - - - - - - -->
+
+                    <div class="call_us">
+
+                        <span>Liên hệ chúng tôi:</span> <b>+0965899230</b>
+
+                    </div><!--/ .call_us-->
+
+
+                    <form class="clearfix search" method="get" action="/tim-kiem.html">
+
+                        <input type="text" id="txtKeyword" name="keyword" tabindex="1" placeholder="Tìm kiếm..." class="alignleft">
+
+
+                        <div class="search_category alignleft">
+
+                            <div class="open_categories" style="opacity: 3;">
+                                <a href="" data-toggle="tooltip" title="vui lòng click vào chọn tìm theo loại!">Chọn</a>
+                            </div>
+
+                            <ul class="categories_list dropdown find">
+                                @*<li class="animated_item"><a href="#">Tất cả</a></li>*@
+                                @Html.Action("_OptionCategory", "Product")
+
+
+
+                            </ul>
+
+                        </div>
+                        <!-- - - - - - - - - - - - - - End of categories - - - - - - - - - - - - - - - - -->
+
+                        <button class="button_blue def_icon_btn alignleft"></button>
+
+                    </form><!--/ #search-->
+                    <!-- - - - - - - - - - - - - - End search form - - - - - - - - - - - - - - - - -->
+
+                </div><!--/ [col]-->
+
+                <div class="col-lg-3 col-sm-4">
+
+
+                    <div class="login__wis" style="margin-top: 40px; display: inline-block;">
+                        <ul class="account_bar">
+
+
+                            <li>
+                                @using (Html.BeginForm("LogOut", "Account", FormMethod.Post, new {@id = "frmLogout"}))
+                                {
+                                    if (Request.IsAuthenticated)
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        <div class="login_box">
+                                            <div class="login_box_inner">
+
+                                                <a href="#">
+                                                    @*@if (User.Identity.GetUserName().Length > 15)
+                                                        {
+                                                            @User.Identity.GetUserName().Substring(0, 11);
+                                                        }
+                                                        else
+                                                        {
+                                                            @User.Identity.GetUserName();
+                                                        }*@
+                                                    @userName
+
+                                                </a> | <a href="#" id="btnLogout">Thoát</a>
+                                            </div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="login_box">
+                                            <div class="login_box_inner"> <a data-toggle="modal" data-target="#myModal5" href="#">Đăng nhập</a> hoặc <a data-toggle="modal" data-target="#myModal6" href="#">Đăng ký</a></div>
+                                        </div>
+                                    }
+                                }
+                            </li>
+                            <li>
+
+                                <a href="#" data-toggle="tooltip" title="xem chi tiết giỏ hàng!" class="wishlist_button adds">
+                                    <i class="fa fa-cart-arrow-down" aria-hidden="true" style="font-size: 32px; margin: 3px;"></i><span class="cart-count" id="lblQuantity"></span>
+                                </a>
+
+                            </li>
+
+                        </ul>
+                    </div>
+
+
+                </div><!--/ [col]-->
+
+            </div><!--/ .main_header_row-->
+
+        </div><!--/ .row-->
+
+    </div><!--/ .container-->
+
+</div><!--/ .bottom_part -->
+
+
+@Html.Action("Menu", "Home")
+
+
+<div class="modal fade poplogin" id="myModal5" role="dialog">
+    <div class="modal-dialog modal-sm">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"></button>
+                <div class="login__title">
+                    <h2>Đăng nhập</h2>
+                    <p>
+                        <span>Bạn chưa có tài khoản ? </span>
+                        <a href="#" id="btnregister1">Đăng ký</a>
+                    </p>
+                </div>
+                <p style="text-align: center; color: red" id="thongbaodn"></p>
+                @*<h4 style="text-align:center;" class="modal-title">Đăng nhập</h4><br />
+                    <strong style="float:left">Bạn chưa có tài khoản ?</strong> <a href="#" id="btnregister1"> <strong style="color:red;">Đăng ký ngay</strong></a>
+                    <p style="text-align:center;color:red" id="thongbaodn"></p>*@
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        @*<h5>Tài khoản</h5>
+                            <input type="text" class="form-control" placeholder="Tên đăng nhập" id="dn_tendangnhap" name="username" required maxlength="20">*@
+                        <div class="form-group">
+                            <label class="control-label">Tài khoản</label>
+                            <input class="form-control login__boder" type="text" placeholder="Tên đăng nhập" id="Username_1" name="Username_1" required>
+
+                        </div>
+                    </div>
+                </div>
+                <br/>
+                <div class="row">
+                    <div class="col-md-12">
+                        @*<h5>Mật khẩu</h5>
+                            <input type="password" class="form-control" placeholder="Nhập mật khẩu" id="dn_matkhau" name="password" required min="6" max="30">*@
+                        <div class="form-group">
+                            <label class="control-label">Mật khẩu</label>
+                            <input class="form-control login__boder" type="password" placeholder="Nhập mật khẩu" id="dn_matkhau" name="dn_matkhau" required>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer progress-demo">
+
+                <input type="hidden" name="url" value=""/>
+
+                <button style="width: 100%;" class="ladda-button btn btn-success phongrass loginshopme" id="btndangnhap" data-color="blue" data-style="slide-right">
+                    <abbr title="Sau khi đăng nhập khách hàng  đánh giá sản phẩm hệ thống sẽ gợi ý cho bạn những sản phẩm tốt !">Đăng nhập</abbr>
+                </button><br/><br/>
+
+
+                <br/>
+                <strong class="mb+" style="float: left">Bạn có thể đăng nhập bằng: </strong>
+                <br/>
+
+                @{
+
+                    if (loginProviders.Any())
+                    {
+                        using (Html.BeginForm("ExternalLogin", "Account", new {ReturnUrl = url}))
+                        {
+                            @Html.AntiForgeryToken()
+                            <div id="socialLoginList">
+                                <p>
+                                    @foreach (AuthenticationDescription p in loginProviders)
+                                    {
+                                        <button type="submit" class="btn ladda-button" id="@p.AuthenticationType" data-color="blue" data-style="slide-right" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account">
+                                            <i class="fa fa-@p.AuthenticationType.ToLower()"></i> @p.AuthenticationType</button>
+                                    }
+                                </p>
+                            </div>
+                        }
+                    }
+                }
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade popresign" id="myModal6" role="dialog">
+    <div class="modal-dialog modal-md res__setwith">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"></button>
+                <div class="login__title1">
+                    <h2>Đăng ký tài khoản</h2>
+                    <p>
+
+                        <span style="float: left">Đã có tài khoản ?</span> <a href="#" id="btnlogin">Đăng nhập</a>
+                    </p>
+                </div>
+
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        @*<h5>Tài khoản</h5>
+                                <input type="text" class="form-control" placeholder="Tên đăng nhập" id="dn_tendangnhap" name="username" required maxlength="20">*@
+                        <div class="form-group">
+                            <label class="control-label">Họ tên</label>
+                            <input class="form-control" type="text" placeholder="Họ tên" id="FullName" name="FullName" required>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        @*<h5>Mật khẩu</h5>
+                                <input type="password" class="form-control" placeholder="Nhập mật khẩu" id="dn_matkhau" name="password" required min="6" max="30">*@
+                        <div class="form-group">
+                            <label class="control-label">Tài khoản</label>
+                            <input class="form-control" type="text" placeholder="Tài khoản" id="UserName" name="UserName" required>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        @*<h5>Mật khẩu</h5>
+                <input type="password" class="form-control" placeholder="Nhập mật khẩu" id="dn_matkhau" name="password" required min="6" max="30">*@
+                        <div class="form-group">
+                            <label class="control-label">Nhập mật khẩu</label>
+                            <input class="form-control" type="password" placeholder="Nhập mật khẩu" id="Password" name="Password" required>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        @*<h5>Mật khẩu</h5>
+                <input type="password" class="form-control" placeholder="Nhập mật khẩu" id="dn_matkhau" name="password" required min="6" max="30">*@
+                        <div class="form-group">
+                            <label class="control-label">Nhập lại mật khẩu</label>
+                            <input class="form-control" type="password" placeholder="Nhập lại mật khẩu" id="ReplacePassword" name="ReplacePassword" required>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        @*<h5>Mật khẩu</h5>
+                <input type="password" class="form-control" placeholder="Nhập mật khẩu" id="dn_matkhau" name="password" required min="6" max="30">*@
+                        <div class="form-group">
+                            <label class="control-label">Email</label>
+                            <input class="form-control" type="email" required placeholder="Email" id="Email" name="Email">
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="modal-footer progress-demo">
+
+                <input type="hidden" name="url" value=""/>
+
+                <input type="submit" style="width: 100%;" class="ladda-button btn btn-success phongrass" value="Đăng ký" id="register" data-color="blue" data-style="slide-right"><br/><br/>
+
+                <strong class="mb+" style="float: left">Bạn có thể đăng nhập bằng: </strong>
+                <br/>
+                @{
+
+                    if (loginProviders.Any())
+                    {
+                        using (Html.BeginForm("ExternalLogin", "Account", new {ReturnUrl = url}))
+                        {
+                            @Html.AntiForgeryToken()
+                            <div id="socialLoginList">
+                                <p>
+                                    @foreach (AuthenticationDescription p in loginProviders)
+                                    {
+                                        <button type="submit" class="ladda-button btn " id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" data-color="blue" data-style="slide-right" title="Log in using your @p.Caption account">
+                                            <i class="fa fa-@p.AuthenticationType.ToLower()"></i> @p.AuthenticationType</button>
+                                    }
+                                </p>
+                            </div>
+                        }
+                    }
+                }
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<script src="~/Scripts/app/lg.js"></script>
+<script src="~/Scripts/app/dk.js"></script>
+
+<script>
+
+
+    $(document).ready(function() {
+        $('#btnregister1').click(function() {
+            $("#myModal6").modal("show");
+            $("#myModal5").modal("hide");
+        });
+        $("#btnlogin").click(function() {
+            $("#myModal6").modal("hide");
+            $("#myModal5").modal("show");
+        });
+    })
+
+
+</script>
+<script>
+    $(document).ready(function() {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
+
+
+</header>

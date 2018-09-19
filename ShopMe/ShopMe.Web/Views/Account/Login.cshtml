@@ -1,0 +1,65 @@
+﻿@model ShopMe.Domains.LoginViewModel
+@{
+    ViewBag.Title = "Login";
+}
+
+
+
+   
+<style>
+    #login__container {
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+    .login--title {
+        text-align: center;
+    }
+</style>
+<section>
+    <div class="container">
+        <div class="row" id="login__container">
+            <header class="login__title">
+                <div class="login--title">
+                    <h2 class="">Thông tin tài khoản</h2>
+                </div>
+
+            </header><!--/ .on_the_sides-->
+            @using (Html.BeginForm("Login", "Account", new { returnUrl = @ViewBag.ReturnUrl }, FormMethod.Post))
+            {
+                @Html.ValidationSummary(false, "", new { @class = "error" })
+                <ul>
+                    <li>
+                        <label for="login_email">Tài khoản</label>
+                        <input type="text" name="UserName" id="login_email">
+                    </li>
+                    <li>
+                        <label for="login_password">Mật khẩu</label>
+                        <input type="password" name="Password" id="login_password">
+                    </li>
+                    <li>
+                        <input type="checkbox" name="RememberMe" id="checkbox_1">
+                        <label for="checkbox_1">Ghi nhớ</label>
+                    </li>
+                    <li class="v_centered">
+                        <button class="button_blue middle_btn">Đăng nhập</button>
+                        <a href="#" class="small_link">Bạn quên mật khẩu?</a>
+                    </li>
+                </ul>
+            }
+            @Html.Partial("_ExternalLoginsListPartial", new ShopMe.Domains.ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+            <hr>
+            @*<div class="streamlined">
+
+                <h4 class="streamlined_title">Đăng nhập với</h4>
+                <!--Social icon's list-->
+                <ul class="horizontal_list social_btns">
+                    <li><a href="#" class="icon_btn middle_btn social_facebook tooltip_container"><i class="icon-facebook-1"></i><span class="tooltip top">Facebook</span></a></li>
+                    <li><a href="#" class="icon_btn middle_btn social_twitter tooltip_container"><i class="icon-twitter"></i><span class="tooltip top">Twitter</span></a></li>
+                    <li><a href="#" class="icon_btn middle_btn social_googleplus tooltip_container"><i class="icon-gplus-2"></i><span class="tooltip top">GooglePlus</span></a></li>
+                </ul><!--/ .horizontal_list.wrapper.social_btns-->
+                <!--End social icon's list-->
+            </div><!--/ .streamlined-->*@
+        </div>
+    </div>
+</section>

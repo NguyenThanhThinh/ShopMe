@@ -1,0 +1,193 @@
+﻿.ui-autocomplete {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    max-height: 200px;
+    overflow: auto;
+    z-index: 9999;
+    border: 1px solid #eeeeee;
+    border-radius: 4px;
+    background-color: #fff;
+    box-shadow: 0px 1px 6px 1px rgba(0, 0, 0, 0.4);
+}
+
+.cart-count {
+    border: 2px solid #ff4557;
+    width: 20px;
+    height: 20px;
+    float: right;
+    /* line-height: 16px; */
+    display: inline-block;
+    padding: 0;
+    position: absolute;
+    z-index: 2;
+    top: -8px;
+    right: 0.3px;
+    color: white;
+    background: #ff4557;
+    border-radius: 70%;
+    text-align: center;
+    display: none;
+}
+collection {
+    border: 1px solid #ddd;
+    81 margin-top: 20px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.collection .collection-header {
+    background: #4ac4fa;
+    margin: 0;
+    color: #fff;
+    text-align: center;
+    font-size: 4rem;
+    padding: 1rem 0;
+    font-weight: 600;
+}
+
+.collection .collection-item {
+    border-left: none;
+    border-right: none;
+    padding: 10px;
+    margin: 0 10px;
+}
+
+    .collection .collection-item + .collection-item {
+        border-top: 1px solid #ddd;
+    }
+
+    .collection .collection-item h4 {
+        margin: 0;
+        font-size: 1rem;
+    }
+
+    .collection .collection-item p {
+        margin: 0;
+    }
+
+.collection .collection-footer {
+    background: #ddd;
+    margin: 0;
+    padding: 1rem;
+    font-weight: 600;
+}
+
+.order-button {
+    border: none;
+    padding: .8rem;
+    text-align: center;
+    width: 100%;
+    background: #4ac4fa;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 1.5rem;
+}
+
+
+button#Facebook {
+    color: #fff;
+    background-color: #3b5998;
+    border-color: rgba(0,0,0,.2);
+    margin: auto;
+    margin-bottom: 1px;
+    width: 100%;
+    margin-top: 4px;
+}
+
+button#Google {
+    background: #c74530;
+    /* border: 1px solid #c63923; */
+    color: white;
+    width: 100%;
+}
+
+.phongrass {
+    color: #fff;
+    background-color: #3b9dc8 !important;
+    border-color: #3b9dc8 !important;
+}
+
+
+
+.rating .fa {
+    color: #f0c808 !important;
+}
+#ui-id-1 {
+    z-index: 1400;
+}
+/* workarounds */
+html .ui-autocomplete {
+    width: 1px;
+}
+/* without this, the menu expands to 100% in IE6 */
+.ui-menu {
+    list-style: none;
+    padding: 2px;
+    margin: 0;
+    display: block;
+    outline: none;
+}
+
+    .ui-menu .ui-menu {
+        margin-top: -3px;
+        position: absolute;
+    }
+
+    .ui-menu .ui-menu-item {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+    }
+
+    .ui-menu .ui-menu-divider {
+        margin: 5px -2px 5px -2px;
+        height: 0;
+        font-size: 0;
+        line-height: 0;
+        border-width: 1px 0 0 0;
+    }
+
+    .ui-menu .ui-menu-item a {
+        font-weight: normal;
+        color: #333333;
+    }
+
+        .ui-menu .ui-menu-item a.ui-state-focus,
+        .ui-menu .ui-menu-item a.ui-state-active {
+            color: #23527c;
+            background-color: #eeeeee;
+        }
+
+    .ui-menu .ui-state-disabled {
+        font-weight: normal;
+        margin: .4em 0 .2em;
+        line-height: 1.5;
+    }
+
+        .ui-menu .ui-state-disabled a {
+            cursor: default;
+        }
+
+/* icon support */
+.ui-menu-icons {
+    position: relative;
+}
+
+    .ui-menu-icons .ui-menu-item a {
+        position: relative;
+        padding-left: 2em;
+    }
+
+/* left-aligned */
+.ui-menu .ui-icon {
+    position: absolute;
+    top: .2em;
+    left: .2em;
+}
+
+/* right-aligned */
+.ui-menu .ui-menu-icon {
+    position: static;
+    float: right;

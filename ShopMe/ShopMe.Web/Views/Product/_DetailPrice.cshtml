@@ -1,0 +1,145 @@
+﻿@model ShopMe.Domains.ProductViewModel
+<script src="~/bower_components/mustache/mustache.js"></script>
+<script src="~/bower_components/numeral/min/numeral.min.js"></script>
+@{ 
+    var listCUB = ViewBag.GetListBCU as ShopMe.Domains.ProductViewModel;
+}
+<style>
+    .title__barank {
+        color: #00aaf1 !important;
+    }
+</style>
+
+<div class="single_product_description">
+
+    <h3 class="offset_title"><a href="#">@Model.Name</a></h3>
+
+    <!-- - - - - - - - - - - - - - Page navigation - - - - - - - - - - - - - - - - -->
+
+    <div class="page-nav">
+
+        <a href="#" class="page-prev"></a>
+        <a href="#" class="page-next"></a>
+
+    </div>
+
+    <!-- - - - - - - - - - - - - - End of page navigation - - - - - - - - - - - - - - - - -->
+
+    <div class="description_section v_centered">
+
+        <!-- - - - - - - - - - - - - - Product rating - - - - - - - - - - - - - - - - -->
+
+        <ul class="rating">
+            @if (Model.ProductRating > 0 && Model.ProductRating != 0)
+            {
+
+                double Mark = (double)Model.ProductRating;//2.7
+                double SoTron = Mark - Mark % 1; //2
+                double SoDu = 5 - SoTron; //3
+                double SoDu_SaoRong = Math.Round(SoDu);//3
+                if (Mark % 1 >= 0.5)
+                {
+                    SoDu_SaoRong = SoDu_SaoRong - 1;
+                }
+                double SoDu_NuaSao = SoDu - Math.Round(SoDu_SaoRong);
+                if (Mark > 0)
+                {
+                    for (int f = 1; f <= SoTron; f++)
+                    {
+                        <i class="fa fa-star"></i>
+                    }
+                    for (int f = 1; f <= SoDu_NuaSao; f++)
+                    {
+                        <i class="fa fa-star-half-o"></i>
+                    }
+                    for (int f = 1; f <= SoDu_SaoRong; f++)
+                    {
+                        <i class="fa fa-star-o"></i>
+                    }
+                    <span class="likes ml+">@Model.ViewRating (đánh giá)</span>
+                }
+
+
+
+            }
+            else
+            {
+                <p class="review" style="text-align:left;">Chưa có nhận xét</p>
+            }
+
+        </ul>
+
+      
+
+        <!-- - - - - - - - - - - - - - End of reviews menu - - - - - - - - - - - - - - - - -->
+
+    </div>
+    <div class="description_section">
+
+        <table class="product_info">
+
+            <tbody>
+
+                <tr>
+
+                    <td>Thương hiệu: </td>
+                    <td><a href="#"><strong class="title__barank">@(listCUB.ProductBrand.Name == "" ? "chưa có thông tin" : listCUB.ProductBrand.Name)</strong></a></td>
+
+                </tr>
+
+                <tr>
+
+                    <td>Lượt xem: </td>
+                    <td><span class="in_stock">@Model.ViewCount</span></td>
+
+                </tr>
+
+               
+
+            </tbody>
+
+        </table>
+
+    </div>
+    <hr>
+
+    <div class="description_section">
+
+        <p>@Model.Description</p>
+
+    </div>
+
+    <hr>
+
+    <p class="product_price"> <b class="theme_color">@(Model.Price == 0 ? "Liên hệ" : Model.Price.ToString("N0")) đ</b></p>
+
+    <div class="description_section_2 v_centered">
+
+        <span class="title">Số lượng:</span>
+
+        <div class="qty min clearfix">
+
+            <button class="theme_button" data-direction="minus">&#45;</button>
+            <input type="text" name="" class="quantity" value="1">
+            <button class="theme_button" data-direction="plus">&#43;</button>
+
+        </div>
+
+    </div>
+    <div class="buttons_row">
+
+       @if (Model.Quantity > 0)
+       {
+            <button class="button_blue middle_btn " id="AddCartQuantity" data-id="@Model.ProductID">Thêm vào giỏ hàng</button>
+            <a class="button_blue middle_btn AddCartQuantityMuaNgay " href="#" data-id="@Model.ProductID">Mua ngay</a>
+       }
+       else
+       {
+         <a class="button_blue middle_btn"  data-toggle="tooltip" title="cảm ơn quý khách!" href="#" >Sản phẩm hết hàng</a>
+       }   
+
+    </div>
+
+   
+
+</div>

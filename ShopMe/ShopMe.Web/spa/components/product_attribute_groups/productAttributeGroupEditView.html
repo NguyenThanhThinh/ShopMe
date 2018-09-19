@@ -1,0 +1,43 @@
+﻿<section class="content-header">
+    <h1>
+        CẬP NHẬT NHÓM THUỘC TÍNH
+    </h1>
+    <ol class="breadcrumb">
+        <li><a ui-sref="home"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
+        <li><a ui-sref="product_attribute_groups">DANH SÁCH NHÓM THUỘC TÍNH</a></li>
+        <li class="active">Cập nhật</li>
+    </ol>
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Cập nhật nhóm: <b>{{productAttributeGroup.Name}}</b></h3>
+                </div><!-- /.box-header -->
+                <!-- form start -->
+                <form class="form-horizontal" role="form" novalidate name="frmUpdateProductAttributeGroup" ng-submit="updateProductAttributeGroup()">
+                    <div class="box-body">
+                        <div class="col-md-12">
+                            <div class="form-group" ng-class="{ 'has-error' : frmUpdateProductAttributeGroup.name.$invalid && !frmUpdateProductAttributeGroup.name.$pristine }">
+                                <label class="col-sm-2 control-label">Tên nhóm:</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="name" class="form-control" ng-maxlength="256" required ng-model="productAttributeGroup.Name">
+                                    <span ng-show="frmUpdateProductAttributeGroup.name.$invalid  && !frmUpdateProductAttributeGroup.name.$pristine" class="has-error">Tên nhóm không được rỗng.</span>
+                                    <span ng-show="frmUpdateProductAttributeGroup.name.$error.maxlength" class="has-error">Tên nhóm tối đa 256 ký tự.</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <input type="submit" ng-disabled="frmUpdateProductAttributeGroup.$invalid" class="btn btn-primary" value="Lưu lại" />
+                                    <a ui-sref="product_attribute_groups" class="btn btn-default">Hủy bỏ</a>
+                                    <button class="btn btn-default" type="button" ng-click="resetForm()">Làm lại</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- /.box-body -->
+                </form>
+            </div><!-- /.box -->
+        </div>
+    </div>
+</section>

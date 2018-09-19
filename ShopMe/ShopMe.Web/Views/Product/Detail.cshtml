@@ -1,0 +1,714 @@
+﻿@using ShopMe.Entities.Models
+@using ShopMe.Domains.Extensions
+
+@model ShopMe.Domains.ProductViewModel
+
+@{
+    ViewBag.Title = "Trang chi tiết";
+
+    double Rating = (double)Model.ProductRating;
+    double Rating1 = Rating - Rating % 1; //2
+    double RatingAVG = Math.Round(Rating1);
+    var listCUB = ViewBag.GetListBCU as ShopMe.Domains.ProductViewModel;
+    var coment = ViewBag.comment as IEnumerable<ShopMe.Domains.FeedbackViewModel>;
+    var listRating = ViewBag.GetListRating as List<ShopMe.Domains.UserRatingViewModel>;
+    var listproudctLike = ViewBag.ProductLike as IEnumerable<ShopMe.Domains.ProductViewModel>;
+
+    var listProductcategory = ViewBag.listProductCategory as IEnumerable<ShopMe.Domains.ProductViewModel>;
+    var model = listProductcategory;
+    var list1 = listRating.Where(n => n.Rating == 1).ToList();
+    var pt1 = (double)((double)list1.Count / (double)listRating.Count) * 100;
+    double ptstar1 = Math.Round(pt1, 3);
+
+    double SoTron1 = ptstar1 - ptstar1 % 1; //2
+
+    double SoDu_SaoRong1 = Math.Round(SoTron1); //3
+    var list2 = listRating.Where(n => n.Rating == 2).ToList();
+    var pt2 = (double)((double)list2.Count / (double)listRating.Count) * 100;
+
+    double ptstar2 = Math.Round(pt2, 3);
+
+    double SoTron2 = ptstar2 - ptstar2 % 1; //2
+
+    double SoDu_SaoRong2 = Math.Round(SoTron2); //3
+    var list3 = listRating.Where(n => n.Rating == 3).ToList();
+
+    var pt3 = (double)((double)list3.Count / (double)listRating.Count) * 100;
+    double ptstar3 = Math.Round(pt3, 3);
+
+    double SoTron3 = ptstar3 - ptstar3 % 1; //2
+
+    double SoDu_SaoRong3 = Math.Round(SoTron3); //3
+    var list4 = listRating.Where(n => n.Rating == 4).ToList();
+    var pt4 = (double)((double)list4.Count / (double)listRating.Count) * 100;
+    double ptstar4 = Math.Round(pt4, 3);
+
+    double SoTron4 = ptstar4 - ptstar4 % 1; //2
+
+    double SoDu_SaoRong4 = Math.Round(SoTron4); //3
+    var list5 = listRating.Where(n => n.Rating == 5).ToList();
+    var pt5 = (double)((double)list5.Count / (double)listRating.Count) * 100;
+
+    double ptstar5 = Math.Round(pt5, 3);
+
+    double SoTron5 = ptstar5 - ptstar5 % 1; //2
+
+    double SoDu_SaoRong5 = Math.Round(SoTron5); //3
+}
+<link href="~/Content/css/OutLine.css" rel="stylesheet" />
+<style>
+    .progress {
+        height: 18px;
+        width: 75%;
+        margin-bottom: 12px;
+        overflow: hidden;
+        background-color: #f8f8f8;
+        border-radius: 4px;
+        -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
+        box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
+    }
+
+    .star__common {
+        color: #f0c808 !important;
+    }
+</style>
+
+
+<div class="secondary_page_wrapper">
+
+    <div class="container">
+
+        <!-- - - - - - - - - - - - - - Breadcrumbs - - - - - - - - - - - - - - - - -->
+
+        <ul class="breadcrumbs">
+
+            <li>
+                <a href="/trang-chu.html">Trang chủ</a>
+            </li>
+            @*<li><a href="#"></a></li>
+                <li><a href="#">@Model.ProductCategory.Name</a></li>*@
+            <li>@Model.Name</li>
+
+        </ul>
+
+        <!-- - - - - - - - - - - - - - End of breadcrumbs - - - - - - - - - - - - - - - - -->
+        <!-- - - - - - - - - - - - - - Product images & description - - - - - - - - - - - - - - - - -->
+
+        <section class="section_offset">
+
+            <div class="clearfix">
+
+                <!-- - - - - - - - - - - - - - Product image column - - - - - - - - - - - - - - - - -->
+
+                @Html.Partial("_DetailImage")
+
+                <!-- - - - - - - - - - - - - - End of product image column - - - - - - - - - - - - - - - - -->
+                <!-- - - - - - - - - - - - - - Product description column - - - - - - - - - - - - - - - - -->
+
+                @Html.Partial("_DetailPrice")
+
+                <!-- - - - - - - - - - - - - - End of product description column - - - - - - - - - - - - - - - - -->
+
+            </div>
+
+        </section><!--/ .section_offset -->
+
+        <section class="section_offset">
+            <h3 class="offset_title">
+                <a href="#" class="section__lable">
+                    <strong>Có thể bạn thích !</strong>
+                </a>
+            </h3>
+
+            @Html.Partial("_ProductLike", listproudctLike);
+
+        </section>
+
+        <div class="section_offset">
+
+            <div class="tabs type_2">
+
+                <ul class="tabs_nav clearfix">
+
+                    <li>
+                        <a href="#tab-1">Thông tin</a>
+                    </li>
+                    <li>
+                        <a href="#tab-2">Thông số sản phẩm</a>
+                    </li>
+                    <li>
+                        <a href="#tab-3">Khách hàng đánh giá</a>
+                    </li>
+
+
+                </ul>
+
+
+                <div class="tab_containers_wrap">
+
+
+                    <div id="tab-1" class="tab_container">
+
+                        @if (Model.Content == "")
+                        {
+                            <span>chưa có thông tin sản phẩm</span>
+                        }
+                        else
+                        {
+                            @Html.Raw(Model.Content)
+                        }
+
+                    </div><!--/ #tab-1-->
+
+
+                    <div id="tab-2" class="tab_container">
+
+                        <ul class="specifications">
+
+                            <li>
+                                <span>Thương hiệu:</span>@(listCUB?.ProductBrand.Name == "" ? "chưa có thông tin" : listCUB.ProductBrand.Name)
+
+
+                            </li>
+                            <li>
+                                <span>Xuất xứ:</span> @(listCUB?.ProductBrand.Address == "" ? "chưa có thông tin" : listCUB.ProductBrand.Address)
+
+
+                            </li>
+                            <li>
+                                <span>Dung tích:</span>
+                                <strong>
+                                    <i>@(listCUB.ProductCappacity == 0 ? "chưa có thông tin" : listCUB.ProductCappacity.ToString())</i>
+                                </strong> @(listCUB.ProductUnit.Name == "" ? "chưa có thông tin" : listCUB.ProductUnit.Name)
+
+
+                            </li>
+
+
+                        </ul>
+
+                    </div><!--/ #tab-2-->
+
+                    <div id="tab-3" class="tab_container">
+
+                        <section class="section_offset">
+                            <div class="tab-pane tabContent active" data-menu="tabMenu3">
+                                <div class="tab-pane tabContent active" data-menu="tabMenu3" id="tab_default_3">
+                                    <div class="DiemDanhGia col-md-3">
+                                        <span class="titleAvgMark">Điểm đánh giá trung bình</span>
+                                        <h3 class="avgMark">
+                                            @(RatingAVG == 0 ? 0 : RatingAVG)/ 5
+                                        </h3>
+                                        <div class="rating">
+                                            @if (Model.ProductRating > 0 && Model.ViewCount != 0)
+                                            {
+                                                double Mark = (double)Model.ProductRating; //2.7
+                                                double SoTron = Mark - Mark % 1; //2
+                                                double SoDu = 5 - SoTron; //3
+                                                double SoDu_SaoRong = Math.Round(SoDu); //3
+                                                if (Mark % 1 >= 0.5)
+                                                {
+                                                    SoDu_SaoRong = SoDu_SaoRong - 1;
+                                                }
+                                                double SoDu_NuaSao = SoDu - Math.Round(SoDu_SaoRong);
+                                                if (Mark > 0)
+                                                {
+                                                    for (int f = 1; f <= SoTron; f++)
+                                                    {
+                                                        <i class="fa fa-star"></i>
+                                                    }
+                                                    for (int f = 1; f <= SoDu_NuaSao; f++)
+                                                    {
+                                                        <i class="fa fa-star-half-o"></i>
+                                                    }
+                                                    for (int f = 1; f <= SoDu_SaoRong; f++)
+                                                    {
+                                                        <i class="fa fa-star-o"></i>
+                                                    }
+                                                    <div class="rating__view p0 ml+" style="display: inline;">
+                                                        <span style="color: #00aaf1 !important;">@Model.ViewRating (đánh giá)</span>
+
+                                                    </div>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <p class="review" style="text-align: left;">Chưa có nhận xét</p>
+                                            }
+
+
+                                        </div>
+                                    </div>
+                                    <div class="DiemDanhGiaTB col-md-5">
+
+                                        <strong>1</strong> <i class="fa fa-star star__common" style="margin: 2px;">(@list1.Count)</i>
+                                        <div class="progress">
+
+
+                                            <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="60"
+                                                 aria-valuemin="0" aria-valuemax="100" style="width: @SoDu_SaoRong1%">
+                                                @SoDu_SaoRong1%
+                                            </div>
+                                        </div>
+                                        <strong>2</strong> <i class="fa fa-star star__common" style="margin: 2px;">(@list2.Count)</i>
+                                        <div class="progress">
+
+
+                                            <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="60"
+                                                 aria-valuemin="0" aria-valuemax="100" style="width: @SoDu_SaoRong2%">
+                                                @SoDu_SaoRong2%
+                                            </div>
+                                        </div>
+                                        <strong>3</strong> <i class="fa fa-star star__common" style="margin: 2px;">(@list3.Count)</i>
+                                        <div class="progress">
+
+
+                                            <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="60"
+                                                 aria-valuemin="0" aria-valuemax="100" style="width: @SoDu_SaoRong3%">
+                                                @SoDu_SaoRong3%
+                                            </div>
+                                        </div>
+                                        <strong>4</strong> <i class="fa fa-star star__common" style="margin: 2px;">(@list4.Count)</i>
+                                        <div class="progress">
+
+
+                                            <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="60"
+                                                 aria-valuemin="0" aria-valuemax="100" style="width: @SoDu_SaoRong4%">
+                                                @SoDu_SaoRong4%
+                                            </div>
+                                        </div>
+                                        <strong>5</strong> <i class="fa fa-star star__common" style="margin: 2px;">(@list5.Count)</i>
+                                        <div class="progress">
+
+
+                                            <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="60"
+                                                 aria-valuemin="0" aria-valuemax="100" style="width: @SoDu_SaoRong5%">
+                                                @SoDu_SaoRong5%
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+
+                                    <div class="DiemDanhGiaTB col-md-4">
+                                        <h4>Chia sẻ nhận xét về sản phẩm</h4>
+
+                                        <button type="button" data-toggle="tooltip" title="bạn phải đăng nhập trước khi sử dụng chức năng này!" data-productrating="@Model.ProductID" class="btn btn-info btntfeedback">Viết nhận xét của bạn</button>
+                                        <button type="button" class="btn btn-info btntfeedbackclose " style="width: 70%;">Đóng</button>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <br>
+                                    <div class="block_input_comment width_commonrating">
+                                        <link href="~/Scripts/plugins/RatingCoursePartial.css" rel="stylesheet" />
+                                        <script src="~/Scripts/plugins/RatingCoursePartial.js"></script>
+                                        <div class="form-group">
+                                            <div class="ratingCourse ratingstatus">
+                                                <div class="container1">
+                                                    <input type="radio" name="example" class="rating" data-ratings="1" value="1" style="display: none;">
+                                                    <input type="radio" name="example" class="rating" data-ratings="2" value="2" style="display: none;">
+                                                    <input type="radio" name="example" class="rating" data-ratings="3" value="3" style="display: none;">
+                                                    <input type="radio" name="example" class="rating" data-ratings="4" value="4" style="display: none;">
+                                                    <input type="radio" name="example" class="rating" data-ratings="5" value="5" style="display: none;">
+
+                                                </div>
+
+                                                <script>
+                                $('.container1').rating();
+                                                </script>
+
+                                            </div>
+
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="txt_input_comment">Tiêu đề nhận xét</div>
+                                            <input type="text" name="rating_title" id="txttitle" class="form-control" placeholder="Nhập tiêu đề nhận xét tại đây (không bắt buộc)">
+                                            <input type="hidden" id="ratinghtml" value="" />
+                                            <input type="hidden" id="productrating" value="@Model.ProductID" />
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="txt_input_comment">
+                                                Viết nhận xét
+
+                                            </div>
+                                            <textarea class="form-control" id="txtcontent" rows="3" name="rating_content" placeholder="Nhận xét của bạn về sản phẩm này"></textarea>
+                                        </div>
+                                        <div class="form-group text-right">
+                                            <button data-toggle="tooltip" title="vui lòng viết nhận xét!" class="btn btn-info btnsubmitRating" type="submit">Gửi</button>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <ul class="reviews">
+
+                                <li>
+
+                                    <div class="DiemDanhGia col-md-12">
+
+
+
+                                        @Html.Action("_GetComment", "Product")
+                                    </div>
+
+
+                                </li>
+
+
+                            </ul>
+
+
+                        </section>
+
+
+                    </div><!--/ .tab_containers_wrap -->
+                    <!-- - - - - - - - - - - - - - End of tabs containers - - - - - - - - - - - - - - - - -->
+
+                </div><!--/ .tabs-->
+
+            </div><!--/ .section_offset -->
+            <br /><br /><br />
+            <div class="clearfix"></div>
+
+            <section class="section_offset">
+
+                <h3 class="offset_title">Sản phẩm cùng loại</h3>
+
+
+                <div class="owl_carousel five_items">
+
+
+                    @foreach (var item in model)
+                    {
+                        var url = "/" + item.Alias + ".sp-" + item.ProductID + ".html";
+                        var Name = item.Name?.Truncate(15, true);
+                        <div class="product_item">
+
+                            <!-- - - - - - - - - - - - - - Thumbnail - - - - - - - - - - - - - - - - -->
+
+                            <div class="image_wrap">
+
+                                <img src="@item.Image" class="img-responsive" alt="">
+                                <!-- - - - - - - - - - - - - - Product actions - - - - - - - - - - - - - - - - -->
+                                <div class="actions_wrap">
+
+                                    <div class="centered_buttons">
+
+                                        <a href="@url" class="button_dark_grey quick_view">Xem</a>
+
+                                        <a href="#" class="button_blue add_to_cart btnAddCart" data-id="@item.ProductID">Mua hàng</a>
+                                    </div><!--/ .centered_buttons -->
+                                </div>
+
+                            </div><!--/. image_wrap-->
+
+                            <div class="description align_center">
+
+                                <p>
+                                    <a href="@url">@Name?.Truncate(20, true)</a>
+                                </p>
+
+                                <div class="clearfix product_info">
+
+                                    <!-- - - - - - - - - - - - - - Product rating - - - - - - - - - - - - - - - - -->
+                                    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+                                    <ul class="rating alignright">
+                                        @if (item.ProductRating > 0 && item.ProductRating != 0)
+                                        {
+                                            double Mark = (double)item.ProductRating; //2.7
+                                            double SoTron = Mark - Mark % 1; //2
+                                            double SoDu = 5 - SoTron; //3
+                                            double SoDu_SaoRong = Math.Round(SoDu); //3
+                                            if (Mark % 1 >= 0.5)
+                                            {
+                                                SoDu_SaoRong = SoDu_SaoRong - 1;
+                                            }
+                                            double SoDu_NuaSao = SoDu - Math.Round(SoDu_SaoRong);
+                                            if (Mark > 0)
+                                            {
+                                                for (int f = 1; f <= SoTron; f++)
+                                                {
+                                                    <i class="fa fa-star"></i>
+                                                }
+                                                for (int f = 1; f <= SoDu_NuaSao; f++)
+                                                {
+                                                    <i class="fa fa-star-half-o"></i>
+                                                }
+                                                for (int f = 1; f <= SoDu_SaoRong; f++)
+                                                {
+                                                    <i class="fa fa-star-o"></i>
+                                                }
+                                                <p class="likes" style="margin-left: 3px;">@item?.ViewRating (đánh giá)</p>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <p class="review" style="text-align: left;">Chưa có nhận xét</p>
+                                        }
+
+                                    </ul>
+
+                                    <p class="product_price alignleft">
+
+                                        <b>@item.Price.ToString("N0")</b>
+                                    </p>
+
+                                </div><!--/ .clearfix.product_info-->
+
+
+                            </div>
+
+
+                        </div>
+                    }
+
+
+
+
+                </div><!--/ .owl_carousel.five_items-->
+
+
+            </section>
+
+
+        </div><!--/ .container-->
+
+    </div>
+</div>
+
+@section scripts {
+
+    <script src="~/Content/js/jquery.elevateZoom-3.0.8.min.js"></script>
+    <script src="~/Content/js/fancybox/source/jquery.fancybox.pack.js"></script>
+    <script src="~/Content/js/fancybox/source/helpers/jquery.fancybox-media.js"></script>
+    <script src="~/Content/js/fancybox/source/helpers/jquery.fancybox-thumbs.js"></script>
+
+    <script>
+        $(document).ready(function() {
+
+            $('.width_commonrating').hide();
+
+            $('.btntfeedbackclose').hide();
+
+        });
+    </script>
+
+    @if (Request.IsAuthenticated == true)
+    {
+        <script>
+            var rating =
+            {
+                init: function() {
+
+                    rating.registerEvent();
+                },
+                registerEvent: function() {
+
+
+                    $('.btntfeedback').on('click',
+                        function() {
+                            var productId = parseInt($(this).data('productrating'));
+
+                            $.ajax({
+                                url: '/Product/Getexist',
+                                data: {
+                                    productrating: productId
+                                },
+                                type: 'POST',
+                                dataType: 'json',
+                                success: function(response) {
+                                    if (response.status == false) {
+                                        toastr.success(response.message);
+
+                                    } else {
+                                        $('.width_commonrating').css("display", "block");
+
+                                        $('.btntfeedback').css("display", "none");
+                                        $('.btntfeedbackclose').css("display", "block");
+                                    }
+                                }
+                            });
+
+
+                        });
+                    $('.btntfeedbackclose').on('click',
+                        function() {
+
+                            $('.width_commonrating').css("display", "none");
+                            $('.btntfeedback').css("display", "block");
+                            $('.btntfeedbackclose').css("display", "none");
+
+                        });
+                    $('.ratingCourse').on('click',
+                        function() {
+
+                            var rating = $("input[type='radio']:checked").val();
+                            $('#ratinghtml').html(rating);
+                            //$('#ratingmodal').modal('show');
+                            //$(':radio:not(:checked)').attr('disabled', true);
+
+                        });
+
+                    $(".btnsubmitRating").off('click').on('click',
+                        function() {
+
+                            var nanValue = NaN;
+                            var product = parseInt($('#productrating').val());
+                            var rating = parseInt($('#ratinghtml').text());
+
+                            var title1 = $('#txttitle').val();
+                            var content1 = $('#txtcontent').val();
+                            var error = 0;
+                            if (isNaN(rating) == true) {
+                                error++;
+                                toastr.warning("Vui lòng chọn ngôi sao");
+                                return;
+
+
+                            }
+
+                            if (content1 == "") {
+                                error++;
+                                toastr.warning("Hãy nhập đầy đủ thông tin");
+                                return;
+
+                            }
+                            if (content1.length < 10) {
+                                error++;
+                                toastr.warning("Vui lòng nhập hơn 10 ký tự");
+                                return;
+                            }
+                            if (title1 == "") {
+                                title1 = "không có tiêu đề";
+                            }
+
+                            if (error != 0) {
+                                return false;
+                            } else {
+
+                                $.ajax({
+                                    url: '/Product/UserRangting',
+                                    data: {
+                                        product: product,
+                                        rating: rating,
+                                        title: title1,
+                                        content: content1
+                                    },
+                                    type: 'POST',
+                                    dataType: 'json',
+                                    success: function(response) {
+                                        if (response.status == true) {
+                                            toastr.success("Góp ý nhận xét thành công");
+                                            window.location.reload();
+                                        }
+                                    }
+                                });
+
+                            }
+
+                        });
+
+                    $("#btnrating").click(function() {
+
+                        bootbox.confirm({
+                            message: "Bạn phải đăng nhập mới đánh giá được!Bạn có muốn làm điều đó không ?",
+                            buttons: {
+                                confirm: {
+                                    label: 'Yes',
+                                    className: 'btn-success'
+                                },
+                                cancel: {
+                                    label: 'No',
+                                    className: 'btn-danger'
+                                }
+                            },
+                            callback: function(result) {
+                                console.log('This was logged in the callback: ' + result);
+                                if (result == true) {
+                                    $("#myModal5").modal("show");
+                                } else {
+                                    window.location.reload();
+                                }
+                            }
+                        });
+                    });
+                },
+
+
+            }
+            rating.init();
+        </script>
+    }
+    else
+    {
+        <script>
+            (function() {
+
+                $(".btntfeedback").click(function() {
+
+                    bootbox.confirm({
+                        message: "Bạn phải đăng nhập mới đánh giá được ! Bạn có muốn làm điều đó không ?",
+                        buttons: {
+                            confirm: {
+                                label: 'Có',
+                                className: 'btn-success'
+                            },
+                            cancel: {
+                                label: 'Không',
+                                className: 'btn-danger'
+                            }
+                        },
+                        callback: function(result) {
+                            console.log('This was logged in the callback: ' + result);
+                            if (result == true) {
+                                $("#myModal5").modal("show");
+                            } else {
+                                window.location.reload();
+                            }
+                        }
+                    });
+                });
+            })();
+        </script>
+    }
+
+
+
+
+
+
+}
+
+
+<div class="modal fade" id="ratingmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="recipient-name" class="form-control-label">Recipient:</label>
+                        <input type="text" class="form-control" id="recipient-name">
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="form-control-label">Message:</label>
+                        <textarea class="form-control" id="message-text"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Send message</button>
+            </div>
+        </div>
+    </div>
+</div>

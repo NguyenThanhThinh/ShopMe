@@ -1,0 +1,73 @@
+﻿ <!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        CẬP NHẬT SLIDER
+    </h1>
+    <ol class="breadcrumb">
+        <li><a ui-sref="home"><i class="fa fa-dashboard"></i>Trang chủ</a></li>
+        <li><a ui-sref="post_categories">Cập nhật Slider</a></li>
+        <li class="active">Cập nhật</li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    <!-- Horizontal Form -->
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <h3 class="box-title">Danh mục: <b>{{update.Name}}</b></h3>
+        </div><!-- /.box-header -->
+        <!-- form start -->
+        <form class="form-horizontal" novalidate name="frmUpdateslider" role="form" ng-submit="UpdateSlider()">
+            <div class="box-body">
+
+                <div class="form-group">
+                    <label for="description" class="col-sm-2 control-label">Mô tả ngắn:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="description" ng-model="update.Description">
+                    </div>
+                </div>
+
+                <div class="form-group" ng-class="{ 'has-error' : frmUpdateslider.displayOrder.$invalid && !frmUpdateslider.displayOrder.$pristine }">
+                    <label for="displayOrder" class="col-sm-2 control-label">Thứ tự:</label>
+                    <div class="col-sm-10">
+                        <input type="number" class="form-control" required name="displayOrder" ng-model="addslider.DisplayOrder">
+                        <span ng-show="frmUpdateslider.displayOrder.$invalid && !frmUpdateslider.displayOrder.$pristine" class="has-error">Thứ tự là bắt buộc.</span>
+                    </div>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error' : frmUpdateslider.image.$invalid && !frmUpdateslider.image.$pristine }">
+                    <label for="image" class="col-sm-2 control-label">Hình ảnh:</label>
+                    <div class="col-sm-10">
+                        <div class="input-group">
+                            <input type="text" class="form-control" ng-maxlength="256" name="imageInput" ng-model="update.Image">
+                            <span class="input-group-btn"><button class="btn btn-default" type="button" ng-click="ChooseImage()">Chọn ảnh</button></span>
+                        </div>
+                        <img ng-show="addslider.Image" class="img-responsive" name="image" ng-src="{{update.Image}}" width="150" alt="Hình ảnh">
+                        <span ng-show="frmAddProductBrand.imageInput.$error.maxlength" class="has-error">Độ dài trường tối đa 256 ký tự.</span>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="status" ng-model="addslider.Status" ng-checked="addslider.Status"> Hiển thị
+                            </label>
+                        </div>
+
+                    </div>
+                </div>
+            </div><!-- /.box-body -->
+            <div class="box-footer">
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <input type="submit" ng-disabled="frmUpdateslider.$invalid" class="btn btn-info" value="Lưu lại" />
+                        <a ui-sref="post_categories" class="btn btn-default">Hủy bỏ</a>
+                        <button class="btn btn-default" type="button" ng-click="resetForm()">Làm lại</button>
+                    </div>
+                </div>
+            </div><!-- /.box-footer -->
+
+        </form>
+    </div><!-- /.box -->
+</section><!-- /.content -->

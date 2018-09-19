@@ -1,0 +1,222 @@
+﻿.header {
+    border-top: 3px solid $red;
+}
+
+.header-container {
+    display: flex;
+
+    .header__left {
+        margin: 0;
+        padding: 0;
+    }
+
+    .header__right {
+        flex: 1;
+    }
+
+    .header__top {
+        background: $grey;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        border-bottom-left-radius: 50px;
+        max-width: 600px;
+        margin-left: auto;
+    }
+}
+
+.header__left {
+    .logo {
+        display: block;
+        padding: 10px 2rem 10px 0;
+    }
+}
+
+.header__top {
+    ul {
+        a {
+            display: block;
+            padding: 0 10px;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-weight: 300;
+            font-size: .85rem;
+            color: $dark;
+            line-height: 2rem;
+            height: 2rem;
+        }
+    }
+
+    li {
+        padding: 4px 0;
+        float: left;
+        cursor: pointer;
+
+        &:last-child {
+            a {
+                border-left: 1px solid $dark;
+                //padding-right: 20px;
+            }
+        }
+
+        &:hover {
+            background: #fff;
+        }
+    }
+
+    a {
+        .fa {
+            margin-left: 10px;
+            margin-right: 10px;
+            font-size: 1.25rem;
+        }
+    }
+
+    > h3 {
+        margin: 0;
+        padding: 8px 10px;
+        font-weight: 600;
+        font-size: 1.2rem;
+        color: $red;
+        cursor: pointer;
+        transition: .3s ease-in-out;
+
+        .fa {
+            background: $red;
+            color: #fff;
+            width: 25px;
+            height: 25px;
+            text-align: center;
+            line-height: 25px;
+            border-radius: 50%;            
+        }
+
+        &:hover {
+            background: $red;
+            color: #fff;
+        }
+    }
+}
+
+.navigation {
+    margin-top: 15px;
+}
+
+.menu {
+    margin-left: 3rem;
+    padding: 0;
+    display: inline-block;
+
+    li {
+        float: left;
+        display: block;
+    }
+
+    > li { /* will have sub menu */
+        > a {
+            display: block;
+            text-transform: uppercase;
+            padding: 5px 15px;
+            font-weight: 600;
+            text-decoration: none;
+            color: $dark;
+            font-size: .9rem;
+        }
+
+        &:hover {
+            background: $grey;
+        }
+    }
+
+    a {
+        &:hover {
+            color: $red;
+            background: $grey;
+        }
+    }
+}
+
+.header__search {
+    display: inline-block;
+    border: 1px solid #111;
+    border-top-left-radius: 20px;
+    position: relative;
+    margin-right: 30px;
+    float: right;
+
+    input {
+        outline: none;
+        border: none;
+        border-top-left-radius: 20px;
+        color: $dark;
+        font-size: 1rem;
+        padding: 2px 20px;
+    }
+
+    .btn-search {
+        border: 3px solid $red;
+        outline: none;
+        color: $red;
+        display: inline-block;
+        border-radius: 8px;
+        width: 35px;
+        height: 35px;
+        text-align: center;
+        // line-height: 30px;
+        position: absolute;
+        bottom: -2px;
+        left: 100%;
+        margin-left: -4px;
+        background: #fff;
+        transition: background color .3s ease-in-out;
+
+        &:hover {
+            background: #ef4136;
+            color: #fff;
+        }
+    }
+}
+
+.has-sub {  
+  position: relative;
+}
+
+.has-sub .sub-menu {  
+  position: absolute;
+  left: 0;
+  top: 100%;
+  z-index: 100;
+  background-color: #f3f3f3;
+  display: none;
+  visibility: hidden;
+}
+
+.has-sub:hover .sub-menu {
+  display: block;
+  visibility: visible;
+}
+
+.menu-sub {
+  white-space: nowrap;
+}
+
+.menu-sub ul {  
+  white-space: nowrap;
+  min-width: calc(100px * 4);
+}
+
+.menu-sub ul li {  
+  float: left;
+  width: 25%;
+  max-width: 100px;
+  min-width: 100px;
+  display: block;  
+}
+
+.menu-sub a {
+  display: block;
+  color: #333;
+  font-weight: 300;
+  text-decoration: none;
+  padding: 8px 16px;
+}

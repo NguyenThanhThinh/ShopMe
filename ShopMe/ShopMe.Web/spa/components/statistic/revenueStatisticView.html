@@ -1,0 +1,102 @@
+﻿ <!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        Thống kê doanh thu
+    </h1>
+    <ol class="breadcrumb">
+        <li><a ui-sref="home"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
+        <li class="active">Thống kê doanh thu</li>
+    </ol>
+</section>
+<section class="content">
+    <!-- Main content -->
+    <div class="row">
+        <section class="col-lg-12">
+            <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs pull-left" style="display:inline-flex">
+                    <li>Từ ngày:</li>
+                    <li>
+                        <input name="dateStart" class="form-control" type="datetime" date-time ng-model="datePicker.dateStart" format="DD-MM-YYYY" placeholder="Ngày-Tháng-Năm" title="Chọn ngày bắt đầu">
+                        <input type="hidden" name="dateStart" ng-model="datePicker.dateStart" required />
+                    </li>
+                    <li>Đến ngày:</li>
+                    <li>
+                        <input name="dateEnd" class="form-control" type="datetime" date-time ng-model="datePicker.dateEnd" format="DD-MM-YYYY" placeholder="Ngày-Tháng-Năm" title="Chọn ngày cuối cùng">
+                        <input type="hidden" name="dateEnd" ng-model="datePicker.dateEnd" required />
+                    </li>
+                    <li><a class="btn btn-default" ng-click="getStatistic()"><i class="glyphicon glyphicon-play"></i>Thực hiện</a></li>
+                </ul>
+                <div class="tab-content no-padding">
+
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="row">
+        <!--Left col-->
+        <div class="col-md-7">
+            <div class="box box-danger">
+                <div class="box-header with-border">
+                    <h3 class="box-title"><i class="fa fa-bar-chart-o"></i>Biểu đồ</h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <div class="chart">
+                        <canvas id="bar" class="chart chart-line" chart-data="chartdata" chart-labels="labels" chart-series="series"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Right col-->
+        <div class="col-md-5">
+            <!-- Map box -->
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <i class="fa fa-inbox"></i>
+                    <h3 class="box-title">
+                        Dữ liệu thống kê
+                    </h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse" title="Thu">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- /.box-body-->
+                <div class="box-body">
+                    <table class="table table-bordered table-striped table-hover">
+                        <thead>
+                            <tr style="font-weight:bold;">
+                                <td>Ngày</td>
+                                <td>Doanh thu</td>
+                                <td>Lợi nhuận</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in tabledata">
+                                <td>
+                                    {{item.Date | date:'dd/MM/yyyy'}}
+                                </td>
+                                <td>
+                                    {{item.Revenues | number}}
+                                </td>
+                                <td>
+                                    {{item.Benefit |number}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- /.row -->
+                </div>
+            </div>
+            <!-- /.box -->
+
+        </div>
+
+    </div>
+</section>

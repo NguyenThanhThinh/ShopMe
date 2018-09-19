@@ -1,0 +1,158 @@
+﻿  <!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        Trang chủ
+        <small>Đây là trang quản lý của ShopMe</small>
+    </h1>
+    <div class="row">
+        <div class="col-md-4">
+            <h3><strong>Tổng sản phẩm</strong> :<span class="countDetails">{{count}}</span></h3>
+        </div>
+        <div class="col-md-4">
+            <h3><strong>Tổng thương hiệu</strong> :<span class="countDetails">{{countbrand}}</span></h3>
+        </div>
+        <div class="col-md-4">
+            <h3><strong>Đơn hàng mới</strong> :<span class="countDetails">{{countOrderNew}}</span></h3>
+        </div>
+    </div>
+   
+   
+    <ol class="breadcrumb">
+        <li><a ui-sref="home"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    <!-- Main row -->
+    <div class="row">
+        <!-- Left col -->
+        <div class="col-md-8">
+            <!-- TABLE: LATEST ORDERS -->
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Đơn hàng mới</h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse" title="Thu">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <div class="table-responsive">
+                        <table class="table no-margin">
+                            <thead>
+                                <tr>
+                                    <th>Mã đơn hàng</th>
+                                    <th>Khách hàng</th>
+                                    <th>Ngày đặt</th>
+                                    <th>Trạng thái</th>
+                                    <th>Thanh toán</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="order in latestOrder">
+                                    <td><a ui-sref="order_edit({id:order.OrderID})" style="color:#3c8dbc;" title="Chọn để xem chi tiết">#{{order.OrderID}}</a></td>
+                                    <td>{{order.CustomerName}}</td>
+                                    <td>{{order.CreatedDate | date:'dd/MM/yyyy'}}</td>
+                                    <td ng-repeat="status in orderStatus | filter:{ ValueInt: order.Status}"><span class="{{status.Code | isStatusOrderFilter}}">{{status.ValueString}}</span></td>
+                                    <td ng-repeat="status in orderStatus | filter:{ ValueInt: order.PaymentStatus}"><span class="{{status.Code | isStatusOrderFilter}}">{{status.ValueString}}</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- /.box-body -->
+                <div class="box-footer clearfix">
+                    <a ui-sref="orders" class="btn btn-sm btn-default btn-flat pull-right">Xem tất cả</a>
+                </div>
+                <!-- /.box-footer -->
+            </div>
+            <!-- TABLE: LATEST FEEDBACK -->
+            <div class="box box-danger">
+              
+            </div>
+
+            <!-- /.box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-4">
+            <!-- PRODUCT LIST -->
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Sản phẩm mới</h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse" title="Thu">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <ul class="products-list product-list-in-box">
+                        <li class="item" ng-repeat="product in latestProduct">
+                            <div class="product-img">
+                                <img ng-src="{{product.Image}}" alt="{{product.NormalizedName}}">
+                            </div>
+                            <div class="product-info">
+                                <a ui-sref="product_edit({id:product.ProductID})" class="product-title">
+                                    {{product.Name}}
+                                   
+                                </a>
+                                <span class="product-description">
+                                    {{product.Description}}
+                                </span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.box-body -->
+                <div class="box-footer text-center">
+                    <a ui-sref="products" class="uppercase">Xem tất cả</a>
+                </div>
+                <!-- /.box-footer -->
+            </div>
+
+
+
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Sản phẩm hết hàng</h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse" title="Thu">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <ul class="products-list product-list-in-box">
+                        <li class="item" ng-repeat="product in getHetHang">
+                            <div class="product-img">
+                                <img ng-src="{{product.Image}}" alt="{{product.NormalizedName}}">
+                            </div>
+                            <div class="product-info">
+                                <a ui-sref="product_edit({id:product.ProductID})" class="product-title">
+                                    {{product.Name}}
+
+                                </a>
+                                <span class="product-description">
+                                    {{product.Description}}
+                                </span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.box-body -->
+                <div class="box-footer text-center">
+                    <a ui-sref="products" class="uppercase">Xem tất cả</a>
+                </div>
+                <!-- /.box-footer -->
+            </div>
+
+
+            <!-- /.box -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>

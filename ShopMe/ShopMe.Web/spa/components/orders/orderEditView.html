@@ -1,0 +1,145 @@
+﻿
+<section class="content-header">
+    <h1>
+        CHI TIẾT ĐƠN HÀNG
+    </h1>
+    <ol class="breadcrumb">
+        <li><a ui-sref="home"><i class="fa fa-dashboard"></i>Trang chủ</a></li>
+        <li><a ui-sref="orders">Danh sách đơn hàng</a></li>
+        <li class="active">Chi tiết</li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Mã đơn hàng: #<b>{{order.OrderID}}</b></h3>
+                    <div class="box-tools pull-right">
+                        <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Thu"><i class="fa fa-minus"></i></button>
+                    </div>
+                </div><!-- /.box-header -->
+                <!-- form start -->
+                <form class="form-horizontal" novalidate name="frmUpdateOrder" role="form" ng-submit="UpdateOrder()">
+                    <div class="box-body">
+                        <div class="col-md-12">
+                            <div class="col-md-6 infoOrder" style="margin-top: 10px;">
+                                <h3 class="titleInfo">Thông tin đơn hàng</h3>
+                                <dl class="dl-horizontal">
+                                    <dt>Mã đơn hàng:</dt>
+                                    <dd>#{{order.OrderID}}</dd>
+                                    <dt>Ngày đặt hàng:</dt>
+                                    <dd>{{order.CreatedDate | date:'dd/MM/yyyy hh:mm:ss'}}</dd>
+                                 
+                                    <dt>Phương thức thanh toán:</dt>
+                                    <dd>{{order.PaymentMethod}}</dd><dd><span>Ghi chú:<strong><i>NL:ngân lượng;CASH:Tiền mặt;ATM_ONLINE:thẻ ngân hàng</i></strong></span></dd>
+                                   
+                                    <dt>Trạng thái thanh toán:</dt>
+                                    <dd>
+                                        <div class="form-group col-md-10">
+                                            <select class="form-control" ng-model="order.PaymentStatus" ng-options="p.ValueInt as p.ValueString for p in paymentStatus" title="Chọn trạng thái thanh toán" name="paymentStatus"></select>
+                                        </div>
+                                        <input type="hidden" name="paymentStatus" ng-model="order.PaymentStatus" />
+                                    </dd>
+                                    <dt>Tình trạng đơn hàng:</dt>
+                                    <dd>
+                                        <div class="form-group col-md-10">
+                                            <select class="form-control" ng-model="order.Status" ng-options="p.ValueInt as p.ValueString for p in status" title="Chọn trạng thái của đơn hàng"></select>
+                                        </div>
+                                        <input type="hidden" name="status" ng-model="order.Status" />
+                                    </dd>
+                                </dl>
+                            </div>
+                            <div class="col-md-1" style="margin-top: 10px;"></div>
+                            <div class="col-md-5 infoOrder" style="margin-top: 10px;">
+                                <h3 class="titleInfo">Thông tin khách hàng</h3>
+                                <dl class="dl-horizontal">
+                                    <dt>Họ tên khách hàng:</dt>
+                                    <dd>{{order.CustomerName}}</dd>
+                                    <dt>Email:</dt>
+                                    <dd>{{order.CustomerEmail}}</dd>
+                                    <dt>Số điện thoại:</dt>
+                                    <dd>{{order.CustomerMobile}}</dd>
+                                    <dt>Địa chỉ nhận hàng:</dt>
+                                    <dd>
+                                        <textarea type="text" class="form-control" ng-model="order.CustomerAddress" ng-disabled="!isActiveShipping" title="Nhập địa chỉ nhận hàng" name="shippingAddress" style="width:100%"></textarea>
+                                    </dd>
+                                    <dd>
+                                        <input type="button" class="btn btn-info" ng-click="editShippingAddress()" title="Chọn để cho phép chỉnh sửa địa chỉ" value="Chỉnh sửa" ng-show="!isActiveShipping" />
+                                    </dd>
+                                    <dt>Lời nhắn:</dt>
+                                    <dd><span>{{order.CustomerMessage}}</span></dd>
+                                </dl>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="pull-right">
+                                <a title="Nhấn chọn để in" class="btn btn-success" ui-sref="order_print({id:order.OrderID})" target="_blank">In</a>
+                                <input type="submit" title="Nhấn chọn để lưu lại" class="btn btn-primary" value="Lưu lại" />
+                                <a ui-sref="orders" title="Nhấn chọn để thoát" class="btn btn-default">Thoát</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div><!-- /.box-body -->
+    </div><!-- /.box -->
+    <!-- Danh sách các sản phẩm -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title"><b>Danh sách sản phẩm    </b><span class="countDetails">{{order.OrderDetail.length}}</span></h3>
+                    <div class="box-tools pull-right">
+                        <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Thu"><i class="fa fa-minus"></i></button>
+                    </div>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                    <div class="row" style="overflow-x:auto;">
+                        <div class="col-md-12">
+                            <div ng-if="loading">
+                                <div class="col-xs-4"></div>
+                                <div class="col-xs-4">
+                                    <i class="fa fa-refresh fa-4x fa-spin"></i> <label class="label label-primary">Đang tải...</label>
+                                </div>
+                                <div class="col-xs-4"></div>
+                            </div>
+                            <table class="table table-bordered table-striped table-hover">
+                                <thead>
+                                    <tr class="rowHeaderTable">
+                                        <th style="width: 3%">STT</th>
+                                        <th style="width: 35%">Sản phẩm</th>
+                                        <th style="width: 15%; text-align:center;">Hình ảnh</th>
+                                        <th style="width: 10%; text-align:center;">Số lượng</th>
+                                        <th style="width: 15%">Giá bán</th>
+                                        <th style="width: 15%">Thành tiền</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="item in order.OrderDetail" title="Chọn vào tên sản phẩm để xem thông tin chi tiết sản phẩm">
+                                        <td style="vertical-align:middle">{{$index+1}}</td>
+                                        <td style="vertical-align:middle"><a ui-sref="product_edit({id:item.Product.ProductID})" title="Chọn vào tên sản phẩm để xem thông tin sản phẩm.">{{item.Product.Name}}</a></td>
+                                        <td style="text-align:center; vertical-align:middle;"><img ng-src="{{item.Product.Image}}" width="75" height="100" /></td>
+                                        <td style="vertical-align:middle; text-align:center;">{{item.Quantity | number}}</td>
+                                        <td style="vertical-align:middle;text-align:right;">{{item.Price | number}} VND</td>
+                                        <td style="text-align:right;vertical-align:middle" ng-init="$parent.total = $parent.total + (item.Price * item.Quantity)">
+                                            {{item.Price * item.Quantity | number}} VND
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="6"><span class="pull-right" style="font-size:18px;">Tổng tiền: <b>{{ total |number }} VND</b></span></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- /.box-body -->
+    </div>
+
+  
+</section>

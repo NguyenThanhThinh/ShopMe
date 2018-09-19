@@ -1,0 +1,255 @@
+﻿@*@model ShopMe.Domains.Common.PaginationSet<ShopMe.Domains.ProductViewModel>*@
+@using ShopMe.Domains
+
+@using ShopMe.Domains.Extensions;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<ProductViewModel>
+@{
+    var category = (ProductCategoryViewModel)ViewBag.Category;
+
+
+}
+<style>
+    .pagination {
+        display: inline-block;
+        padding-left: 0;
+        margin: 0px 0;
+        border-radius: 4px;
+    }
+</style>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+<div class="secondary_page_wrapper">
+
+    <div class="container">
+
+        <!-- - - - - - - - - - - - - - Breadcrumbs - - - - - - - - - - - - - - - - -->
+
+        <ul class="breadcrumbs">
+
+            <li><a href="/trang-chu.html">Trang chủ</a></li>
+
+
+        </ul>
+
+
+        <!-- - - - - - - - - - - - - - Filter -->
+        @if (Model.Count > 0)
+        {
+
+            <div class="section_offset">
+
+                <header class="top_box on_the_sides">
+
+                    @using (Html.BeginForm("Category", "Product", FormMethod.Get))
+                    {
+                        <div class="left_side clearfix v_centered">
+
+                            <!-- - - - - - - - - - - - - - Sort by - - - - - - - - - - - - - - - - -->
+
+                            <div class="v_centered">
+
+                                <span>Sắp xếp:</span>
+
+                                <div class="custom_select1 sort_select1">
+
+                                    <select name="sort" onchange="this.form.submit();">
+
+                                        <option value="" selected="selected">Mặc định</option>
+
+                                        <option value="AZ" selected="selected">Tên (A - Z)</option>
+
+                                        <option value="ZA" selected="selected">Tên (Z - A)</option>
+                                        <option value="09" selected="selected">Giá (Thấp - Cao)</option>
+                                        <option value="90" selected="selected">Giá (Cao - Thấp)</option>
+
+                                    </select>
+
+                                </div>
+
+                            </div>
+
+                            <div class="v_centered">
+
+                                <span>Hiện thị:</span>
+
+                                <div class="custom_select1">
+
+                                    @Html.DropDownList("sh", new SelectList(new List<int> { 9, 12, 24, 36, 48, 60, 72, 84, 96 }), new { onchange = "this.form.submit();" })
+
+                                </div>
+
+                            </div>
+
+                            <!-- - - - - - - - - - - - - - End of number of products shown - - - - - - - - - - - - - - - - -->
+
+
+                        </div>
+                    }
+
+                    <div class="right_side">
+
+                        <!-- - - - - - - - - - - - - - Product layout type - - - - - - - - - - - - - - - - -->
+
+                        <div class="layout_type buttons_row" data-table-container="#products_container">
+
+                            <a href="#" data-table-layout="grid_view" class="button_grey middle_btn icon_btn active tooltip_container"><i class="icon-th-list"></i><span class="tooltip top">Danh sách</span></a>
+
+
+
+                        </div>
+
+                        <!-- - - - - - - - - - - - - - End of product layout type - - - - - - - - - - - - - - - - -->
+
+                    </div>
+
+                </header>
+
+
+                <div class=" container table_layout grid_view" id="products_container">
+
+
+
+                    <div class="row">
+
+                        @foreach (var item in Model)
+                        {
+                            var url = "/" + item.Alias + ".sp-" + item.ProductID + ".html";
+                            <div class=" col-md-3 table_cell">
+
+                                <div class="product_item">
+
+                                    <!-- - - - - - - - - - - - - - Thumbmnail - - - - - - - - - - - - - - - - -->
+
+                                    <div class="image_wrap">
+
+                                        <img src="@item.Image" alt="">
+
+                                        <!-- - - - - - - - - - - - - - Product actions - - - - - - - - - - - - - - - - -->
+
+                                        <div class="actions_wrap">
+
+                                            <div class="centered_buttons">
+
+                                                <a href="@url" class="button_dark_grey middle_btn quick_view">Xem chi tiết</a>
+
+                                                <a href="#" class="button_blue middle_btn add_to_cart btnAddCart" data-id="@item.ProductID">Mua hàng</a>
+
+                                            </div><!--/ .centered_buttons -->
+
+                                        </div><!--/ .actions_wrap-->
+                                        <!-- - - - - - - - - - - - - - End of product actions - - - - - - - - - - - - - - - - -->
+
+                                    </div><!--/. image_wrap-->
+                                    <!-- - - - - - - - - - - - - - End thumbmnail - - - - - - - - - - - - - - - - -->
+                                    <!-- - - - - - - - - - - - - - Product title & price - - - - - - - - - - - - - - - - -->
+
+                                    <div class="description align_center">
+
+                                        <h5 class="pi__name" style="font-size:12.4px;">
+                                            <a href="#">@item?.Name.Truncate(24, true)</a>
+                                        </h5>
+
+                                        <div class="clearfix product_info">
+
+                                            <p class="product_price alignleft"><b>@item.Price.ToString("N0")</b></p>
+
+                                            <!-- - - - - - - - - - - - - - Product rating - - - - - - - - - - - - - - - - -->
+                                            <ul class="rating alignright">
+
+                                                @if (item.ProductRating > 0 && item.ProductRating != 0)
+                                                {
+
+                                                    var Mark = (double)item.ProductRating;//2.7
+                                                    var SoTron = Mark - Mark % 1; //2
+                                                    var SoDu = 5 - SoTron; //3
+                                                    var SoDu_SaoRong = Math.Round(SoDu);//3
+                                                    if (Mark % 1 >= 0.5)
+                                                    {
+                                                        SoDu_SaoRong = SoDu_SaoRong - 1;
+                                                    }
+                                                    var SoDu_NuaSao = SoDu - Math.Round(SoDu_SaoRong);
+                                                    if (Mark > 0)
+                                                    {
+                                                        for (var f = 1; f <= SoTron; f++)
+                                                        {
+                                                            <i class="fa fa-star"></i>
+                                                        }
+                                                        for (var f = 1; f <= SoDu_NuaSao; f++)
+                                                        {
+                                                            <i class="fa fa-star-half-o"></i>
+                                                        }
+                                                        for (var f = 1; f <= SoDu_SaoRong; f++)
+                                                        {
+                                                            <i class="fa fa-star-o"></i>
+                                                        }
+                                                        <span class="likes">@item.ViewRating (đánh giá)</span>
+                                                    }
+
+
+
+                                                }
+                                                else
+                                                {
+                                                    <p class="review" style="text-align:left;">Chưa có nhận xét</p>
+                                                }
+
+                                            </ul>
+
+
+                                            <!-- - - - - - - - - - - - - - End of product rating - - - - - - - - - - - - - - - - -->
+
+                                        </div>
+
+
+
+                                    </div>
+
+
+
+                                </div><!--/ .product_item-->
+
+                            </div>
+                        }
+                    </div>
+
+
+
+                </div>
+
+
+
+                <footer class="bottom_box on_the_sides">
+
+
+
+                    <div class="right_side">
+
+                        <ul class="pags">
+
+                            @Html.PagedListPager(Model, page => Url.Action("Category", new { @id = ViewBag.id, page = page, @sort = ViewBag.sort, @sh = ViewBag.sh }))
+
+                        </ul>
+
+                    </div>
+
+                </footer>
+
+            </div>
+        }
+        else
+        {
+            <div class="text-center">Không có bản ghi nào được tìm thấy.</div>
+        }
+
+        <!-- - - - - - - - - - - - - - End of products - - - - - - - - - - - - - - - - -->
+
+    </div><!--/ .container-->
+
+</div>
+
+@section ui {
+
+    <script src="~/Content/js/jquery-ui.min.js"></script>
+}
+

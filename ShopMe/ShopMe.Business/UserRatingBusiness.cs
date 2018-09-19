@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace ShopMe.Business
 {
-   public interface IUserRatingBusiness
+    public interface IUserRatingBusiness
     {
         UserRating Add(UserRating userRating);
         void RatingProductInsert(UserRating userRating);
@@ -20,18 +20,20 @@ namespace ShopMe.Business
         UserRating getExist(int product, string user);
         int Count(int rating);
 
-    
 
         void Save();
     }
-    public class UserRatingBusiness:IUserRatingBusiness
+
+    public class UserRatingBusiness : IUserRatingBusiness
     {
         private readonly IUserRatingRepository _userRatingRepository;
         private readonly IListSugggetRepository _listsuggget;
 
 
         private IUnitOfWork _unitOfWork;
-        public UserRatingBusiness(IUserRatingRepository userRatingRepository, IUnitOfWork unitOfWork, IListSugggetRepository listsuggget)
+
+        public UserRatingBusiness(IUserRatingRepository userRatingRepository, IUnitOfWork unitOfWork,
+            IListSugggetRepository listsuggget)
         {
             this._userRatingRepository = userRatingRepository;
             this._listsuggget = listsuggget;
@@ -48,14 +50,13 @@ namespace ShopMe.Business
             return _userRatingRepository.Count(n => n.Rating == rating);
         }
 
-       
 
         public IEnumerable<DanhSachGoiSanPham> GetAll()
         {
             return _listsuggget.GetAll();
         }
 
-        public UserRating getExist(int product,string user)
+        public UserRating getExist(int product, string user)
         {
             return _userRatingRepository.GetSingleByCondition(n => n.ProductID == product && n.UserID == user);
         }
@@ -67,23 +68,22 @@ namespace ShopMe.Business
 
         public List<UserRating> GetListRatingByProduct(int productId)
         {
-            return _userRatingRepository.GetListByParameter(n=>n.ProductID==productId).ToList();
+            return _userRatingRepository.GetListByParameter(n => n.ProductID == productId).ToList();
         }
 
         public IEnumerable<UserRating> GetmutiRating(int product, string user)
         {
-            return _userRatingRepository.GetmutiRating(product,user);
+            return _userRatingRepository.GetmutiRating(product, user);
         }
 
         public void RatingProductInsert(UserRating userRating)
         {
-          var model=  _userRatingRepository.GetListByParameter(n => n.UserID == userRating.UserID && n.ProductID == userRating.ProductID);
+            var model = _userRatingRepository.GetListByParameter(n =>
+                n.UserID == userRating.UserID && n.ProductID == userRating.ProductID);
             if (model.Count() > 0)
             {
                 _userRatingRepository.Update(userRating);
-
             }
-
         }
 
         //public UserRating RatingProductInsert(string user, int product)
@@ -95,7 +95,7 @@ namespace ShopMe.Business
 
         public void Save()
         {
-           _unitOfWork.Commit();
+            _unitOfWork.Commit();
         }
 
         public IEnumerable<RatingProductViewModel> UserRating(int product, string user, int rating)

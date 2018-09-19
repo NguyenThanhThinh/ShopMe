@@ -1,0 +1,98 @@
+﻿@using ShopMe.Entities.Models
+@using ShopMe.Domains
+@model IEnumerable<ShopMe.Domains.OrderViewModel>
+
+@using Microsoft.AspNet.Identity
+@using Microsoft.Owin.Security
+@{
+    ViewBag.Title = "Đơn hàng của tôi";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+
+            <ul class="breadcrumbs">
+
+                <li><a href="/trang-chu.html">Trang chủ</a></li>
+                @*<li><a href="#"></a></li>
+               <li><a href="#">@Model.ProductCategory.Name</a></li>*@
+                
+
+            </ul>
+        </div>
+    </div>
+</div>
+    <div class="container mb+++">
+        
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="list-group">
+                        <a href="#" class="list-group-item active">
+                          <span> Xin chào : @User.Identity.GetUserName()</span>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action">Quản lý đơn hàng</a>
+                        <a href="#" class="list-group-item list-group-item-action">Cập nhật mật khẩu</a>
+                        
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <h2>Đơn hàng của tôi</h2>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Mã đơn hàng</th>
+                                <th>Ngày mua</th>
+                                <th>Sản phẩm</th>
+                                <th>Tổng tiền</th>
+                                <th>Trạng thái</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                          @foreach (var item in Model)
+                          {
+                              <tr>
+                                  <td>@item.OrderID</td>
+                                  <td>@item.CreatedDate.Value.ToString("dd/MM/yyyy")</td>
+                                  <td>@ViewBag.Name</td>
+                                  <td>@ViewBag.totail</td>
+                                  <td>@switch (item.Status)
+                                  {
+                                      case 10:
+                                          <label class=" label label-info">chưa xử lý</label>
+                                          break;
+                                      case 20:
+                                        <label class=" label label-info">Đang xử lý</label>
+                                          break;
+                                      case 30:
+                                        <label class=" label label-info">Chưa xác nhận</label>
+                                          break;
+                                      case 40:
+                                        <label class=" label label-info">Đã xác nhận</label>
+                                          break;
+                                      case 50:
+                                        <label class=" label label-info">Đã hoàn thành</label>
+                                          break;
+                                      case 60:
+                                        <label class=" label label-info">Hủy</label>
+                                          break;
+                                      case 70:
+                                        <label class=" label label-info">Đã gửi đi</label>
+                                          break;
+
+
+                                      default:
+                                          break;
+                                  }
+                                 
+                                  </td>
+                              </tr>
+
+                          }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+

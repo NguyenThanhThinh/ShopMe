@@ -1,0 +1,257 @@
+﻿<footer id="footer">
+
+
+<div class="footer_section_2">
+
+    <div class="container">
+
+        <div class="row">
+
+
+            <div class="col-md-6 col-sm-7">
+
+                <section class="streamlined_type_2">
+
+                    <h4 class="streamlined_title">Đăng ký nhận tin mới nhất</h4>
+
+                    <form class="newsletter subscribe" novalidate="">
+
+                        <input type="email" name="sc_email" placeholder="Vui lòng nhập mail">
+
+                        <button class="button_blue def_icon_btn"></button>
+
+                    </form>
+
+                </section><!--/ .streamlined-->
+
+            </div><!--/ [col]-->
+            <!-- - - - - - - - - - - - - - End newsletter - - - - - - - - - - - - - - - - -->
+            <!-- - - - - - - - - - - - - - Follow us - - - - - - - - - - - - - - - - -->
+
+            <div class="col-md-6 col-sm-5">
+
+                <section class="streamlined">
+
+                    <h4 class="streamlined_title">Theo dõi</h4>
+
+                    <!-- - - - - - - - - - - - - - Social icon's list - - - - - - - - - - - - - - - - -->
+
+                    <ul class="social_btns">
+
+                        <li>
+                            <a href="#" class="icon_btn middle_btn social_facebook tooltip_container">
+                                <i class="icon-facebook-1"></i><span class="tooltip top">Facebook</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="icon_btn middle_btn social_twitter tooltip_container">
+                                <i class="icon-twitter"></i><span class="tooltip top">Twitter</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="icon_btn middle_btn social_googleplus tooltip_container">
+                                <i class="icon-gplus-2"></i><span class="tooltip top">GooglePlus</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="icon_btn middle_btn social_pinterest tooltip_container">
+                                <i class="icon-pinterest-3"></i><span class="tooltip top">Pinterest</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="icon_btn middle_btn social_flickr tooltip_container">
+                                <i class="icon-flickr-1"></i><span class="tooltip top">Flickr</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="icon_btn middle_btn social_youtube tooltip_container">
+                                <i class="icon-youtube"></i><span class="tooltip top">Youtube</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="icon_btn middle_btn social_vimeo tooltip_container">
+                                <i class="icon-vimeo-2"></i><span class="tooltip top">Vimeo</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="icon_btn middle_btn social_instagram tooltip_container">
+                                <i class="icon-instagram-4"></i><span class="tooltip top">Instagram</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="icon_btn middle_btn social_linkedin tooltip_container">
+                                <i class="icon-linkedin-5"></i><span class="tooltip top">LinkedIn</span>
+                            </a>
+                        </li>
+
+                    </ul>
+
+                    <!-- - - - - - - - - - - - - - End social icon's list - - - - - - - - - - - - - - - - -->
+
+                </section><!--/ .streamlined-->
+
+            </div><!--/ [col]-->
+            <!-- - - - - - - - - - - - - - End follow us - - - - - - - - - - - - - - - - -->
+
+        </div><!--/ .row-->
+
+    </div><!--/ .container-->
+
+</div><!--/ .footer_section_2-->
+<!-- - - - - - - - - - - - - - End footer section- - - - - - - - - - - - - - - - -->
+
+<hr>
+
+
+<div class="footer_section">
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-md-3 col-sm-6">
+
+
+                <section class="widget">
+
+                    <h4>Sản phẩm mới</h4>
+
+                    @Html.Action("NewProduct", "Footer")
+
+                </section>
+
+                <!-- - - - - - - - - - - - - - End of featured products widget - - - - - - - - - - - - - - - - -->
+
+            </div><!--/ [col]-->
+
+            <div class="col-md-3 col-sm-6">
+
+                <!-- - - - - - - - - - - - - - Bestseller products widget - - - - - - - - - - - - - - - - -->
+
+                <section class="widget">
+
+                    <h4>có thể bạn thích</h4>
+
+                    @Html.Action("LikeProduct", "Footer")
+
+                </section><!--/ .widget-->
+                <!-- - - - - - - - - - - - - - End of bestseller products widget - - - - - - - - - - - - - - - - -->
+
+            </div><!--/ [col]-->
+
+            <div class="col-md-3 col-sm-6">
+
+                <!-- - - - - - - - - - - - - - New products widget - - - - - - - - - - - - - - - - -->
+
+                <section class="widget">
+
+                    <h4>Sản phẩm xem nhiều</h4>
+
+                    <ul class="products_list_widget">
+
+
+
+                        @Html.Action("ViewProduct", "Footer")
+
+
+
+                    </ul><!--/ .list_of_products-->
+
+                </section><!--/ .widget-->
+                <!-- - - - - - - - - - - - - - End of new products widget - - - - - - - - - - - - - - - - -->
+
+            </div><!--/ [col]-->
+
+            <div class="col-md-3 col-sm-6">
+
+                <!-- - - - - - - - - - - - - - On sale products widget - - - - - - - - - - - - - - - - -->
+
+                <section class="widget">
+
+                    <h4>Sản phẩm hot</h4>
+
+                    @Html.Action("HostProduct", "Footer")
+
+                </section><!--/ .widget-->
+
+
+            </div>
+
+        </div><!--/ .row-->
+
+    </div><!--/ .container-->
+
+</div><!--/ .footer_section_2-->
+
+
+<hr>
+
+<!-- - - - - - - - - - - - - - Footer section - - - - - - - - - - - - - - - - -->
+
+<div class="footer_section_3 align_center">
+
+    <div class="container">
+
+        <p class="footer_message">Website dùng cho demo , không mang tính thương mại, xin chân thành cảm ơn</p>
+
+        <!-- - - - - - - - - - - - - - Payments - - - - - - - - - - - - - - - - -->
+
+        <ul class="payments">
+
+            <li>
+                <img src="~/Content/images/payment_1.png" alt="">
+            </li>
+            <li>
+                <img src="~/Content/images/payment_2.png" alt="">
+            </li>
+            <li>
+                <img src="~/Content/images/payment_3.png" alt="">
+            </li>
+            <li>
+                <img src="~/Content/images/payment_4.png" alt="">
+            </li>
+            <li>
+                <img src="~/Content/images/payment_5.png" alt="">
+            </li>
+            <li>
+                <img src="~/Content/images/payment_6.png" alt="">
+            </li>
+            <li>
+                <img src="~/Content/images/payment_7.png" alt="">
+            </li>
+            <li>
+                <img src="~/Content/images/payment_8.png" alt="">
+            </li>
+
+        </ul>
+
+        <!-- - - - - - - - - - - - - - End of payments - - - - - - - - - - - - - - - - -->
+        <!-- - - - - - - - - - - - - - Footer navigation - - - - - - - - - - - - - - - - -->
+
+        <nav class="footer_nav">
+
+            <ul class="bottombar">
+                @Html.Action("Footer", "Home")
+
+            </ul>
+
+        </nav>
+
+        <!-- - - - - - - - - - - - - - End of footer navigation - - - - - - - - - - - - - - - - -->
+
+        <p class="copyright">@DateTime.Now.Year <a href="/trang-chu.html">Shopme</a>. Thinh Nguyen.</p>
+
+    </div><!--/ .container-->
+
+</div><!--/ .footer_section-->
+<!-- - - - - - - - - - - - - - End footer section - - - - - - - - - - - - - - - - -->
+
+</footer>

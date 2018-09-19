@@ -1,0 +1,132 @@
+﻿/* title style */
+
+}
+/* dau sao */
+.ratting {
+    color: #17aa1c;
+}
+
+.ratingCourse {
+    font-size: 25px;
+    color: #17aa1c;
+}
+
+
+    .ratting {
+        color: #17aa1c;
+    }
+
+    .ratingCourse {
+        font-size: 15px;
+        color: #17aa1c;
+    }
+
+   
+}
+
+
+/***
+Bootstrap Line Tabs by @keenthemes
+A component of Metronic Theme - #1 Selling Bootstrap 3 Admin Theme in Themeforest: http://j.mp/metronictheme
+Licensed under MIT
+***/
+
+
+
+.titleAvgMark {
+    color: #f63 !important;
+    font-size: 18px;
+}
+
+.avgMark {
+    color: #f63 !important;
+    font-size: 55px !important;
+}
+
+.rattingCourse_ {
+    color: green !important;
+}
+
+.tblDiemTB tr, .tblDiemTB td {
+    color: green !important;
+    padding:0.5%;
+
+}
+.tblDiemTB {
+    width:100%;
+}
+.tblDiemTB progress {
+    background-color: #D7D7D7 !important;
+}
+
+.tblDiemTB progress {
+    /* style rules */
+    background-color: #D7D7D7 !important;
+    
+}
+
+    .tblDiemTB progress::-webkit-progress-bar {
+        /* style rules */
+        background-color: #D7D7D7 !important;
+    }
+
+    .tblDiemTB progress::-webkit-progress-value {
+        /* style rules */
+        background-color: green !important;
+    }
+
+    .tblDiemTB progress::-moz-progress-bar {
+        /* style rules */
+        background-color: #D7D7D7;
+    }
+    .tblDiemTB progress {
+    /* style rules */
+    background-color: #D7D7D7;
+}
+/* Danh gia binh luan */
+.rattingOutLine {
+
+
+}
+.avtUser {
+    width:30px;
+    height:30px;
+}
+.rattingTitle {
+    font-size:18px !important;
+    color:rgba(0,0,0,0.55) !important;
+    font-weight:bold;
+    
+    margin-left:5% !important;
+}
+.rattingContent {
+    color:rgba(0,0,0,0.55) !important;
+      font-size:15px !important;
+    
+    margin-left:5% !important;
+}
+
+/*avt*/
+.imgauthor {
+border-radius:50% !important;
+width:50px;height:40px;
+}
+.ratting {
+float:right;
+}
+    .ratting .fa {
+        color: #f0c808;
+        font-size: 18px;
+    }
+.likes_ {
+       font-size: 16px;
+    color: blue;
+    display: block;
+    line-height: 1.2;
+    font-weight: bold;
+   
+   
+}
+
+
+ 

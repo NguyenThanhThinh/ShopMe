@@ -1,0 +1,10 @@
+﻿
+@model IEnumerable<ShopMe.Domains.ProductCategoryViewModel>
+
+
+@foreach (var item in Model.Where(n=>n.ParentID!=null))
+{
+    var url = "/" + item.Alias + ".pc-" + item.CategoryID + ".html";
+   
+    <li name="id" class="animated_item1"><a href="@url">@item.Name</a></li>
+}

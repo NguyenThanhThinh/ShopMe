@@ -1,0 +1,90 @@
+﻿<section class="content-header">
+    <h1>
+        DANH SÁCH NGƯỜI DÙNG
+    </h1>
+    <ol class="breadcrumb">
+        <li><a ui-sref="home"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
+        <li class="active"><a ui-sref="application_users">Danh sách người dùng</a></li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header">
+                    <div class="row">
+                        <div class="col-md-4">
+
+                            <input type="text" id="txtSearch" ng-model="filterExpression" class="form-control" placeholder="Nhập từ khóa..." title="Nhập từ khóa tìm kiếm"/>
+                        </div>
+                        <div class="col-md-2 pull-left">
+                            <button class="btn btn-success" ui-sref="add_application_user" title="Thêm mới tài khoản">Thêm mới</button>
+                        </div>
+                        <div class="col-md-2 pull-right">
+                            <select name="numRow" ng-model="numRow" ng-change="search(page)" class="form-control">
+                                <option value="5">Hiển thị 5 hàng</option>
+                                <option value="10">Hiển thị 10 hàng</option>
+                                <option value="25">Hiển thị 25 hàng</option>
+                                <option value="50">Hiển thị 50 hàng</option>
+                                <option value="-1">Tất cả</option>
+                            </select>
+                            <input type="hidden" name="numRow" ng-model="numRow" />
+                        </div>
+                        <div class="col-md-4 pull-right">
+                            <pager-directive page="{{page}}" custom-path="{{customPath}}" pages-count="{{pagesCount}}" total-count="{{totalCount}}" search-func="search(page)" class="pull-right"></pager-directive>
+                        </div>
+                    </div>
+                </div><!-- /.box-header -->
+                <div ng-if="loading">
+                    <div class="col-xs-4"></div>
+                    <div class="col-xs-4">
+                        <i class="fa fa-refresh fa-4x fa-spin"></i> <label class="label label-primary">Đang tải...</label>
+                    </div>
+                    <div class="col-xs-4"></div>
+                </div>
+                <div class="box-body" style="overflow-x:auto;">
+                    <table class="table table-bordered table-striped table-hover">
+                        <thead class="rowHeaderTable">
+                            <tr>
+                                <th style="width:15%">Tên người dùng</th>
+                                <th style="width:10%">Tài khoản</th>
+                                <th style="width:20%">Email</th>
+                                <th style="width:24%">Địa chỉ</th>
+                                <th style="width:13%">Loại tài khoản</th>
+                                <th style="width:8%">Khóa</th>
+                                <th style="width:10%; text-align:center;">Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in data | filter:filterExpression ">
+                                <td><a ui-sref="edit_application_user({id:item.Id})" title="Chọn để chỉnh sửa">{{item.FullName}}</a></td>
+                                <td><a ui-sref="edit_application_user({id:item.Id})" title="Chọn để chỉnh sửa">{{item.UserName}}</a></td>
+                                <td>{{item.Email}}</td>
+                                <td>{{item.Address}}</td>
+                                <td>
+                                    <ul style="margin-left: -23px;" ng-repeat="group in item.Groups">
+                                        <li> {{group.Description}}</li>
+                                    </ul>
+                                </td>
+                                <td style="text-align:center;"><i ng-show="item.IsDelete" class="{{item.IsDelete | isPublishFilter}}"></i></td>
+                                <td style="text-align:center">
+                                    <a ui-sref="edit_application_user({id:item.Id})" class="btn btn-sm btn-primary" title="Chỉnh sửa"><i class="fa fa-pencil"></i></a>
+                                    <button class="btn btn-sm btn-danger" ng-disabled="item.IsDelete" title="Khóa tài khoản" ng-click="deleteItem(item.Id)"><i class="fa fa-lock"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="7"><span class="pull-right">Trang: {{page+1}} - Tổng số bản ghi: {{totalCount}}</span></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    <div class="col-md-4 pull-right">
+                        <pager-directive page="{{page}}" custom-path="{{customPath}}" pages-count="{{pagesCount}}" total-count="{{totalCount}}" search-func="search(page)" class="pull-right"></pager-directive>
+                    </div>
+                </div><!-- /.box-body -->
+            </div><!-- /.box -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+</section><!-- /.content -->

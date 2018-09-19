@@ -1,0 +1,78 @@
+﻿<!--<link href="../../../Assets/admin/css/custom.css" rel="stylesheet" />
+<link href="../../../Assets/admin/libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />-->
+
+
+<body>
+    <div class="row" id="divPrint">
+        <div class="col-xs-12">
+            <h2 style="text-align:center; font-size:18px; font-weight:bold">THÔNG TIN ĐƠN HÀNG</h2>
+            <h4 style="text-align:center; font-style:italic; font-size:11px;">In ngày: {{currentDate | date:'dd/MM/yyyy HH:mm:ss'}}</h4>
+            <div class="row">
+                <div class="col-xs-6">
+                    <h2 style="font-size:16px; font-weight:bold">Thông tin cửa hàng</h2>
+                    <dl class="inline">
+                        <dt style="font-size:13px;">Cửa hàng:</dt>
+                        <dd style="font-size:14px;">{{shopInfo.ShopName}}</dd>
+                        <dt style="font-size:13px;">Số điện thoại:</dt>
+                        <dd style="font-size:13px;">{{shopInfo.ShopPhone}}</dd>
+                        <dt style="font-size:13px;">Địa chỉ:</dt>
+                        <dd style="font-size:13px;">{{shopInfo.ShopAddress}}</dd>
+                    </dl>
+                </div>
+                <div class="col-xs-6">
+                    <h2 style="font-size:16px; font-weight:bold">Thông tin khách hàng</h2>
+                    <dl class="inline">
+                        <dt style="font-size:13px;">Khách hàng:</dt>
+                        <dd style="font-size:14px;">{{order.CustomerName}}</dd>
+                        <dt style="font-size:13px;">Số điện thoại:</dt>
+                        <dd style="font-size:13px;">{{order.CustomerMobile}}</dd>
+                        <dt style="font-size:13px;">Đặt hàng ngày:</dt>
+                        <dd style="font-size:13px;">{{order.CreatedDate | date: 'dd/MM/yyyy  HH:mm:ss'}}</dd>
+                        <dt style="font-size:13px;">Địa chỉ:</dt>
+                        <dd style="font-size:13px;">{{order.CustomerAddress}}</dd>
+                    </dl>
+                </div>
+            </div>
+            <h4 style="font-size:14px;">Mã đơn hàng: <b>#{{order.OrderID}}</b></h4>
+            <div class="row">
+                <div class="col-xs-12">
+                    <table class="table">
+                        <thead>
+                            <tr class="rowHeaderTable">
+                                <th style="width: 3%; font-size:14px;">STT</th>
+                                <th style="width: 15%; text-align:center;font-size:14px;">Mã sản phẩm</th>
+                                <th style="width: 25%; font-size:14px;">Sản phẩm</th>
+                                <th style="width: 20%; font-size:14px;">Hình ảnh</th>
+                                <th style="width: 10%; text-align:center; font-size:14px;">Số lượng</th>
+                                <th style="width: 15%; text-align:right; font-size:14px;">Giá bán</th>
+                                <th style="width: 15%; text-align:right; font-size:14px;">Thành tiền</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in order.OrderDetail">
+                                <td style="vertical-align:middle; font-size:13px;">{{$index+1}}</td>
+                                <td style="text-align:center; vertical-align:middle; font-size:13px;">#{{item.Product.ProductID}}</td>
+                                <td style="vertical-align:middle; font-size:13px;">{{item.Product.Name}}</td>
+                                <td style="vertical-align:middle; font-size:13px;"><img ng-src="{{item.Product.Image}}" width="75" height="100" /></td>
+                                <td style="vertical-align:middle; text-align:center; font-size:13px;">{{item.Quantity | number}}</td>
+                                <td style="vertical-align:middle;text-align:right; font-size:13px;">{{item.Price | number}} VND</td>
+                                <td style="text-align:right;vertical-align:middle; font-size:13px;" ng-init="$parent.total = $parent.total + (item.Price * item.Quantity)">
+                                    {{item.Price * item.Quantity | number}} VND
+                                </td>
+                            </tr>
+                        </tbody>
+
+                        <tr>
+                            <td colspan="6"><span class="pull-right" style="font-size:14px;">Số sản phẩm: <b>{{order.OrderDetail.length}}</b></span></td>
+                        </tr>
+                        <tr>
+                            <td colspan="6"><span class="pull-right" style="font-size:15px;">Tổng tiền: <b>{{ total |number }} VND</b></span></td>
+                        </tr>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+

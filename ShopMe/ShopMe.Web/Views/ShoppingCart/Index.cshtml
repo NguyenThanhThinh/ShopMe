@@ -1,0 +1,356 @@
+﻿
+@{
+    ViewBag.Title = "Chi tiết giỏ hàng";
+    var listHot = ViewBag.getShowHot as IEnumerable<ShopMe.Entities.Models.ProductShowViewModel>;
+}
+
+
+
+<div class="secondary_page_wrapper">
+ 
+
+    <div class="container">
+
+        <!--  Breadcrumbs -->
+        <ul class="breadcrumbs">
+            <li><a href="#">Home</a></li>
+            <li>Giỏ Hàng</li>
+        </ul>
+        <div id="cartContent">
+
+            <section class="container m0 p0">
+                <h4>Giỏ Hàng</h4>
+                <!-- Shopping cart table -->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-9">
+
+                            <div class="table_wrap">
+                                <table class="table_type_1 shopping_cart_table">
+                                    <thead>
+                                        <tr>
+                                            <th class="product_image_col">Hình ảnh</th>
+                                            <th class="product_title_col">Tên Sản Phẩm</th>
+                                            <th>Giá</th>
+                                            <th class="product_qty_col">Số lượng</th>
+                                            <th>Tổng</th>
+                                            <th class="product_actions_col">Thao tác</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="cartBody"></tbody>
+
+                                </table>
+
+                            </div>
+
+
+                            <footer class="bottom_box on_the_sides">
+
+                                <div class="left_side">
+
+                                    <a href="#" data-toggle="tooltip" title="khi click vào sẽ quay về trang chủ!" data-placement="bottom" class="button_blue middle_btn" id="btnContinue">Tiếp tục mua hàng</a>
+
+                                </div>
+
+                                <div class="right_side">
+                         
+
+                                      <a href="#" data-toggle="tooltip" title="khi chọn tất cả đơn hàng sẽ bị xóa!" data-placement="bottom" class="button_grey middle_btn btnDeleteAll">Xóa giỏ hàng</a>
+                              
+                                  
+
+                                </div>
+
+                            </footer>
+                        </div>
+                        <div class="col-md-3">
+
+
+
+
+                            <div class="collection mb++">
+                                <h4 class="collection-header">đơn hàng!</h4>
+                                <div class="collection-item">ĐƠN HÀNG <span id="lblQuantity1"></span> <text>(sản phẩm)</text></div>
+
+
+
+                                <h4 class="collection-footer clearfix">
+                                    <span class="pull-left">TỔNG CỘNG</span>
+                                    <span class="pull-right" id="lblTotalOrder"></span>
+                                </h4>
+
+
+
+
+                            </div>
+
+                            <button  class="order-button text-uppercase mb++" id="btnnetxcheckout" data-toggle="tooltip" title="click vào chuyển sang trang nhập thông tin đơn hàng!" data-placement="bottom">Tiến hành đặt hàng</button>
+
+
+
+
+
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </section>
+
+
+        </div>
+           
+       
+    <section class="section_offset nextcart" style="display:none;">
+        <footer class="bottom_box on_the_sides">
+
+            <div class="left_side">
+
+                <a href="#" data-toggle="tooltip" title="Trở về trang chủ!" class="button_blue middle_btn" id="btnContinue">Quay về trang chủ</a>
+
+                @*<div class="right_side">
+
+            <a href="#" class="button_grey middle_btn">Thanh Toán</a>
+
+        </div>*@   
+            </div>
+
+
+        </footer>
+    </section>
+        
+        
+    </div>
+    <br />
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <section class="section_offset animated transparent" data-animation="fadeInDown">
+
+                    <h3 class="offset_title section_title">Sản Phẩm Mua nhiều</h3>
+
+                    <div class="tabs type_3 products">
+                        <div class="tab_containers_wrap">
+                            <div class="owl_carousel carousel_in_tabs type_3">
+
+
+                                @foreach (var item in listHot)
+                                {
+                                    var url = "/" + item.Alias + ".sp-" + item.ProductID + ".html";
+                                    <div class="product_item">
+
+                                        <!-- - - - - - - - - - - - - - Thumbnail - - - - - - - - - - - - - - - - -->
+
+                                        <div class="image_wrap">
+                                            <img src="@item.Image" />
+
+                                            @*<img src="~/UploadedFiles/images/1.jpg" class="img-responsive" />*@
+
+                                            <!-- - - - - - - - - - - - - - Product actions - - - - - - - - - - - - - - - - -->
+
+                                            <div class="actions_wrap">
+
+                                                <div class="centered_buttons">
+
+                                                    <a href="@url" class="button_dark_grey middle_btn quick_view pb">Xem chi tiết</a>
+
+                                                </div><!--/ .centered_buttons -->
+
+                                            </div><!--/ .actions_wrap-->
+                                            <!-- - - - - - - - - - - - - - End of product actions - - - - - - - - - - - - - - - - -->
+
+                                        </div><!--/. image_wrap-->
+                                        <!-- - - - - - - - - - - - - - End thumbnail - - - - - - - - - - - - - - - - -->
+                                        <!-- - - - - - - - - - - - - - Label - - - - - - - - - - - - - - - - -->
+
+                                        <div class="label_new">
+
+                                            <div>Mới</div>
+
+                                        </div>
+
+                                        <!-- - - - - - - - - - - - - - End label - - - - - - - - - - - - - - - - -->
+                                        <!-- - - - - - - - - - - - - - Countdown - - - - - - - - - - - - - - - - -->
+                                        <!-- - - - - - - - - - - - - - End countdown - - - - - - - - - - - - - - - - -->
+                                        <!-- - - - - - - - - - - - - - Product description - - - - - - - - - - - - - - - - -->
+
+                                        <div class="description align_center">
+
+                                            <p><a href="@url">@item.Name</a></p>
+
+                                            <div class="clearfix product_info">
+
+                                                <!-- - - - - - - - - - - - - - Product rating - - - - - - - - - - - - - - - - -->
+                                                <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+                                                <ul class="rating alignright">
+                                                    @if (item.ProductRating > 0 && item.ProductRating != 0)
+                                                    {
+
+                                                        double Mark = (double)item.ProductRating;//2.7
+                                                        double SoTron = Mark - Mark % 1; //2
+                                                        double SoDu = 5 - SoTron; //3
+                                                        double SoDu_SaoRong = Math.Round(SoDu);//3
+                                                        if (Mark % 1 >= 0.5)
+                                                        {
+                                                            SoDu_SaoRong = SoDu_SaoRong - 1;
+                                                        }
+                                                        double SoDu_NuaSao = SoDu - Math.Round(SoDu_SaoRong);
+                                                        if (Mark > 0)
+                                                        {
+                                                            for (int f = 1; f <= SoTron; f++)
+                                                            {
+                                                                <i class="fa fa-star"></i>
+                                                            }
+                                                            for (int f = 1; f <= SoDu_NuaSao; f++)
+                                                            {
+                                                                <i class="fa fa-star-half-o"></i>
+                                                            }
+                                                            for (int f = 1; f <= SoDu_SaoRong; f++)
+                                                            {
+                                                                <i class="fa fa-star-o"></i>
+                                                            }
+                                                            <span class="likes">@item.ViewRating (đánh giá)</span>
+                                                        }
+
+
+
+                                                    }
+                                                    else
+                                                    {
+                                                        <p class="review" style="text-align:left;">Chưa có nhận xét</p>
+                                                    }
+                                                    @*<li class="active"></li>
+                                            <li class="active"></li>
+                                            <li class="active"></li>
+                                            <li class="active"></li>
+                                            <li></li>*@
+                                                    @*<ul style="list-style: none;display: inline-flex;margin-top: 10px">*@
+                                                    @*<li class="active sao1 sao" data-id="@item.ProductID"  data-sao="1"></li>
+                                            <li class="active sao2 sao" data-id="@item.ProductID"  data-sao="2"></li>
+                                            <li class="active sao3 sao" data-id="@item.ProductID" data-sao="3"></li>
+                                            <li class="active sao4 sao" data-id="@item.ProductID" data-sao="4"></li>
+                                            <li class="active sao5 sao" data-id="@item.ProductID" data-sao="5"></li>*@
+                                                    @*</ul>*@
+
+                                                    @*<i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>*@
+
+
+                                                </ul>
+
+                                                <!-- - - - - - - - - - - - - - End product rating - - - - - - - - - - - - - - - - -->
+
+                                                <p class="product_price alignleft">
+
+                                                    <b>@item.Price.ToString("N0")</b>
+                                                </p>
+
+                                            </div><!--/ .clearfix.product_info-->
+
+                                            <button class="button_blue middle_btn btnAddCart" data-id="@item.ProductID">Mua Hàng</button>
+
+                                            @*<ul class="bottombar">
+
+                                        <li><a href="#">Add to Wishlist</a></li>
+                                        <li><a href="#">Add to Compare</a></li>
+
+                                    </ul>*@
+
+                                        </div>
+
+                                        <!-- - - - - - - - - - - - - - End of product description - - - - - - - - - - - - - - - - -->
+
+                                    </div>
+                                }
+
+
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+                </section>
+            </div>
+        </div>
+    </div>
+
+</div><!--/ .page_wrapper-->
+
+<script id="tplCart" type="x-tmpl-mustache">
+    <tr>
+        <!-- Product Image -->
+        <td class="product_image_col" data-title="Product Image">
+            <a href="#"><img src="{{Image}}" height="50" /></a>
+        </td>
+
+        <!-- - - - - - - - - - - - - - End of product Image - - - - - - - - - - - - - - - - -->
+        <!-- - - - - - - - - - - - - - Product name - - - - - - - - - - - - - - - - -->
+
+        <td data-title="Product Name">
+
+            <a href="#" class="product_title">{{ProductName}}</a>
+
+            @*<ul class="sc_product_info">
+
+                    <li>Size: Big</li>
+                    <li>Color: Red</li>
+
+                </ul>*@
+
+        </td>
+
+        <td class="subtotal" data-title="Price">
+
+            {{PriceF}}
+
+        </td>
+
+
+        <td data-title="Quantity">
+
+            <div class=" clearfix  ">
+            @*cái này xử lý load a ja x khi chọn số lượng r à=> ??
+                nó dùng show và thao tác cập nhật số lượng ln á
+                *@
+                @*<button class="theme_button txtQuantitychange" data-price="{{Price}}" data-id="{{ProductId}}" value="{{Quantity}}" data-direction="minus">&#45;</button>*@
+                <input type="number"  min="1"  data-id="{{ProductId}}"  data-price="{{Price}}" value="{{Quantity}}" class="input txtQuantity" id="txtQuantity_Id"/>
+                @*<button class="theme_button txtQuantitychange" data-price="{{Price}}" data-id="{{ProductId}}" value="{{Quantity}}" data-direction="plus">&#43;</button>*@
+
+            </div><!--/ .qty.min.clearfix-->
+
+        </td>
+
+        <!-- - - - - - - - - - - - - - End of quantity - - - - - - - - - - - - - - - - -->
+        <!-- - - - - - - - - - - - - - Total - - - - - - - - - - - - - - - - -->
+
+        <td class="total" data-title="Total" id="amount_{{ProductId}}">
+
+            {{Amount}}
+
+        </td>
+
+        <!-- - - - - - - - - - - - - - End of total - - - - - - - - - - - - - - - - -->
+        <!-- - - - - - - - - - - - - - Action - - - - - - - - - - - - - - - - -->
+
+        <td data-title="Action">
+
+            @*<a href="#" class="button_dark_grey icon_btn edit_product"><i class="icon-pencil"></i></a>*@
+
+            <a href="#" data-toggle="tooltip" title="click vào  xóa ngay một sản phẩm!" class="button_dark_grey icon_btn remove_product btnDeleteItem " data-id="{{ProductId}}"><i class="icon-cancel-2"></i></a>
+
+        </td>
+
+        <!-- - - - - - - - - - - - - - End of action - - - - - - - - - - - - - - - - -->
+
+    </tr>
+</script>

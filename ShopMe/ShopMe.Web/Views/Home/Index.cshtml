@@ -1,0 +1,998 @@
+﻿@model ShopMe.Domains.HomeViewModel
+@{
+    ViewBag.Title = "Trang chủ";
+
+    var listsuggest = ViewBag.listSugget as IEnumerable<ShopMe.Entities.Models.Product>;
+    var listHot = ViewBag.getShowHot as IEnumerable<ShopMe.Entities.Models.ProductShowViewModel>;
+}
+
+<link href="~/Content/index-home.css" rel="stylesheet"/>
+
+<div class="container">
+
+<div class="section_offset">
+
+    <div class="row">
+        @Html.Action("_Slider", "Home")
+
+
+    </div>
+
+</div>
+
+<section class="section_offset animated transparent lastest__product" data-animation="fadeInDown">
+
+    <h3 class="offset_title section_title section_title1">
+        <a href="#" class="section__lable"> Sản phẩm mới</a>
+    </h3>
+
+    <div class="tabs type_3 products">
+        <div class="tab_containers_wrap">
+            <div class="owl_carousel carousel_in_tabs type_3">
+
+
+                @foreach (var item in Model.LastestProducts)
+                {
+                    var url = "/" + item.Alias + ".sp-" + item.ProductID + ".html";
+                    <div class="product_item">
+
+
+                        <div class="image_wrap">
+                            <img src="@item.Image"/>
+
+
+                            <div class="actions_wrap">
+
+                                <div class="centered_buttons">
+
+                                    <a href="@url" class="button_dark_grey middle_btn quick_view pb">Xem chi tiết</a>
+
+                                </div><!--/ .centered_buttons -->
+
+                            </div><!--/ .actions_wrap-->
+                            <!-- - - - - - - - - - - - - - End of product actions - - - - - - - - - - - - - - - - -->
+
+                        </div><!--/. image_wrap-->
+                        <!-- - - - - - - - - - - - - - End thumbnail - - - - - - - - - - - - - - - - -->
+                        <!-- - - - - - - - - - - - - - Label - - - - - - - - - - - - - - - - -->
+
+                        <div class="label_new">
+
+                            <div>Mới</div>
+
+                        </div>
+
+
+                        <div class="description align_center">
+
+                            <p>
+                                <a href="@url">@item?.Name</a>
+                            </p>
+
+                            <div class="clearfix product_info">
+
+                                <!-- - - - - - - - - - - - - - Product rating - - - - - - - - - - - - - - - - -->
+                                <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+                                <div class="rating alignright">
+                                    @if (item.ProductRating > 0 && item.ProductRating != 0)
+                                    {
+                                        var Mark = (double) item.ProductRating; //2.7
+                                        var SoTron = Mark - Mark % 1; //2
+                                        var SoDu = 5 - SoTron; //3
+                                        var SoDu_SaoRong = Math.Round(SoDu); //3
+                                        if (Mark % 1 >= 0.5)
+                                        {
+                                            SoDu_SaoRong = SoDu_SaoRong - 1;
+                                        }
+                                        var SoDu_NuaSao = SoDu - Math.Round(SoDu_SaoRong);
+                                        if (Mark > 0)
+                                        {
+                                            for (var f = 1; f <= SoTron; f++)
+                                            {
+                                                <i class="fa fa-star"></i>
+                                            }
+                                            for (var f = 1; f <= SoDu_NuaSao; f++)
+                                            {
+                                                <i class="fa fa-star-half-o"></i>
+                                            }
+                                            for (var f = 1; f <= SoDu_SaoRong; f++)
+                                            {
+                                                <i class="fa fa-star-o"></i>
+                                            }
+                                            <span class="likes ml+">@item.ViewRating (đánh giá)</span>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <p class="review" style="text-align: left;">Chưa có nhận xét</p>
+                                    }
+
+
+
+                                </div>
+
+                                <!-- - - - - - - - - - - - - - End product rating - - - - - - - - - - - - - - - - -->
+
+                                <p class="product_price alignleft">
+
+                                    <b>@item.Price.ToString("N0")</b>
+                                </p>
+
+                            </div><!--/ .clearfix.product_info-->
+
+                            <button class="button_blue middle_btn btnAddCart" data-id="@item.ProductID">Mua Hàng</button>
+
+                        </div>
+
+                        <!-- - - - - - - - - - - - - - End of product description - - - - - - - - - - - - - - - - -->
+
+                    </div>
+                }
+
+
+            </div>
+        </div>
+
+
+    </div>
+
+</section>
+@if (Request.IsAuthenticated)
+{
+    <section class="section_offset animated transparent" data-animation="fadeInDown">
+
+
+
+        @if (listsuggest.Count() > 0)
+        {
+            <h3 class="offset_title section_title section_title1">
+                <a href="#" class="section__lable"> Sản phẩm gởi ý</a>
+            </h3>
+            <div class="tabs type_3 products">
+                <div class="tab_containers_wrap">
+                    <div class="owl_carousel carousel_in_tabs type_3">
+
+
+                        @foreach (var item in listsuggest)
+                        {
+                            var url = "/" + item.Alias + ".sp-" + item.ProductID + ".html";
+                            <div class="product_item">
+
+                                <!-- - - - - - - - - - - - - - Thumbnail - - - - - - - - - - - - - - - - -->
+
+                                <div class="image_wrap">
+                                    <img src="@item.Image"/>
+
+                                    @*<img src="~/UploadedFiles/images/1.jpg" class="img-responsive" />*@
+
+                                    <!-- - - - - - - - - - - - - - Product actions - - - - - - - - - - - - - - - - -->
+
+                                    <div class="actions_wrap">
+
+                                        <div class="centered_buttons">
+
+                                            <a href="@url" class="button_dark_grey middle_btn quick_view pb">Xem chi tiết</a>
+
+                                        </div><!--/ .centered_buttons -->
+
+                                    </div><!--/ .actions_wrap-->
+                                    <!-- - - - - - - - - - - - - - End of product actions - - - - - - - - - - - - - - - - -->
+
+                                </div><!--/. image_wrap-->
+
+
+                                <div class="description align_center">
+
+                                    <p>
+                                        <a href="@url">@item?.Name</a>
+                                    </p>
+
+                                    <div class="clearfix product_info">
+
+                                        <!-- - - - - - - - - - - - - - Product rating - - - - - - - - - - - - - - - - -->
+                                        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+                                        <ul class="rating alignright">
+                                            @if (item.ProductRating > 0 && item.ProductRating != 0)
+                                            {
+                                                var Mark = (double) item.ProductRating; //2.7
+                                                var SoTron = Mark - Mark % 1; //2
+                                                var SoDu = 5 - SoTron; //3
+                                                var SoDu_SaoRong = Math.Round(SoDu); //3
+                                                if (Mark % 1 >= 0.5)
+                                                {
+                                                    SoDu_SaoRong = SoDu_SaoRong - 1;
+                                                }
+                                                var SoDu_NuaSao = SoDu - Math.Round(SoDu_SaoRong);
+                                                if (Mark > 0)
+                                                {
+                                                    for (var f = 1; f <= SoTron; f++)
+                                                    {
+                                                        <i class="fa fa-star"></i>
+                                                    }
+                                                    for (var f = 1; f <= SoDu_NuaSao; f++)
+                                                    {
+                                                        <i class="fa fa-star-half-o"></i>
+                                                    }
+                                                    for (var f = 1; f <= SoDu_SaoRong; f++)
+                                                    {
+                                                        <i class="fa fa-star-o"></i>
+                                                    }
+                                                    <span class="likes">@item.ViewRating (đánh giá)</span>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <p class="review" style="text-align: left;">Chưa có nhận xét</p>
+                                            }
+
+
+                                        </ul>
+
+                                        <!-- - - - - - - - - - - - - - End product rating - - - - - - - - - - - - - - - - -->
+
+                                        <p class="product_price alignleft">
+
+                                            <b>@item.Price.ToString("N0")</b>
+                                        </p>
+
+                                    </div><!--/ .clearfix.product_info-->
+
+                                    <button class="button_blue middle_btn btnAddCart" data-id="@item.ProductID">Mua Hàng</button>
+
+                                </div>
+
+                                <!-- - - - - - - - - - - - - - End of product description - - - - - - - - - - - - - - - - -->
+
+                            </div>
+                        }
+
+
+                    </div>
+                </div>
+
+
+            </div>
+        }
+
+
+    </section>
+    <section class="section_offset animated transparent" data-animation="fadeInDown">
+
+        <h3 class="offset_title section_title section_title1">
+            <a href="#" class="section__lable"> Sản phẩm mua nhiều</a>
+        </h3>
+
+        <div class="tabs type_3 products">
+            <div class="tab_containers_wrap">
+                <div class="owl_carousel carousel_in_tabs type_3">
+
+
+                    @foreach (var item in listHot)
+                    {
+                        var url = "/" + item.Alias + ".sp-" + item.ProductID + ".html";
+                        <div class="product_item">
+
+                            <!-- - - - - - - - - - - - - - Thumbnail - - - - - - - - - - - - - - - - -->
+
+                            <div class="image_wrap">
+                                <img src="@item.Image"/>
+
+                                @*<img src="~/UploadedFiles/images/1.jpg" class="img-responsive" />*@
+
+                                <!-- - - - - - - - - - - - - - Product actions - - - - - - - - - - - - - - - - -->
+
+                                <div class="actions_wrap">
+
+                                    <div class="centered_buttons">
+
+                                        <a href="@url" class="button_dark_grey middle_btn quick_view pb">Xem chi tiết</a>
+
+                                    </div><!--/ .centered_buttons -->
+
+                                </div><!--/ .actions_wrap-->
+                                <!-- - - - - - - - - - - - - - End of product actions - - - - - - - - - - - - - - - - -->
+
+                            </div><!--/. image_wrap-->
+                            <!-- - - - - - - - - - - - - - End thumbnail - - - - - - - - - - - - - - - - -->
+                            <!-- - - - - - - - - - - - - - Label - - - - - - - - - - - - - - - - -->
+
+                            <div class="label_hot">
+
+                                <div>Hot</div>
+
+                            </div>
+
+                            <!-- - - - - - - - - - - - - - End label - - - - - - - - - - - - - - - - -->
+                            <!-- - - - - - - - - - - - - - Countdown - - - - - - - - - - - - - - - - -->
+                            <!-- - - - - - - - - - - - - - End countdown - - - - - - - - - - - - - - - - -->
+                            <!-- - - - - - - - - - - - - - Product description - - - - - - - - - - - - - - - - -->
+
+                            <div class="description align_center">
+
+                                <p>
+                                    <a href="@url">@item?.Name</a>
+                                </p>
+
+                                <div class="clearfix product_info">
+
+                                    <!-- - - - - - - - - - - - - - Product rating - - - - - - - - - - - - - - - - -->
+                                    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+                                    <ul class="rating alignright">
+                                        @if (item.ProductRating > 0 && item.ProductRating != 0)
+                                        {
+                                            var Mark = (double) item.ProductRating; //2.7
+                                            var SoTron = Mark - Mark % 1; //2
+                                            var SoDu = 5 - SoTron; //3
+                                            var SoDu_SaoRong = Math.Round(SoDu); //3
+                                            if (Mark % 1 >= 0.5)
+                                            {
+                                                SoDu_SaoRong = SoDu_SaoRong - 1;
+                                            }
+                                            var SoDu_NuaSao = SoDu - Math.Round(SoDu_SaoRong);
+                                            if (Mark > 0)
+                                            {
+                                                for (var f = 1; f <= SoTron; f++)
+                                                {
+                                                    <i class="fa fa-star"></i>
+                                                }
+                                                for (var f = 1; f <= SoDu_NuaSao; f++)
+                                                {
+                                                    <i class="fa fa-star-half-o"></i>
+                                                }
+                                                for (var f = 1; f <= SoDu_SaoRong; f++)
+                                                {
+                                                    <i class="fa fa-star-o"></i>
+                                                }
+                                                <span class="likes">@item.ViewRating (đánh giá)</span>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <p class="review" style="text-align: left;">Chưa có nhận xét</p>
+                                        }
+
+
+
+                                    </ul>
+
+                                    <!-- - - - - - - - - - - - - - End product rating - - - - - - - - - - - - - - - - -->
+
+                                    <p class="product_price alignleft">
+
+                                        <b>@item.Price.ToString("N0")</b>
+                                    </p>
+
+                                </div><!--/ .clearfix.product_info-->
+
+                                <button class="button_blue middle_btn btnAddCart" data-id="@item.ProductID">Mua Hàng</button>
+
+
+                            </div>
+
+                            <!-- - - - - - - - - - - - - - End of product description - - - - - - - - - - - - - - - - -->
+
+                        </div>
+                    }
+
+
+                </div>
+            </div>
+
+
+        </div>
+
+    </section>
+    <section class="section_offset animated transparent" data-animation="fadeInDown">
+
+        <h3 class="offset_title section_title section_title1">
+            <a href="#" class="section__lable"> Sản phẩm mới</a>
+        </h3>
+
+        <div class="tabs type_3 products">
+            <div class="tab_containers_wrap">
+                <div class="owl_carousel carousel_in_tabs type_3">
+
+
+                    @foreach (var item in Model.LastestProducts)
+                    {
+                        var url = "/" + item.Alias + ".sp-" + item.ProductID + ".html";
+                        <div class="product_item">
+
+                            <!-- - - - - - - - - - - - - - Thumbnail - - - - - - - - - - - - - - - - -->
+
+                            <div class="image_wrap">
+                                <img src="@item.Image"/>
+
+                                @*<img src="~/UploadedFiles/images/1.jpg" class="img-responsive" />*@
+
+                                <!-- - - - - - - - - - - - - - Product actions - - - - - - - - - - - - - - - - -->
+
+                                <div class="actions_wrap">
+
+                                    <div class="centered_buttons">
+
+                                        <a href="@url" class="button_dark_grey middle_btn quick_view pb">Xem chi tiết</a>
+
+                                    </div><!--/ .centered_buttons -->
+
+                                </div><!--/ .actions_wrap-->
+                                <!-- - - - - - - - - - - - - - End of product actions - - - - - - - - - - - - - - - - -->
+
+                            </div><!--/. image_wrap-->
+                            <!-- - - - - - - - - - - - - - End thumbnail - - - - - - - - - - - - - - - - -->
+                            <!-- - - - - - - - - - - - - - Label - - - - - - - - - - - - - - - - -->
+
+                            <div class="label_new">
+
+                                <div>Mới</div>
+
+                            </div>
+
+                            <!-- - - - - - - - - - - - - - End label - - - - - - - - - - - - - - - - -->
+                            <!-- - - - - - - - - - - - - - Countdown - - - - - - - - - - - - - - - - -->
+                            <!-- - - - - - - - - - - - - - End countdown - - - - - - - - - - - - - - - - -->
+                            <!-- - - - - - - - - - - - - - Product description - - - - - - - - - - - - - - - - -->
+
+                            <div class="description align_center">
+
+                                <p>
+                                    <a href="@url">@item?.Name</a>
+                                </p>
+
+                                <div class="clearfix product_info">
+
+                                    <!-- - - - - - - - - - - - - - Product rating - - - - - - - - - - - - - - - - -->
+                                    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+                                    <div class="rating alignright">
+                                        @if (item.ProductRating > 0 && item.ProductRating != 0)
+                                        {
+                                            var Mark = (double) item.ProductRating; //2.7
+                                            var SoTron = Mark - Mark % 1; //2
+                                            var SoDu = 5 - SoTron; //3
+                                            var SoDu_SaoRong = Math.Round(SoDu); //3
+                                            if (Mark % 1 >= 0.5)
+                                            {
+                                                SoDu_SaoRong = SoDu_SaoRong - 1;
+                                            }
+                                            var SoDu_NuaSao = SoDu - Math.Round(SoDu_SaoRong);
+                                            if (Mark > 0)
+                                            {
+                                                for (var f = 1; f <= SoTron; f++)
+                                                {
+                                                    <i class="fa fa-star"></i>
+                                                }
+                                                for (var f = 1; f <= SoDu_NuaSao; f++)
+                                                {
+                                                    <i class="fa fa-star-half-o"></i>
+                                                }
+                                                for (var f = 1; f <= SoDu_SaoRong; f++)
+                                                {
+                                                    <i class="fa fa-star-o"></i>
+                                                }
+                                                <span class="likes ml+">@item.ViewRating (đánh giá)</span>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <p class="review" style="text-align: left;">Chưa có nhận xét</p>
+                                        }
+
+
+
+                                    </div>
+
+                                    <!-- - - - - - - - - - - - - - End product rating - - - - - - - - - - - - - - - - -->
+
+                                    <p class="product_price alignleft">
+
+                                        <b>@item.Price.ToString("N0")</b>
+                                    </p>
+
+                                </div><!--/ .clearfix.product_info-->
+
+                                <button class="button_blue middle_btn btnAddCart" data-id="@item.ProductID">Mua Hàng</button>
+
+                            </div>
+
+                            <!-- - - - - - - - - - - - - - End of product description - - - - - - - - - - - - - - - - -->
+
+                        </div>
+                    }
+
+
+                </div>
+            </div>
+
+
+        </div>
+
+    </section>
+    <script>
+        $(document).ready(function() {
+            $('.lastest__product').css('display', 'none');
+            $('.hot__product').css('display', 'none');
+        });
+
+    </script>
+}
+
+
+<section class="section_offset animated transparent hot__product" data-animation="fadeInDown">
+
+    <h3 class="offset_title section_title section_title1">
+        <a href="#" class="section__lable"> Sản phẩm mua nhiều</a>
+    </h3>
+
+    <div class="tabs type_3 products">
+        <div class="tab_containers_wrap">
+            <div class="owl_carousel carousel_in_tabs type_3">
+
+
+                @foreach (var item in listHot)
+                {
+                    var url = "/" + item.Alias + ".sp-" + item.ProductID + ".html";
+                    <div class="product_item">
+
+                        <!-- - - - - - - - - - - - - - Thumbnail - - - - - - - - - - - - - - - - -->
+
+                        <div class="image_wrap">
+                            <img src="@item.Image"/>
+
+                            @*<img src="~/UploadedFiles/images/1.jpg" class="img-responsive" />*@
+
+                            <!-- - - - - - - - - - - - - - Product actions - - - - - - - - - - - - - - - - -->
+
+                            <div class="actions_wrap">
+
+                                <div class="centered_buttons">
+
+                                    <a href="@url" class="button_dark_grey middle_btn quick_view pb">Xem chi tiết</a>
+
+                                </div><!--/ .centered_buttons -->
+
+                            </div><!--/ .actions_wrap-->
+                            <!-- - - - - - - - - - - - - - End of product actions - - - - - - - - - - - - - - - - -->
+
+                        </div><!--/. image_wrap-->
+                        <!-- - - - - - - - - - - - - - End thumbnail - - - - - - - - - - - - - - - - -->
+                        <!-- - - - - - - - - - - - - - Label - - - - - - - - - - - - - - - - -->
+
+                        <div class="label_hot">
+
+                            <div>Hot</div>
+
+                        </div>
+
+
+                        <div class="description align_center">
+
+                            <p>
+                                <a href="@url">@item?.Name</a>
+                            </p>
+
+                            <div class="clearfix product_info">
+
+                                <!-- - - - - - - - - - - - - - Product rating - - - - - - - - - - - - - - - - -->
+                                <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+                                <ul class="rating alignright">
+                                    @if (item.ProductRating > 0 && item.ProductRating != 0)
+                                    {
+                                        var Mark = (double) item.ProductRating; //2.7
+                                        var SoTron = Mark - Mark % 1; //2
+                                        var SoDu = 5 - SoTron; //3
+                                        var SoDu_SaoRong = Math.Round(SoDu); //3
+                                        if (Mark % 1 >= 0.5)
+                                        {
+                                            SoDu_SaoRong = SoDu_SaoRong - 1;
+                                        }
+                                        var SoDu_NuaSao = SoDu - Math.Round(SoDu_SaoRong);
+                                        if (Mark > 0)
+                                        {
+                                            for (var f = 1; f <= SoTron; f++)
+                                            {
+                                                <i class="fa fa-star"></i>
+                                            }
+                                            for (var f = 1; f <= SoDu_NuaSao; f++)
+                                            {
+                                                <i class="fa fa-star-half-o"></i>
+                                            }
+                                            for (var f = 1; f <= SoDu_SaoRong; f++)
+                                            {
+                                                <i class="fa fa-star-o"></i>
+                                            }
+                                            <span class="likes">@item.ViewRating (đánh giá)</span>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <p class="review" style="text-align: left;">Chưa có nhận xét</p>
+                                    }
+
+
+
+                                </ul>
+
+                                <!-- - - - - - - - - - - - - - End product rating - - - - - - - - - - - - - - - - -->
+
+                                <p class="product_price alignleft">
+
+                                    <b>@item.Price.ToString("N0")</b>
+                                </p>
+
+                            </div><!--/ .clearfix.product_info-->
+
+                            <button class="button_blue middle_btn btnAddCart" data-id="@item.ProductID">Mua Hàng</button>
+
+
+                        </div>
+
+                        <!-- - - - - - - - - - - - - - End of product description - - - - - - - - - - - - - - - - -->
+
+                    </div>
+                }
+
+
+            </div>
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<section class="section_offset animated transparent" data-animation="fadeInDown">
+
+    <h3 class="offset_title section_title section_title1">
+        <a href="#" class="section__lable"> Trang điểm</a>
+    </h3>
+
+    <div class="tabs type_3 products">
+        <div class="tab_containers_wrap">
+            <div class="owl_carousel carousel_in_tabs type_3">
+
+
+                @foreach (var item in Model.ProductCategoryDM)
+                {
+                    var url = "/" + item.Alias + ".sp-" + item.ProductID + ".html";
+                    <div class="product_item">
+
+                        <!-- - - - - - - - - - - - - - Thumbnail - - - - - - - - - - - - - - - - -->
+
+                        <div class="image_wrap">
+                            <img src="@item.Image"/>
+
+                            @*<img src="~/UploadedFiles/images/1.jpg" class="img-responsive" />*@
+
+                            <!-- - - - - - - - - - - - - - Product actions - - - - - - - - - - - - - - - - -->
+
+                            <div class="actions_wrap">
+
+                                <div class="centered_buttons">
+
+                                    <a href="@url" class="button_dark_grey middle_btn quick_view pb">Xem chi tiết</a>
+
+                                </div><!--/ .centered_buttons -->
+
+                            </div><!--/ .actions_wrap-->
+                            <!-- - - - - - - - - - - - - - End of product actions - - - - - - - - - - - - - - - - -->
+
+                        </div><!--/. image_wrap-->
+                        <!-- - - - - - - - - - - - - - End thumbnail - - - - - - - - - - - - - - - - -->
+                        <!-- - - - - - - - - - - - - - Label - - - - - - - - - - - - - - - - -->
+
+
+                        <!-- - - - - - - - - - - - - - End label - - - - - - - - - - - - - - - - -->
+                        <!-- - - - - - - - - - - - - - Countdown - - - - - - - - - - - - - - - - -->
+                        <!-- - - - - - - - - - - - - - End countdown - - - - - - - - - - - - - - - - -->
+                        <!-- - - - - - - - - - - - - - Product description - - - - - - - - - - - - - - - - -->
+
+                        <div class="description align_center">
+
+                            <p>
+                                <a href="@url">@item?.Name</a>
+                            </p>
+
+                            <div class="clearfix product_info">
+
+                                <!-- - - - - - - - - - - - - - Product rating - - - - - - - - - - - - - - - - -->
+                                <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+                                <div class="rating alignright">
+                                    @if (item.ProductRating > 0 && item.ProductRating != 0)
+                                    {
+                                        var Mark = (double) item.ProductRating; //2.7
+                                        var SoTron = Mark - Mark % 1; //2
+                                        var SoDu = 5 - SoTron; //3
+                                        var SoDu_SaoRong = Math.Round(SoDu); //3
+                                        if (Mark % 1 >= 0.5)
+                                        {
+                                            SoDu_SaoRong = SoDu_SaoRong - 1;
+                                        }
+                                        var SoDu_NuaSao = SoDu - Math.Round(SoDu_SaoRong);
+                                        if (Mark > 0)
+                                        {
+                                            for (var f = 1; f <= SoTron; f++)
+                                            {
+                                                <i class="fa fa-star"></i>
+                                            }
+                                            for (var f = 1; f <= SoDu_NuaSao; f++)
+                                            {
+                                                <i class="fa fa-star-half-o"></i>
+                                            }
+                                            for (var f = 1; f <= SoDu_SaoRong; f++)
+                                            {
+                                                <i class="fa fa-star-o"></i>
+                                            }
+                                            <span class="likes ml+">@item.ViewRating (đánh giá)</span>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <p class="review" style="text-align: left;">Chưa có nhận xét</p>
+                                    }
+
+
+
+                                </div>
+
+                                <!-- - - - - - - - - - - - - - End product rating - - - - - - - - - - - - - - - - -->
+
+                                <p class="product_price alignleft">
+
+                                    <b>@item.Price.ToString("N0")</b>
+                                </p>
+
+                            </div><!--/ .clearfix.product_info-->
+
+                            <button class="button_blue middle_btn btnAddCart" data-id="@item.ProductID">Mua Hàng</button>
+
+                        </div>
+
+                        <!-- - - - - - - - - - - - - - End of product description - - - - - - - - - - - - - - - - -->
+
+                    </div>
+                }
+
+
+            </div>
+        </div>
+
+
+    </div>
+
+</section>
+
+<section class="section_offset animated transparent" data-animation="fadeInDown">
+
+    <h3 class="offset_title section_title section_title1">
+        <a href="#" class="section__lable">Thương hiệu @Model.ProductBrandDM.FirstOrDefault().ProductBrand.Name</a>
+    </h3>
+
+    <div class="tabs type_3 products">
+        <div class="tab_containers_wrap">
+            <div class="owl_carousel carousel_in_tabs type_3">
+
+
+                @foreach (var item in Model.ProductBrandDM)
+                {
+                    var url = "/" + item.Alias + ".sp-" + item.ProductID + ".html";
+                    <div class="product_item">
+
+                        <!-- - - - - - - - - - - - - - Thumbnail - - - - - - - - - - - - - - - - -->
+
+                        <div class="image_wrap">
+                            <img src="@item.Image"/>
+
+                            @*<img src="~/UploadedFiles/images/1.jpg" class="img-responsive" />*@
+
+                            <!-- - - - - - - - - - - - - - Product actions - - - - - - - - - - - - - - - - -->
+
+                            <div class="actions_wrap">
+
+                                <div class="centered_buttons">
+
+                                    <a href="@url" class="button_dark_grey middle_btn quick_view pb">Xem chi tiết</a>
+
+                                </div><!--/ .centered_buttons -->
+
+                            </div><!--/ .actions_wrap-->
+                            <!-- - - - - - - - - - - - - - End of product actions - - - - - - - - - - - - - - - - -->
+
+                        </div><!--/. image_wrap-->
+
+
+                        <div class="description align_center">
+
+                            <p>
+                                <a href="@url">@item?.Name</a>
+                            </p>
+
+                            <div class="clearfix product_info">
+
+                                <!-- - - - - - - - - - - - - - Product rating - - - - - - - - - - - - - - - - -->
+                                <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+                                <div class="rating alignright">
+                                    @if (item.ProductRating > 0 && item.ProductRating != 0)
+                                    {
+                                        var Mark = (double) item.ProductRating; //2.7
+                                        var SoTron = Mark - Mark % 1; //2
+                                        var SoDu = 5 - SoTron; //3
+                                        var SoDu_SaoRong = Math.Round(SoDu); //3
+                                        if (Mark % 1 >= 0.5)
+                                        {
+                                            SoDu_SaoRong = SoDu_SaoRong - 1;
+                                        }
+                                        var SoDu_NuaSao = SoDu - Math.Round(SoDu_SaoRong);
+                                        if (Mark > 0)
+                                        {
+                                            for (var f = 1; f <= SoTron; f++)
+                                            {
+                                                <i class="fa fa-star"></i>
+                                            }
+                                            for (var f = 1; f <= SoDu_NuaSao; f++)
+                                            {
+                                                <i class="fa fa-star-half-o"></i>
+                                            }
+                                            for (var f = 1; f <= SoDu_SaoRong; f++)
+                                            {
+                                                <i class="fa fa-star-o"></i>
+                                            }
+                                            <span class="likes ml+">@item?.ViewRating (đánh giá)</span>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <p class="review" style="text-align: left;">Chưa có nhận xét</p>
+                                    }
+
+
+
+                                </div>
+
+                                <!-- - - - - - - - - - - - - - End product rating - - - - - - - - - - - - - - - - -->
+
+                                <p class="product_price alignleft">
+
+                                    <b>@item.Price.ToString("N0")</b>
+                                </p>
+
+                            </div><!--/ .clearfix.product_info-->
+
+                            <button class="button_blue middle_btn btnAddCart" data-id="@item.ProductID">Mua Hàng</button>
+
+                        </div>
+
+                        <!-- - - - - - - - - - - - - - End of product description - - - - - - - - - - - - - - - - -->
+
+                    </div>
+                }
+
+
+            </div>
+        </div>
+
+
+    </div>
+
+</section>
+
+</div>
+
+
+<div class="modal fade" id="shoppingcart-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title titlegiohang" id="myModalLabel">Giỏ hàng</h4>
+            </div>
+            <div class="modal-body">
+                <div id="notification" style="height: 300px; overflow-y: auto; color: black !important">
+                    <div class="container">
+                        <div id="cartContent">
+                            <section class="section_offset">
+                                <h1>Giỏ Hàng Của Tôi</h1>
+                                <!-- Shopping cart table -->
+                                <div class="table_wrap">
+                                    <table class="table_type_1 shopping_cart_table">
+                                        <thead>
+                                        <tr>
+                                            <th class="product_image_col">Hình ảnh</th>
+                                            <th class="product_title_col">Tên Sản Phẩm</th>
+                                            <th>Đơn giá</th>
+                                            <th class="product_qty_col">Số lượng</th>
+                                            <th>Tổng</th>
+
+                                        </tr>
+                                        </thead>
+                                        <tbody id="cartBody"></tbody>
+
+                                    </table>
+
+                                </div>
+
+                            </section><!--/ .section_offset -->
+
+
+                        </div>
+
+
+                    </div><!--/ .container-->
+
+                </div><!--/ .page_wrapper-->
+
+                <script id="tplCart" type="x-tmpl-mustache">
+                    <tr>
+                        <!-- Product Image -->
+                        <td class="product_image_col" data-title="Product Image">
+                            <a href="#"><img src="{{Image}}" style="height:30px; width:30px;" /></a>
+                        </td>
+
+                        <!-- - - - - - - - - - - - - - End of product Image - - - - - - - - - - - - - - - - -->
+                        <!-- - - - - - - - - - - - - - Product name - - - - - - - - - - - - - - - - -->
+
+                        <td data-title="Product Name">
+
+                            <a href="#" class="product_title">{{ProductName}}</a>
+
+                            @*<ul class="sc_product_info">
+
+                        <li>Size: Big</li>
+                        <li>Color: Red</li>
+
+                    </ul>*@
+
+                        </td>
+
+                        <!-- - - - - - - - - - - - - - End of product name - - - - - - - - - - - - - - - - -->
+                        <!-- - - - - - - - - - - - - - SKU - - - - - - - - - - - - - - - - -->
+                        <!-- - - - - - - - - - - - - - End of SKU - - - - - - - - - - - - - - - - -->
+                        <!-- - - - - - - - - - - - - - Price - - - - - - - - - - - - - - - - -->
+
+                        <td class="subtotal" data-title="Price">
+
+                            {{PriceF}}
+
+                        </td>
+
+                        <!-- - - - - - - - - - - - - - End of Price - - - - - - - - - - - - - - - - -->
+                        <!-- - - - - - - - - - - - - - Quantity - - - - - - - - - - - - - - - - -->
+
+                        <td data-title="Quantity">
+
+                            <div class="qty min clearfix">
+
+                                <button class="theme_button txtQuantitychange" data-price="{{Price}}" data-id="{{ProductId}}" value="{{Quantity}}" data-direction="minus">&#45;</button>
+                                <input type="text" name="" data-price="{{Price}}" class="txtQuantity" data-id="{{ProductId}}" value="{{Quantity}}">
+                                <button class="theme_button txtQuantitychange" data-price="{{Price}}" data-id="{{ProductId}}" value="{{Quantity}}" data-direction="plus">&#43;</button>
+
+                            </div><!--/ .qty.min.clearfix-->
+
+                        </td>
+
+                        <!-- - - - - - - - - - - - - - End of quantity - - - - - - - - - - - - - - - - -->
+                        <!-- - - - - - - - - - - - - - Total - - - - - - - - - - - - - - - - -->
+
+                        <td class="total" data-title="Total" id="amount_{{ProductId}}">
+
+                            {{Amount}}
+
+                        </td>
+
+                        <!-- - - - - - - - - - - - - - End of total - - - - - - - - - - - - - - - - -->
+                        <!-- - - - -ch - - - - - - - - - Action - - - - - - - - - - - - - - - - -->
+
+
+                        <!-- - - - - - - - - - - - - - End of action - - - - - - - - - - - - - - - - -->
+
+                    </tr>
+                </script>
+            </div>
+            <div class="modal-footer" id="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Thoát</button>
+            </div>
+        </div>
+    </div>
+</div>

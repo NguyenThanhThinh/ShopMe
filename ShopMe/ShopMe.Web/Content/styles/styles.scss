@@ -1,0 +1,16 @@
+﻿@import 'modules/variables';
+@import 'modules/common'; // import common after variables, so in common we can `reference` to variables
+
+@import 'partials/layout';
+@import 'partials/header';
+@import 'partials/footer';
+@import 'partials/guide';
+@import 'partials/news';
+
+@import 'partials/index';
+@import 'partials/slider';
+@import 'partials/cart';
+@import 'partials/checkout';
+@import 'partials/about';
+
+@import 'partials/product-detail';

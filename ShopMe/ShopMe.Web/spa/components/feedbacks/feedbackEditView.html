@@ -1,0 +1,47 @@
+﻿ <!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        nhận xét
+    </h1>
+    <ol class="breadcrumb">
+        <li><a ui-sref="home"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
+        <li><a ui-sref="feedbacks">Danh sách nhật xét</a></li>
+        <li class="active">cập nhật </li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    <!-- Horizontal Form -->
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <h3 class="box-title">Mã nhận xét: #<b>{{feedback.FeedbackID}}</b></h3>
+        </div><!-- /.box-header -->
+        <!-- form start -->
+        <form class="form-horizontal" novalidate name="frmReplyFeedback" role="form" ng-submit="EditFeedback()">
+            <div class="box-body">
+                <h3 >Thông tin nhận xét</h3>
+                <dl class="dl-horizontal">
+                    <dt>Người gửi:</dt>
+                    <dd>{{feedback.User.FullName}}</dd>
+                    <dt>Tiêu đề:</dt>
+                    <dd>{{feedback.Title}}</dd>
+                    <dt>Thời gian:</dt>
+                    <dd>{{feedback.CreatedDate | date:'dd/MM/yyyy hh:mm'}}</dd>
+                    <dt>Nội dung:</dt>
+                    <dd>
+                        <textarea class="form-control" name="content" ckeditor="ckeditorOptions" ng-model="feedback.Content"></textarea>
+                    </dd>
+                   
+                </dl>    
+            </div><!-- /.box-body -->
+            <div class="box-footer">
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-send-o"></i>Lưu</button>                           
+                        <a ui-sref="feedbacks" class="btn btn-default">Hủy bỏ</a>
+                    </div>
+                </div>
+            </div><!-- /.box-footer -->
+        </form>
+    </div><!-- /.box -->
+</section><!-- /.content -->

@@ -1,0 +1,35 @@
+﻿
+
+@model IEnumerable<ShopMe.Domains.SliderViewModel>
+<div class="col-sm-12">
+
+    <div class="revolution_slider">
+
+        <div class="rev_slider">
+
+            <ul>
+
+
+                @foreach (var item in Model)
+                {
+                    <li data-transition="papercut" data-slotamount="7">
+                        <img src="@item.Image" class="img-responsive"/>
+
+
+                        <div class="caption sfl stl layer_1" data-x="left" data-hoffset="60" data-y="90" data-easing="easeOutBack" data-speed="600" data-start="900">@item.Description</div>
+
+
+                        <div class="caption sfb stb" data-x="left" data-y="245" data-hoffset="60" data-easing="easeOutBack" data-speed="700" data-start="1100">
+                            <a href="#" class="button_blue big_btn">Mua Ngay!</a>
+                        </div>
+
+                    </li>
+                }
+            </ul>
+
+        </div>
+
+    </div>
+
+
+</div>

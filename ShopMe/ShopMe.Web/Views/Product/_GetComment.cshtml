@@ -1,0 +1,61 @@
+﻿
+
+@model IEnumerable<ShopMe.Domains.FeedbackViewModel >
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Đánh giá người dùng";
+    //var coment = ViewBag.comment as IEnumerable<ShopMe.Domains.FeedbackViewModel>;
+    var coment = Model;
+    string url = Request.Url.PathAndQuery;
+    List<ShopMe.Entities.Models.UserRating> user = ViewBag.userrating as List<ShopMe.Entities.Models.UserRating>;
+}
+
+
+
+<div class="clearfix"></div>
+<br>
+<br>
+
+@if (coment.Count() > 0)
+{
+    foreach (var item in coment)
+    {
+        <div class="rattingOutLine">
+            <a href="#">
+
+            </a>
+            <span class="UserFullName">@item.User.FullName</span>
+            <span class="ratting">
+
+                @foreach (var users in user)
+                {
+                    if (users.ProductID == item.ProductID && users.UserID == item.UserID)
+                    {
+                        for (int i = 1; i <= users.Rating; i++)
+                        {
+                            <i class="fa fa-star"></i>
+                        }
+
+                    }
+                }
+            </span>
+            <span class="flashTime">- @item.CreatedDate</span>
+            <br>
+            <div class="rattingTitle">
+                <strong class="text-left title__rating">@if (item.Title =="không có tiêu đề")
+                {
+                   <span>không có tiêu đề</span>
+                }
+                else
+                {
+                    @item.Title
+                }
+                </strong>
+            </div>
+            <br />
+            <div class="rattingContent">@item.Content</div>
+        </div>
+    }
+}
+@*@Html.PagedListPager(Model, page => Url.Action("_GetComment", new { @url=url, page = page,@id=ViewBag.id }))*@
+

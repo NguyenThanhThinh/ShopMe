@@ -1,0 +1,57 @@
+﻿<section class="content-header">
+    <h1>
+        Thay đổi mật khẩu
+    </h1>
+    <ol class="breadcrumb">
+        <li><a ui-sref="home"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
+        <li class="active">Đổi mật khẩu</li>
+    </ol>
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Đổi mật khẩu</h3>
+                </div><!-- /.box-header -->
+                <!-- form start -->
+                <form class="form-horizontal" role="form" novalidate name="frmChangePass" ng-submit="changePassword()">
+                    <div class="box-body">
+                        <div class="col-md-12">
+                            <div class="form-group" ng-class="{ 'has-error' : frmChangePass.oldPassword.$invalid && !frmChangePass.oldPassword.$pristine }">
+                                <label class="col-sm-2 control-label">Mặt khẩu hiện tại:</label>
+                                <div class="col-sm-10">
+                                    <input type="password" name="oldPassword" class="form-control" required ng-model="account.OldPassword">
+                                    <span ng-show="frmChangePass.oldPassword.$invalid && !frmChangePass.oldPassword.$pristine" class="has-error">Mậu khẩu hiện tại là bắt buộc.</span>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-class="{ 'has-error' : frmChangePass.newPassword.$invalid && !frmChangePass.newPassword.$pristine }">
+                                <label class="col-sm-2 control-label">Mật khẩu mới:</label>
+                                <div class="col-sm-10">
+                                    <div class="input-group">
+                                        <input type="{{inputType}}" name="newPassword" id="newPassword" class="form-control" required ng-model="account.NewPassword">
+                                        <span class="input-group-btn"><button class="btn btn-default" type="button" ng-click="showPass()"><i class="fa fa-eye"></i></button></span>
+                                    </div>
+                                    <span ng-show="frmAddAccount.newPassword.$invalid && !frmChangePass.newPassword.$pristine" class="has-error">Tài khoản là bắt buộc.</span>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-class="{ 'has-error' : frmChangePass.confirmPassword.$invalid && !frmChangePass.confirmPassword.$pristine }">
+                                <label class="col-sm-2 control-label">Nhập lại mật khẩu:</label>
+                                <div class="col-sm-10">
+                                    <input type="password" name="confirmPassword" class="form-control" required ng-model="account.ConfirmPassword" ng-match="account.NewPassword">
+                                    <span ng-show="account.NewPassword!=account.ConfirmPassword && !frmChangePass.confirmPassword.$pristine" class="has-error">Mật khẩu không khớp</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <input type="submit" ng-disabled="frmChangePass.$invalid" class="btn btn-primary" value="Lưu lại" />
+                                    <a ui-sref="home" class="btn btn-default">Hủy bỏ</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- /.box-body -->
+                </form>
+            </div><!-- /.box -->
+        </div>
+    </div>
+</section>

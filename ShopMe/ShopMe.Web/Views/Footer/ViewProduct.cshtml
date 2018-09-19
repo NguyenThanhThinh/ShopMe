@@ -1,0 +1,42 @@
+﻿
+@using ShopMe.Domains.Extensions
+@model IEnumerable<ShopMe.Domains.ProductViewModel>
+
+@{
+    var model = Model;
+
+}
+
+@if (model.Any())
+{
+    <ul class="products_list_widget">
+        @foreach (var item in model)
+        {
+            var url = "/" + item.Alias + ".sp-" + item.ProductID + ".html";
+            <li>
+
+                <a href="@url" class="product_thumb">
+
+                    <img src="@item.Image" alt="" style="width:80px;">
+
+                </a>
+
+                <div class="wrapper">
+
+                    <a href="@url" class="product_title">
+                        @item.Name.Truncate(24, true)
+                    </a>
+
+                    <div class="clearfix product_info">
+
+                        <p class="product_price alignleft"><b>@item.Price.ToString("N0")</b></p>
+
+                    </div>
+
+                </div>
+
+            </li>
+
+        }
+    </ul>
+}

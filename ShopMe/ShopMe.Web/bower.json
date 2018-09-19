@@ -1,0 +1,21 @@
+{
+  "name": "asp.net",
+  "private": true,
+  "dependencies": {
+
+    "mustache": "~2.3.0",
+    "numeral": "~1.5.3",
+    "angular": "^1.6.4",
+    "angular-ui-router": "~0.3.2",
+    "angular-ui-select": "~0.19.6",
+    "angular-sanitize": "~1.6.1",
+    "angular-local-storage": "~0.2.7",
+    "jquery-ui": "^1.12.1",
+    "boostrap": "^3.3.7",
+    "jquery-validation": "^1.16.0",
+    
+
+
+
+  }
+}

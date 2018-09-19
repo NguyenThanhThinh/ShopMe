@@ -1,0 +1,52 @@
+﻿<section class="content-header">
+    <h1>
+        CẬP NHẬT THUỘC TÍNH
+    </h1>
+    <ol class="breadcrumb">
+        <li><a ui-sref="home"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
+        <li><a ui-sref="product_attributes">Danh sách thuộc tính</a></li>
+        <li class="active">Cập nhật</li>
+    </ol>
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Cập nhật thuộc tính: <b>{{productAttribute.Name}}</b></h3>
+                </div><!-- /.box-header -->
+                <!-- form start -->
+                <form class="form-horizontal" role="form" novalidate name="frmUpdateProductAttribute" ng-submit="updateProductAttribute()">
+                    <div class="box-body">
+                        <div class="col-md-12">
+                            <div class="form-group" ng-class="{ 'has-error' : frmUpdateProductAttribute.name.$invalid && !frmUpdateProductAttribute.name.$pristine }">
+                                <label class="col-sm-2 control-label">Tên đơn vị tính:</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="name" class="form-control" required ng-model="productAttribute.Name">
+                                    <span ng-show="frmUpdateProductAttribute.name.$invalid  && !frmUpdateProductAttribute.name.$pristine" class="has-error">Tên thuộc tính là bắt buộc.</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="status" ng-model="productAttribute.Status" ng-checked="productAttribute.Status"> Hiển thị
+                                        </label>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <input type="submit" ng-disabled="frmUpdateAppRole.$invalid" class="btn btn-primary" value="Lưu lại" />
+                                    <a ui-sref="product_attributes" class="btn btn-default">Hủy bỏ</a>
+                                    <button class="btn btn-default" type="button" ng-click="resetForm()">Làm lại</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- /.box-body -->
+                </form>
+            </div><!-- /.box -->
+        </div>
+    </div>
+</section>

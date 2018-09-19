@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+   
+</head>
+<body>
+
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal5">Small modal</button>
+    <div class="modal fade" id="myModal5" role="dialog">
+        <div class="modal-dialog modal-sm">
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 style="text-align:center;" class="modal-title">Đăng nhập</h4><br />
+                    <p style="text-align:center;color:red" id="thongbaodn"></p>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h5>Tài khoản</h5>
+                            <input type="text" class="form-control" placeholder="Tên đăng nhập" id="dn_tendangnhap" name="username" required maxlength="20">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h5>Mật khẩu</h5>
+                            <input type="password" class="form-control" placeholder="Nhập mật khẩu" id="dn_matkhau" name="password" required min="6" max="30">
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+
+                    <input type="hidden" name="url" value="" />
+                    <input type="submit" style="width:100%;" class="btn btn-success phongrass" value="Đăng nhập" id="dangnhap"><br /><br />
+                    <p style="float:left">Bạn chưa có tài khoản ?</p> <a href="#" id="clickdathang"><strong style="color:red;">Đăng ký ngay</strong></a>
+
+                </div>
+
+            </div>
+            </div></div>
+</body>
+</html>

@@ -1,0 +1,99 @@
+﻿<section class="content-header">
+    <h1>
+        Cập nhật người dùng
+    </h1>
+    <ol class="breadcrumb">
+        <li><a ui-sref="home"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
+        <li><a ui-sref="application_users">Danh sách người dùng</a></li>
+        <li class="active">Cập nhật</li>
+    </ol>
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Tài khoản: <b>{{account.FullName}} </b></h3>
+                </div><!-- /.box-header -->
+                <!-- form start -->
+                <form class="form-horizontal" role="form" novalidate name="frmUpdateAccount" ng-submit="updateAccount()">
+                    <div class="box-body">
+                        <div class="col-md-12">
+                            <div class="form-group" ng-class="{ 'has-error' : frmUpdateAccount.name.$invalid && !frmUpdateAccount.name.$pristine }">
+                                <label class="col-sm-2 control-label">Họ tên người dùng:</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="name" class="form-control" required ng-model="account.FullName">
+                                    <span ng-show="frmUpdateAccount.name.$invalid && !frmUpdateAccount.name.$pristine" class="has-error">Họ tên là bắt buộc.</span>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-class="{ 'has-error' : frmUpdateAccount.userName.$invalid && !frmUpdateAccount.userName.$pristine }">
+                                <label class="col-sm-2 control-label">Tài khoản:</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="userName" class="form-control" required ng-model="account.UserName">
+                                    <span ng-show="frmAddAccount.userName.$invalid && !frmUpdateAccount.userName.$pristine" class="has-error">Tài khoản là bắt buộc.</span>
+                                </div>
+                            </div>
+                            <!--<div class="form-group" ng-class="{ 'has-error' : frmUpdateAccount.password.$invalid && !frmUpdateAccount.password.$pristine }">
+                                <label class="col-sm-2 control-label">Mật khẩu:</label>
+                                <div class="col-sm-10">
+                                    <input type="password" name="password" class="form-control" ng-minlength="6" required ng-model="account.Password">
+                                    <span ng-show="frmUpdateAccount.password.$invalid && !frmUpdateAccount.password.$pristine" class="has-error">Trường yêu cầu bắt buộc.</span>
+                                    <span ng-show="frmUpdateAccount.password.$error.minlength" class="has-error">Độ dài tối thiểu 6 ký tự</span>
+                                </div>
+                            </div>-->
+                            <div class="form-group" ng-class="{ 'has-error' : frmUpdateAccount.email.$invalid && !frmUpdateAccount.email.$pristine }">
+                                <label class="col-sm-2 control-label">Email:</label>
+                                <div class="col-sm-10">
+                                    <input type="email" name="email" class="form-control" required ng-model="account.Email">
+                                    <span ng-show="frmAddAccount.email.$invalid && !frmUpdateAccount.email.$pristine" class="has-error">Email không chính xác.</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Điện thoại:</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="password" class="form-control" ng-model="account.PhoneNumber">
+                                </div>
+                            </div>
+                            <div class="form-group" ng-class="{ 'has-error' : frmUpdateAccount.birthDate.$invalid && !frmUpdateAccount.birthDate.$pristine }">
+                                <label for="birthdate" class="col-sm-2 control-label">Ngày sinh:</label>
+                                <div class="col-sm-10">
+                                    <div class="input-group">
+                                        <input name="birthdate" class="form-control" type="datetime" date-time ng-model="account.BirthDay" format="DD-MM-YYYY" placeholder="Ngày-Tháng-Năm">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-class="{ 'has-error' : frmUpdateAccount.address.$invalid && !frmUpdateAccount.address.$pristine }">
+                                <label class="col-sm-2 control-label">Địa chỉ:</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="address" class="form-control" ng-model="account.Address">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <label ng-repeat="group in groups">
+                                        <input type="checkbox" checklist-model="account.Groups" checklist-value="group"> {{group.Description}}
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <input type="checkbox" name="isDelete" ng-model="account.IsDelete" ng-checked="account.IsDelete" /> Khóa tài khoản
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <input type="submit" class="btn btn-primary" value="Lưu lại" />
+                                    <a ui-sref="application_users" class="btn btn-default">Hủy bỏ</a>
+                                    <button class="btn btn-default" type="button" ng-click="resetForm()">Làm lại</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- /.box-body -->
+                </form>
+            </div><!-- /.box -->
+        </div>
+    </div>
+</section>

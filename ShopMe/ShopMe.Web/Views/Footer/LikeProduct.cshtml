@@ -1,0 +1,91 @@
+﻿@using ShopMe.Domains.Extensions
+@model IEnumerable<ShopMe.Domains.ProductViewModel>
+
+@{
+    var model = Model;
+
+}
+
+
+
+@if (model.Count() > 0)
+
+{
+    <ul class="products_list_widget">
+
+        @foreach (var item in model)
+        {
+            var url = "/" + item.Alias + ".sp-" + item.ProductID + ".html";
+            <li>
+
+                <a href="@url" class="product_thumb">
+
+                    <img src="@item.Image" style="width:80px;" alt="">
+
+                </a>
+
+                <div class="wrapper">
+
+                    <a href="@url" class="product_title">@item.Name.Truncate(24, true)</a>
+
+                    <div class="clearfix product_info">
+
+                        <p class="product_price alignleft"><b>@item.Price.ToString("N0")</b></p>
+
+                        <!-- - - - - - - - - - - - - - Product rating - - - - - - - - - - - - - - - - -->
+
+                        <div class="rating alignright">
+                            @if (item.ProductRating > 0 && item.ProductRating != 0)
+                    {
+
+                        double Mark = (double)item.ProductRating;//2.7
+                        double SoTron = Mark - Mark % 1; //2
+                        double SoDu = 5 - SoTron; //3
+                        double SoDu_SaoRong = Math.Round(SoDu);//3
+                        if (Mark % 1 >= 0.5)
+                        {
+                            SoDu_SaoRong = SoDu_SaoRong - 1;
+                        }
+                        double SoDu_NuaSao = SoDu - Math.Round(SoDu_SaoRong);
+                        if (Mark > 0)
+                        {
+                            for (int f = 1; f <= SoTron; f++)
+                            {
+                                        <i class="fa fa-star"></i>
+                                    }
+                                    for (int f = 1; f <= SoDu_NuaSao; f++)
+                                    {
+                                        <i class="fa fa-star-half-o"></i>
+                                    }
+                                    for (int f = 1; f <= SoDu_SaoRong; f++)
+                                    {
+                                        <i class="fa fa-star-o"></i>
+                                    }
+                                    <span class="likes ml+">@item.ViewRating (đánh giá)</span>
+                                }
+
+
+
+                            }
+                            else
+                            {
+                                <p class="review" style="text-align:left;">Chưa có nhận xét</p>
+                            }
+
+
+
+                        </div>
+
+
+
+
+                    </div>
+
+                </div>
+
+            </li>
+        }
+
+
+    </ul>
+}

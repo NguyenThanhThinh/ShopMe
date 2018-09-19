@@ -1,0 +1,38 @@
+﻿
+    .section_title1 {
+     background: #00b7f1;
+     padding: 0 20px 0 15px;
+     height: 100%;
+    
+     
+     float: left;
+     -webkit-border-radius: 10px;
+     -moz-border-radius: 10px;
+     border-radius: 10px;
+ }
+
+.section__lable {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 36px;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, .3);
+    display: block;
+    color: #fff;
+    padding: 0;
+    margin: 0;
+}
+
+.section_title1 a :hover {
+    text-decoration: none !important;
+    color: !important;
+}
+
+.section_title1 a :active {
+    text-decoration: none !important;
+    color: #fff;
+}
+
+.section_title1 a :focus {
+    text-decoration: none !important;
+    color: #fff;
+}

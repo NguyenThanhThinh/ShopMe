@@ -1,0 +1,93 @@
+﻿ <!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+       THÊM MỚI thương hiệu SẢN PHẨM
+    </h1>
+    <ol class="breadcrumb">
+        <li><a ui-sref="home"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
+        <li><a ui-sref="product_brands">Danh sách thương hiệu</a></li>
+        <li class="active">Thêm mới</li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    <!-- Horizontal Form -->
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <h3 class="box-title">Thêm mới: <b>{{productBrand.Name}}</b></h3>
+        </div><!-- /.box-header -->
+        <!-- form start -->
+        <form class="form-horizontal" novalidate name="frmAddProductBrand" role="form" ng-submit="AddProductBrand()">
+            <div class="box-body">
+                <div class="form-group" ng-class="{ 'has-error' : frmAddProductBrand.name.$invalid && !frmAddProductBrand.name.$pristine }">
+                    <label for="name" class="col-sm-2 control-label">Tên thương hiệu:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" ng-maxlength="256" required ng-change="GetSeoTitle()" name="name" ng-model="productBrand.Name">
+                        <span ng-show="frmAddProductBrand.name.$invalid  && !frmAddProductBrand.name.$pristine" class="has-error">Tên thương hiệu là bắt buộc.</span>
+                        <span ng-show="frmAddProductBrand.name.$error.maxlength" class="has-error"> Tên thương hiệu tối đa 256 ký tự.</span>
+                    </div>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error' : frmAddProductBrand.email.$invalid && !frmAddProductBrand.email.$pristine }">
+                    <label for="alias" class="col-sm-2 control-label">Email:</label>
+                    <div class="col-sm-10">
+                        <input type="email" class="form-control" name="email" ng-pattern="/^.+@gmail\.com$/" ng-required=true ng-model="productBrand.Email">
+                        <span ng-show="frmAddProductBrand.email.$invalid  && !frmAddProductBrand.alias.$pristine" class="has-error">Email là bắt buộc.</span>
+                        <span ng-show="frmAddProductBrand.email.$error.required &&frmAddProductBrand.email.$error.pattern" class="has-error"> Email  không hợp lệ</span>
+                        <span ng-show="frmAddProductBrand.mail.$valid">OK</span>
+                    </div>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error' : frmAddProductBrand.address.$invalid && !frmAddProductBrand.address.$pristine }">
+                    <label for="alias" class="col-sm-2 control-label">xuất xứ:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" required ng-maxlength="256" name="address" ng-model="productBrand.Address">
+                        <span ng-show="frmAddProductBrand.address.$invalid  && !frmAddProductBrand.alias.$pristine" class="has-error">địa chỉ là bắt buộc.</span>
+                        <span ng-show="frmAddProductBrand.address.$error.maxlength" class="has-error"> điện thoại tối đa 256 ký tự</span>
+                    </div>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error' : frmAddProductBrand.phone.$invalid && !frmAddProductBrand.phone.$pristine }">
+                    <label for="alias" class="col-sm-2 control-label">Số điện thoại:</label>
+                    <div class="col-sm-10">
+                        <input type="number" class="form-control" ng-required="true" ng-minlength="8" name="phone" ng-model="productBrand.Phone">
+                        <span ng-show="frmAddProductBrand.phone.$invalid  && !frmAddProductBrand.alias.$pristine" class="has-error">số điện thoại là bắt buộc.</span>
+                        <span ng-show="frmAddProductBrand.phone.$error.required && frmAddProductBrand.phone.$pristine" class="has-error"> điện thoại phải là số</span>
+                        <span ng-show="frmAddProductBrand.phone.$error.minlength" class="has-error"> Số điện thoại phải lớn hơn 8 sô.</span>
+                    </div>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error' : frmAddProductBrand.alias.$invalid && !frmAddProductBrand.alias.$pristine }">
+                    <label for="alias" class="col-sm-2 control-label">Tiêu đề SEO:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" required ng-maxlength="256" name="alias" ng-model="productBrand.Alias">
+                        <span ng-show="frmAddProductBrand.alias.$invalid  && !frmAddProductBrand.alias.$pristine" class="has-error">Tiêu đề SEO là bắt buộc.</span>
+                        <span ng-show="frmAddProductBrand.alias.$error.maxlength" class="has-error"> Tiêu đề Seo tối đa 256 ký tự</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="description" class="col-sm-2 control-label">Mô tả ngắn:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="description" ng-model="productBrand.Description">
+                    </div>
+                </div>
+              
+                
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="status" ng-model="productBrand.Status" ng-checked="productBrand.Status"> Hiển thị
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /.box-body -->
+            <div class="box-footer">
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <input type="submit" ng-disabled="frmAddProductBrand.$invalid" class="btn btn-info" value="Lưu lại" />
+                        <a ui-sref="product_brands" class="btn btn-default">Hủy bỏ</a>
+                        <button class="btn btn-default" type="button" ng-click="resetForm()">Làm lại</button>
+                    </div>
+                </div>
+            </div><!-- /.box-footer -->
+        </form>
+    </div><!-- /.box -->
+</section><!-- /.content -->

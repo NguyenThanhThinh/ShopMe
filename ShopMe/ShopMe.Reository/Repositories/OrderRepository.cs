@@ -11,7 +11,6 @@ namespace ShopMe.Reository.Repositories
     {
         IEnumerable<StatisticPriceQuantity> GetStatisticPriceQuantity(string fromDate, string toDate);
         IEnumerable<ProductStatisticViewModel> GetProductStatistic(string fromDate, string toDate);
-
     }
 
     public class OrderRepository : RepositoryBase<Order>, IOrderRepository
@@ -22,20 +21,24 @@ namespace ShopMe.Reository.Repositories
 
         public IEnumerable<ProductStatisticViewModel> GetProductStatistic(string fromDate, string toDate)
         {
-            var parameters = new SqlParameter[]{
-                new SqlParameter("@fromDate", fromDate) ,
-                    new SqlParameter("@toDate", toDate)
+            var parameters = new SqlParameter[]
+            {
+                new SqlParameter("@fromDate", fromDate),
+                new SqlParameter("@toDate", toDate)
             };
-            return DbContext.Database.SqlQuery<ProductStatisticViewModel>("GetProductStatisticsSP @fromDate, @toDate", parameters);
+            return DbContext.Database.SqlQuery<ProductStatisticViewModel>("GetProductStatisticsSP @fromDate, @toDate",
+                parameters);
         }
 
         public IEnumerable<StatisticPriceQuantity> GetStatisticPriceQuantity(string fromDate, string toDate)
         {
-            var parameters = new SqlParameter[]{
-                new SqlParameter("@fromDate", fromDate) ,
-                    new SqlParameter("@toDate", toDate)
+            var parameters = new SqlParameter[]
+            {
+                new SqlParameter("@fromDate", fromDate),
+                new SqlParameter("@toDate", toDate)
             };
-            return DbContext.Database.SqlQuery<StatisticPriceQuantity>("GetRevenueStatisticSP @fromDate, @toDate", parameters);
+            return DbContext.Database.SqlQuery<StatisticPriceQuantity>("GetRevenueStatisticSP @fromDate, @toDate",
+                parameters);
         }
     }
 }

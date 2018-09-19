@@ -1,0 +1,86 @@
+﻿
+@model ShopMe.Domains.ExternalLoginConfirmationViewModel
+@{
+    ViewBag.Title = "Xác nhận thông tin";
+
+}
+<section>
+    <div class="container">
+
+
+
+
+
+
+        <div class="modal fade popresign" id="myModalfacebbok" role="dialog">
+            <div class="modal-dialog modal-md">
+
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"></button>
+                        <h4 style="text-align:center;" class="modal-title">Xác nhận thông tin</h4><br />
+                    </div>
+                    @using (Html.BeginForm("ExternalLoginConfirmation", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+
+
+                        <div class="modal-body">
+
+                            @Html.AntiForgeryToken()
+
+                            <span class="text-info">
+                                Bạn vừa chứng thực thành công với <strong>@ViewBag.LoginProvider</strong>.
+                                Xin hãy nhập tên tài khoản mà bạn muốn đăng ký trên ShopMe dưới đây để kết thúc quá trình login. Những lần sau bạn sẽ không phải thực hiện bước này.
+
+                            </span>
+
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                    <div class="input-group">
+
+                                        <input class="form-control" type="text" readonly="readonly" id="FullName" name="FullName" value="@Model.FullName" required>
+                                        <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                    <div class="input-group">
+
+                                        <input class="form-control" placeholder="nhập mail" type="text" id="Email" name="Email" value="@Model.Email" required>
+                                        <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="modal-footer">
+
+                            <div class="pull-right">
+                                <input type="submit" class="btn btn-info" value="Chấp nhận" />
+                            </div>
+                            <input type="hidden" name="url" value="" />
+
+
+
+                        </div>
+                    }
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</section>
+<script>
+    $(document).ready(function () {
+        $('#myModalfacebbok').modal('show');
+    })
+</script>

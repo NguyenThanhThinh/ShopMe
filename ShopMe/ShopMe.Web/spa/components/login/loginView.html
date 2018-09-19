@@ -1,0 +1,37 @@
+﻿<div class="login-box" style="max-width: 344px;">
+    <div class="login-logo">
+        <a href="#"><b>Me</b>Shop</a>
+    </div>
+    <!-- /.login-logo -->
+    <div class="login-box-body">
+        <p class="login-box-msg">ĐĂNG NHẬP</p>
+        <form role="form" method="post" ng-submit="loginSubmit()" name="frmLogin">
+            <div class="form-group has-feedback" ng-class="{ 'has-error' : frmLogin.userName.$invalid && !frmLogin.userName.$pristine }">
+                <input name="userName" required type="text" class="form-control" placeholder="Tài khoản" ng-model="loginData.userName">
+                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                <span ng-show="frmLogin.userName.$invalid && !frmLogin.userName.$pristine " class="has-error">Chưa nhập tên tài khoản.</span>
+            </div>
+            <div class="form-group has-feedback" ng-class="{ 'has-error' : frmLogin.password.$invalid && !frmLogin.password.$pristine }">
+                <input required name="password" type="password" class="form-control" placeholder="Mật khẩu" ng-model="loginData.password">
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                <span ng-show="frmLogin.password.$invalid && !frmLogin.password.$pristine " class="has-error">Chưa nhập mật khẩu.</span>
+            </div>
+            <div class="row">
+                <div class="col-xs-7">
+                    <div class="checkbox icheck">
+                        <label>
+                            <input type="checkbox"> Nhớ mật khẩu
+                        </label>
+                    </div>
+                </div>
+                <!-- /.col -->
+                <div class="col-xs-5">
+                    <button type="submit" class="btn btn-primary btn-block btn-flat">ĐĂNG NHẬP</button>
+                </div>
+                <!-- /.col -->
+            </div>
+        </form>
+    </div>
+    <!-- /.login-box-body -->
+</div>
+<!-- /.login-box -->

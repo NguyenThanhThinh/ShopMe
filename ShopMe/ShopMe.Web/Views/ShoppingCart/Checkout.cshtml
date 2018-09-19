@@ -1,0 +1,681 @@
+﻿@using ShopMe.Domains.Common
+@using ShopMe.Domains.Extensions
+
+@using Microsoft.AspNet.Identity
+@using Microsoft.Owin.Security
+@{
+    Layout = null; // new layout
+    string user = User.Identity.GetUserName();
+    string userName = ExtensionMethods.Truncate(user, 10, true);
+    string url = Request.Url.PathAndQuery;
+    var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
+}
+<style>
+    .ladda-button {
+        font: 400 14px/21px 'Roboto Condensed','Segoe UI','Open Sans', sans-serif;
+        color: #777;
+        border: 0;
+        padding: 2px;
+        font-size: 16px;
+        cursor: pointer !important;
+        color: #fff !important;
+        border-radius: 2px;
+        border: 1px solid transparent;
+        -webkit-appearance: none;
+        -webkit-font-smoothing: antialiased;
+        -webkit-tap-highlight-color: transparent;
+    }
+</style>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <!--Website chỉ mang tính phục vụ cho báo cáo , không mang tính thương mại , xin chân thành cảm ơn !-->
+    <meta name="viewport" charset="utf-8" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Home" />
+    <meta name="keywords" content="Mua bán mỹ phẩm, bán hàng , hệ thống gợi ý, ASP.NET MVC, jQuery, Ajax, Javascript, CSS,angular js" />
+    <meta name="type" content="website" />
+    <meta name="site_name" content="nguyenthanhthinh" />
+    <meta name="domains" content="nguyenthanhthinh.com" />
+    <meta name="author" content="Nguyễn Thành Thịnh" />
+    <meta name="publisher" content="nguyenthanhthinh" />
+    @{
+        var title = ViewBag.Title as string;
+        var keywords = ViewBag.Keywords as string;
+        var description = ViewBag.Description as string;
+        if (string.IsNullOrEmpty(keywords)) { keywords = "Hệ thống gợi ý,Mua bán mỹ phẩm, Bán mỹ phẩm, .NET Development, Javascript, ASP.NET MVC"; }
+        if (string.IsNullOrEmpty(description)) { description = title; }
+    }@TagHelper.Head(title, keywords, description)
+    <link href="~/Content/linda/ladda.min.css" rel="stylesheet" />
+    <link rel="shortcut icon" type="image/x-icon" href="~/Content/images/fav_icon.ico">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,700&amp;subset=vietnamese" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/spacing.min.css" rel="stylesheet" />
+    <link href="~/Content/jquery.bxslider.css" rel="stylesheet" />
+    <link href="~/Content/styles/styles.css" rel="stylesheet" />
+    <link href="~/Assets/admin/libs/toastr/toastr.css" rel="stylesheet" />
+    <link href="~/Content/css/ordercheckout.css" rel="stylesheet" />
+    <link href="~/Assets/client/css/bank.css" rel="stylesheet" />
+   
+    
+    <style>
+        .login__title {
+            background: url(/Assets/client/images/icon1.png) no-repeat;
+            min-height: 36px;
+            padding: 0 0 0 50px;
+        }
+
+            .login__title h2 {
+                font-size: 30px;
+                font-weight: 500;
+            }
+
+            .login__title p span {
+                display: block;
+                float: left;
+                margin-right: 3px;
+            }
+
+            .login__title p a {
+                color: #00b7f1;
+                display: block;
+                float: left;
+            }
+
+        .login__boder {
+            border-color: #00b7f1;
+        }
+
+        .res__setwith {
+            width: 400px !important;
+        }
+
+        .login__title1 {
+            background: url(/Assets/client/images/icon2.png) no-repeat;
+            min-height: 36px;
+            padding: 0 0 0 50px;
+        }
+
+            .login__title1 h2 {
+                font-size: 30px;
+                font-weight: 500;
+            }
+
+            .login__title1 p span {
+                display: block;
+                float: left;
+                margin-right: 3px;
+            }
+
+            .login__title1 p a {
+                color: #00b7f1;
+                display: block;
+                float: left;
+            }
+
+        .login__boder1 {
+            border-color: #00b7f1;
+        }
+    </style>
+    <style>
+        html, body {
+            background: #eee;
+        }
+    </style>
+    <style>
+        .ladda-button {
+            font: 400 14px/21px 'Roboto Condensed','Segoe UI','Open Sans', sans-serif;
+            color: #777;
+            border: 0;
+            padding: 2px;
+            font-size: 16px;
+            cursor: pointer !important;
+            color: #fff !important;
+            border-radius: 2px;
+            border: 1px solid transparent;
+            -webkit-appearance: none;
+            -webkit-font-smoothing: antialiased;
+            -webkit-tap-highlight-color: transparent;
+        }
+    </style>
+</head>
+<body>
+ 
+    <div class="container checkout-header clearfix">
+        <a href="/trang-chu.html" data-toggle="tooltip" title="Trở về trang chủ!" class="pull-left">
+            <i class="fa fa-2x fa-arrow-left"></i>
+        </a>
+        <div class="text-center">
+            <a href="#">
+                <img src="~/Content/images/logo.png" class="img-responsive" />
+            </a>
+        </div>
+    </div>
+   
+    <div class="container checkout-container">
+       
+        <div class="row">
+
+            <form method="post" id="frmPayment" class="frmPayment">
+                <div class="col-md-4">
+                    <h3 class="co-title">Thông tin giao hàng</h3>
+
+                    @if (Request.IsAuthenticated == false)
+                    {
+                        <div class="co-login">
+                            <label>
+                                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal6"  name="login" value="" /> Đăng ký tài khoản mua hàng
+                            </label>
+                            @*<a href="#">Đăng ký tài khoản mua hàng</a>*@
+
+                            <label>
+                                <button type="button" class="btn btn-info" name="login" data-toggle="modal" data-target="#myModal5" value="" /> Đăng nhập
+                            </label>
+                            @*<a href="#">Đăng nhập</a>*@
+                        </div>
+                        <div class="mb">
+                            <a href="#"  class="co-buy-without-acc tc-red">Mua không cần tài khoản</a>
+                        </div>
+                    }
+                   
+                    
+                    <div class="form-group">
+                         
+                            <i class="fa fa-asterisk"></i>
+                            <input type="text" value="" id="txtName" name="name" class="form-control" placeholder="Họ và tên" />
+
+                    </div>
+                    <div class="form-group">
+                        <i class="fa fa-asterisk"></i>
+                        <input type="text" value="" id="txtPhone"   name="phone" class="form-control" placeholder="Số điện thoại" />
+                    </div>
+                    <div class="form-group">
+                        <i class="fa fa-asterisk"></i>
+                        <input type="email" value="" id="txtEmail" name="email" class="form-control" placeholder="Email" />
+                    </div>
+
+                    <div class="form-group">
+                        <i class="fa fa-asterisk"></i>
+
+                        @Html.DropDownList("CustomerProvince", new SelectList(string.Empty, "Value", "Text"), "Chọn tỉnh thành", new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <i class="fa fa-asterisk"></i>
+                        @Html.DropDownList("CustomerDistricts", new SelectList(string.Empty, "Value", "Text"), "Chọn huyện", new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <i class="fa fa-asterisk"></i>
+                        <input type="text" value="" id="txtAddress" name="address" class="form-control" placeholder="Địa chỉ giao hàng" />
+                    </div>
+                    <div class="mb">
+                        <textarea rows="3" placeholder="Ghi chú" class="form-control"></textarea>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <h3 class="co-title">thanh toán</h3>
+                    <label><input type="radio" id="rdoCash" name="paymentMethod" value="CASH" checked="checked" /> Tiền mặt</label>
+                    <label><input type="radio" id="rdoNL" name="paymentMethod" value="NL" />Ngân Lượng</label>
+                    <label><input type="radio" id="rdoBank" value="ATM_ONLINE" name="paymentMethod" /> Thẻ ngân hàng </label>
+                    <div id="bankContent" class="boxContent" style="display:none;">
+                        <p>
+                            <i>
+                                <span style="color:#ff5a00;font-weight:bold;text-decoration:underline;">Lưu ý</span>: Bạn cần <strong>đăng ký Internet-Banking </strong> hoặc <strong>dịch vụ thanh toán trực tuyến</strong> tại ngân hàng trước khi thực hiện.
+                            </i>
+                        </p>
+                        <span>Danh sách ngân hàng:</span>
+                        <ul class="cardList clearfix">
+                            <li class="bank-online-methods ">
+                                <label for="vcb_ck_on">
+                                    <i class="VCB" title="Ngân hàng TMCP Ngoại Thương Việt Nam"></i>
+                                    <input type="radio" ID="VCB" name="bank" GroupName="bankcode" />
+                                </label>
+                            </li>
+                            <li class="bank-online-methods ">
+                                <label for="vnbc_ck_on">
+                                    <i class="DAB" title="Ngân hàng Đông Á"></i>
+                                    <input type="radio" ID="DAB" name="bank" GroupName="bankcode" />
+                                </label>
+                            </li>
+
+                            <li class="bank-online-methods ">
+                                <label for="sml_atm_vib_ck_on">
+                                    <i class="VIB" title="Ngân hàng Quốc tế"></i>
+                                    <input type="radio" ID="VIB" name="bank" GroupName="bankcode" />
+                                </label>
+                            </li>
+                            <li class="bank-online-methods ">
+                                <label for="sml_atm_vtb_ck_on">
+                                    <i class="ICB" title="Ngân hàng Công Thương Việt Nam"></i>
+                                    <input type="radio" ID="ICB" name="bank" GroupName="bankcode" />
+                                </label>
+                            </li>
+
+                            <li class="bank-online-methods ">
+                                <label for="sml_atm_acb_ck_on">
+                                    <i class="ACB" title="Ngân hàng Á Châu"></i>
+                                    <input type="radio" ID="ACB" name="bank" GroupName="bankcode" />
+                                </label>
+                            </li>
+                            <li class="bank-online-methods ">
+                                <label for="sml_atm_hdb_ck_on">
+                                    <i class="HDB" title="Ngân hàng Phát triển Nhà TPHCM"></i>
+                                    <input type="radio" ID="HDB" name="bank" GroupName="bankcode" />
+                                </label>
+                            </li>
+
+
+
+
+                            <li class="bank-online-methods ">
+                                <label for="sml_atm_scb_ck_on">
+                                    <i class="SCB" title="Ngân hàng Sài Gòn Thương tín"></i>
+                                    <input type="radio" ID="SCB" name="bank" GroupName="bankcode" />
+                                </label>
+                            </li>
+
+
+
+                            <li class="bank-online-methods ">
+                                <label for="bnt_atm_agb_ck_on">
+                                    <i class="AGB" title="Ngân hàng Nông nghiệp &amp; Phát triển nông thôn"></i>
+                                    <input type="radio" ID="AGB" GroupName="bankcode" />
+                                </label>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                  
+                      
+               
+
+                    <div id="nganluongContent" class="boxContent" style="display:none;">
+                        <p>
+                            Thanh toán trực tuyến <strong>AN TOÀN và ĐƯỢC BẢO VỆ</strong> sử dụng thẻ ngân hàng trong và ngoài nước hoặc nhiều hình thức tiện lợi khác.
+                            Được bảo hộ & cấp phép bởi <strong>NGÂN HÀNG NHÀ NƯỚC</strong> ví điện tử duy nhất được cộng đồng <strong>ƯA THÍCH NHẤT 2 năm</strong> liên tiếp, Bộ Thông tin Truyền thông trao giải thưởng Sao Khuê
+                            <br />Giao dịch. Đăng ký ví <strong>NgânLượng.vn</strong> miễn phí <a href="https://www.nganluong.vn/?portal=nganluong&amp;page=user_register" target="_blank">tại đây</a>
+                        </p>
+                    </div>
+                    <div class="chu-y">
+                        <h4><strong>Cách thức mua hàng trực tuyến:</strong></h4>
+                        <p><span>1. </span>Khách hàng chọn sản phẩm, điền đầy đủ thông tin đặt hàng rồi gởi cho cửa hàng.</p>
+                        <p><span>2. </span>Cửa hàng sẽ liên hệ với quý khách trong thời gian sớm nhất để xác nhận thông tin đặt hàng.</p>
+                        <p><span>3. </span>Nhân viên của cửa hàng sẽ giao hàng và nhận thanh toán khi giao hàng hoặc gửi bưu điện.</p>
+                        <div class="luu-y" style="font-style:italic;">
+                            <p><strong>Lưu ý: </strong><b>Cửa hàng chỉ chấp nhận những đơn đặt hàng cung cấp thông tin chính xác về địa chỉ, số điện thoại.</b></p>
+                        </div>
+                    </div>
+                    <br />
+                   <br />
+                    <div class="shopping_img">
+                    
+                        <img src="~/Assets/client/images/shopping.gif" />
+                    </div>
+                </div>
+                <div class="progress-demo col-md-4">
+                    <div class="collection mb++">
+                        <h4 class="collection-header">đơn hàng!</h4>
+                        <div class="collection-item" >ĐƠN HÀNG <text id="lblQuantity"></text> <text>(sản phẩm)</text></div>
+                        <div id="cartBody">
+
+                            
+                        </div>
+                        <h4 class="collection-footer clearfix">
+                            <span class="pull-left">TỔNG CỘNG</span>
+                            <span class="pull-right summoney"></span>
+                        </h4>
+                        @*<h4 class="collection-item clearfix">
+                                <strong class="pull-left">Tạm tính</strong>
+                                <span class="pull-right">21.990.000 d</span>
+                            </h4>
+                            <div class="collection-item clearfix">
+                                <span class="pull-left">Phí vận chuyển</span>
+                                <span class="pull-right">0 d</span>
+                            </div>
+                            <div class="collection-item">
+                                <a href="#">Sử dụng mã giảm giá <i class="fa fa-arrow-right"></i></a>
+                            </div>*@
+                       
+                    </div>
+
+                    <button class="ladda-button order-button text-uppercase mb++" data-color="blue" data-style="slide-right" style="height:50px;" id="btnCreateOrder">ĐẶT HÀNG</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+
+    <script id="tplCart" type="x-tmpl-mustache">
+
+        <div class="collection-item clearfix">
+            <div class="pull-left">
+                <h4>{{Quantity}} x {{ProductName}}</h4>
+                <p></p>
+            </div>
+            <div class="pull-right">{{Amount}} d</div>
+        </div>
+        @*<h4 class="collection-footer clearfix">
+            <span class="pull-left">TỔNG CỘNG</span>
+            <span class="pull-right">{{Amount}} d</span>
+        </h4>*@
+    </script>
+    @*<script src="~/Scripts/jquery-2.2.4.js"></script>*@
+
+    <script src="~/Content/js/jquery-2.1.1.min.js"></script>
+  
+    <script src="~/Content/js/toastr.js"></script>
+    <script src="~/Content/js/bootbox.js"></script>
+  
+    <script src="~/Content/js/mustache.min.js"></script>
+    <script src="~/Content/js/numeral.min.js"></script>
+    <script src="~/Content/js/velocity.min.js"></script>
+    <script src="~/Content/js/jquery.waypoints.min.js"></script>
+    <script src="~/Content/js/bootstrap.min.js"></script>
+    <script src="~/Content/js/jquery.bxslider.min.js"></script>
+    <script src="~/Scripts/app/shoppingcart.js"></script>
+    <script src="~/Scripts/app/states.js"></script>
+
+
+    @Scripts.Render("~/bundles/AppScriptCheckout")
+
+    @*<script src="~/Assets/admin/libs/toastr/toastr.js"></script>*@
+        @*<script src="~/bower_components/mustache/mustache.js"></script>
+        <script src="~/Content/js/velocity.min.js"></script>
+            <script src="~/bower_components/numeral/min/numeral.min.js"></script>*@
+    @*<script src="~/Scripts/velocity.min.js"></script><!-- after jquery, becuz valocity can use jquery as dependency -->
+    <script src="~/Scripts/jquery.waypoints.min.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/jquery.bxslider.min.js"></script><!-- vl,
+
+    @*<script src="~/Scripts/app/app.js"></script>
+        <script src="~/Scripts/app/common.js"></script>*@
+    @if (Request.IsAuthenticated == true)
+    {
+        <script>
+           
+                $(document).ready(function () {
+                    $.ajax({
+                        url: '/ShoppingCart/GetUser',
+                        type: 'POST',
+                        dataType: 'json',
+                        success: function (response) {
+                            if (response.status) {
+                                var user = response.data;
+                                $('#txtName').val(user.FullName);
+                                $('#txtAddress').val(user.Address);
+                                $('#txtEmail').val(user.Email);
+                                $('#txtPhone').val(user.PhoneNumber);
+                                $('#CustomerProvince').val(user.Provinces);
+                                $('#CustomerDistricts').val(user.Districts);
+
+                            }
+                        }
+                    });
+                            })
+
+       
+        </script>
+    }
+
+
+    <div class="modal fade poplogin" id="myModal5" role="dialog">
+        <div class="modal-dialog modal-sm">
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"></button>
+                    <div class="login__title">
+                        <h2>Đăng nhập</h2>
+                        <p>
+                            <span>Bạn chưa có tài khoản ? </span>
+                            <a href="#" id="btnregister1">Đăng ký</a>
+                        </p>
+                    </div>
+                    <p style="text-align:center;color:red" id="thongbaodn"></p>
+                    @*<h4 style="text-align:center;" class="modal-title">Đăng nhập</h4><br />
+                        <strong style="float:left">Bạn chưa có tài khoản ?</strong> <a href="#" id="btnregister1"> <strong style="color:red;">Đăng ký ngay</strong></a>
+                        <p style="text-align:center;color:red" id="thongbaodn"></p>*@
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            @*<h5>Tài khoản</h5>
+                                <input type="text" class="form-control" placeholder="Tên đăng nhập" id="dn_tendangnhap" name="username" required maxlength="20">*@
+                            <div class="form-group">
+                                <label class="control-label">Tài khoản</label>
+                                <input class="form-control login__boder" type="text" placeholder="Tên đăng nhập" id="Username_1" name="Username_1" required>
+
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-12">
+                            @*<h5>Mật khẩu</h5>
+                                <input type="password" class="form-control" placeholder="Nhập mật khẩu" id="dn_matkhau" name="password" required min="6" max="30">*@
+                            <div class="form-group">
+                                <label class="control-label">Mật khẩu</label>
+                                <input class="form-control login__boder" type="password" placeholder="Nhập mật khẩu" id="dn_matkhau" name="dn_matkhau" required>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer progress-demo">
+
+                    <input type="hidden" name="url" value="" />
+
+                    <button style="width:100%;" class="ladda-button btn btn-success phongrass loginshopme" id="btndangnhap" data-color="blue" data-style="slide-right"><abbr title="Sau khi đăng nhập khách hàng  đánh giá sản phẩm hệ thống sẽ gợi ý cho bạn những sản phẩm tốt !">Đăng nhập</abbr></button><br /><br />
+
+
+                    <br />
+                    <strong class="mb+" style="float:left">Bạn có thể đăng nhập bằng: </strong>
+                    <br />
+
+                    @{
+
+                        if (loginProviders.Any())
+                        {
+                            using (Html.BeginForm("ExternalLogin", "Account", new { ReturnUrl = url }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <div id="socialLoginList">
+                                    <p>
+                                        @foreach (AuthenticationDescription p in loginProviders)
+                                        {
+                                            <button type="submit" class="btn ladda-button" id="@p.AuthenticationType" data-color="blue" data-style="slide-right" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account"><i class="fa fa-@p.AuthenticationType.ToLower()"></i> @p.AuthenticationType</button>
+                                        }
+                                    </p>
+                                </div>
+                            }
+                        }
+
+                    }
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade popresign" id="myModal6" role="dialog">
+        <div class="modal-dialog modal-md res__setwith">
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"></button>
+                    <div class="login__title1">
+                        <h2>Đăng ký tài khoản</h2>
+                        <p>
+
+                            <span style="float:left">Đã có tài khoản ?</span> <a href="#" id="btnlogin">Đăng nhập</a>
+                        </p>
+                    </div>
+
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            @*<h5>Tài khoản</h5>
+                                <input type="text" class="form-control" placeholder="Tên đăng nhập" id="dn_tendangnhap" name="username" required maxlength="20">*@
+                            <div class="form-group">
+                                <label class="control-label">Họ tên</label>
+                                <input class="form-control" type="text" placeholder="Họ tên" id="FullName" name="FullName" required>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            @*<h5>Mật khẩu</h5>
+                                <input type="password" class="form-control" placeholder="Nhập mật khẩu" id="dn_matkhau" name="password" required min="6" max="30">*@
+                            <div class="form-group">
+                                <label class="control-label">Tài khoản</label>
+                                <input class="form-control" type="text" placeholder="Tài khoản" id="UserName" name="UserName" required>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            @*<h5>Mật khẩu</h5>
+                                <input type="password" class="form-control" placeholder="Nhập mật khẩu" id="dn_matkhau" name="password" required min="6" max="30">*@
+                            <div class="form-group">
+                                <label class="control-label">Nhập mật khẩu</label>
+                                <input class="form-control" type="password" placeholder="Nhập mật khẩu" id="Password" name="Password" required>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            @*<h5>Mật khẩu</h5>
+                                <input type="password" class="form-control" placeholder="Nhập mật khẩu" id="dn_matkhau" name="password" required min="6" max="30">*@
+                            <div class="form-group">
+                                <label class="control-label">Nhập lại mật khẩu</label>
+                                <input class="form-control" type="password" placeholder="Nhập lại mật khẩu" id="ReplacePassword" name="ReplacePassword" required>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            @*<h5>Mật khẩu</h5>
+                                <input type="password" class="form-control" placeholder="Nhập mật khẩu" id="dn_matkhau" name="password" required min="6" max="30">*@
+                            <div class="form-group">
+                                <label class="control-label">Email</label>
+                                <input class="form-control" type="email" required placeholder="Email" id="Email" name="Email">
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer progress-demo">
+
+                    <input type="hidden" name="url" value="" />
+
+                    <input type="submit" style="width:100%;" class="ladda-button btn btn-success phongrass" value="Đăng ký" id="register" data-color="blue" data-style="slide-right"><br /><br />
+
+                    <strong class="mb+" style="float:left">Bạn có thể đăng nhập bằng: </strong>
+                    <br />
+                    @{
+
+                        if (loginProviders.Any())
+                        {
+                            using (Html.BeginForm("ExternalLogin", "Account", new { ReturnUrl = url }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <div id="socialLoginList">
+                                    <p>
+                                        @foreach (AuthenticationDescription p in loginProviders)
+                                        {
+                                            <button type="submit" class="ladda-button btn " id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" data-color="blue" data-style="slide-right" title="Log in using your @p.Caption account"><i class="fa fa-@p.AuthenticationType.ToLower()"></i> @p.AuthenticationType</button>
+                                        }
+                                    </p>
+                                </div>
+                            }
+                        }
+
+                    }
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+    <script src="~/Scripts/app/lg.js"></script>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                type: "GET",
+                url: "/ShoppingCart/GetAll",
+                datatype: "Json",
+                success: function (data) {
+                    if (data.status == true) {
+                    
+                        $(".summoney").text(data.summonney);
+                    }
+                  
+                }
+            });
+        })
+    </script>
+    <script src="~/Scripts/app/dk.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
+    <script src="~/Content/linda/spin.min.js"></script>
+    <script src="~/Content/linda/ladda.min.js"></script>
+    <script>
+
+        // Bind normal buttons
+        Ladda.bind('.button-demo button', { timeout: 2000 });
+
+        // Bind progress buttons and simulate loading progress
+        Ladda.bind('.progress-demo button', {
+            callback: function (instance) {
+                var progress = 0;
+                var interval = setInterval(function () {
+                    progress = Math.min(progress + Math.random() * 0.1, 1);
+                    instance.setProgress(progress);
+
+                    if (progress === 1) {
+                        instance.stop();
+                        clearInterval(interval);
+                    }
+                }, 200);
+            }
+        });
+
+			// You can control loading explicitly using the JavaScript API
+			// as outlined below:
+
+			// var l = Ladda.create( document.querySelector( 'button' ) );
+			// l.start();
+			// l.stop();
+			// l.toggle();
+			// l.isLoading();
+			// l.setProgress( 0-1 );
+
+    </script>
+</body>
+  <!--Website chỉ mang tính phục vụ cho báo cáo , không mang tính thương mại , xin chân thành cảm ơn !-->
+</html>

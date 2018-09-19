@@ -1,0 +1,12 @@
+﻿
+@model IEnumerable<ShopMe.Domains.ProductBrandViewModel>
+
+@{ 
+    var model = Model;
+}
+<ul class="bottombar">
+    @foreach (var item in model)
+    {
+        <li><a href="#">@item.Name</a></li>
+    }
+</ul>

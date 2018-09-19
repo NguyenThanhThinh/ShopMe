@@ -1,0 +1,121 @@
+﻿ <!-- Content Header (Page header) -->
+
+<section class="content-header">
+    <h1>
+        Thống kê bán hàng
+    </h1>
+    <ol class="breadcrumb">
+        <li><a ui-sref="home"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
+        <li class="active">Thống kê số lượng</li>
+    </ol>
+</section>
+<section class="content">
+    <!-- Main content -->
+    <div class="row">
+        <section class="col-lg-12">
+            <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs pull-left" style="display:inline-flex">
+                    <li>Từ ngày:</li>
+                    <li>
+                        <input name="dateStart" class="form-control" type="datetime" date-time ng-model="datePicker.dateStart" format="DD-MM-YYYY" placeholder="Ngày-Tháng-Năm">
+                        <input type="hidden" name="dateStart" ng-model="datePicker.dateStart" required />
+                    </li>
+                    <li>Đến ngày:</li>
+                    <li>
+                        <input name="dateEnd" class="form-control" type="datetime" date-time ng-model="datePicker.dateEnd" format="DD-MM-YYYY" placeholder="Ngày-Tháng-Năm">
+                        <input type="hidden" name="dateEnd" ng-model="datePicker.dateEnd" required />
+                    </li>
+                    <li>Sắp theo:</li>
+                    <li>
+                        <select name="sortType" ng-model="sortType" class="form-control">
+                            <option value="0">Bán ít</option>
+                            <option value="1">Bán nhiều</option>
+                            <option value="2">Lợi nhuận thấp</option>
+                            <option value="3">Lợi nhuận cao</option>
+                        </select>
+                        <input type="hidden" name="sortType" ng-model="sortType" />
+                    </li>
+                    <li>Số sản phẩm:</li>
+                    <li>
+                        <select name="numTop" ng-model="numTop" class="form-control">
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                            <option value="-1">Tất cả</option>
+                        </select>
+                        <input type="hidden" name="numTop" ng-model="numTop" />
+                    </li>
+                    <li><a class="btn btn-default" ng-click="getStatistic()"><i class="glyphicon glyphicon-play"></i>Thực hiện</a></li>
+                    <li>
+                        <button class="btn btn-success" ng-click="exportData()" id="btnExport" title="Xuất dữ liệu ra file excel"><i class="fa fa-download"> </i> Xuất Excel</button>
+                    </li>                    
+                </ul>
+                <div class="tab-content no-padding">
+
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <!-- Map box -->
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <i class="fa fa-inbox"></i>
+                    <h3 class="box-title">
+                        Thống Kê Doanh Số Sản Phẩm
+                    </h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse" title="Thu">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- /.box-body-->
+                <div class="box-body" id="tblDanhSach">
+                    <table class="table table-bordered table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>Mã sản phẩm</th>
+                                <th>Sản phẩm</th>
+                                <th>Số lượng bán</th>
+                                <th>Giá nhập bình quân</th>
+                                <th>Giá bán bình quân</th>
+                                <th>Lợi nhuận</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in tabledata">
+                                <td>
+                                    {{item.ProductID}}
+                                </td>
+                                <td>
+                                    {{item.Name}}
+                                </td>
+                                <td style="text-align:center;">
+                                    {{item.Quantities |number}}
+                                </td>
+                                <td>
+                                    {{item.OriginalPrice |number}} VND
+                                </td>
+                                <td>
+                                    {{item.PriceAvg |number}} VND
+                                </td>
+                                <td>
+                                    {{item.Benefit |number}} VND
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- /.row -->
+                </div>
+            </div>
+            <!-- /.box -->
+
+        </div>
+        <script src="https://rawgithub.com/eligrey/FileSaver.js/master/FileSaver.js" type="text/javascript"></script>
+    </div>
+</section>

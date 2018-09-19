@@ -1,0 +1,26 @@
+﻿.section-guide {
+    > .container {
+        border-top: 2px solid #ddd;
+        padding-top: 2rem;
+        margin-top: 2rem;
+    }
+}
+
+.guide {
+    margin-bottom: 16px;
+}
+
+.guide img {
+    max-width: 100%;
+    height: auto;
+}
+
+.row-guide > div {
+    &:nth-child(odd) {
+        padding-right: 8px;
+    }
+
+    &:nth-child(even) {
+        padding-left: 8px;
+    }
+}

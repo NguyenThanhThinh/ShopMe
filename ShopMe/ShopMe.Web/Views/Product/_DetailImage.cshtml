@@ -1,0 +1,42 @@
+﻿@model ShopMe.Domains.ProductViewModel
+<div class="single_product">
+
+    <!-- - - - - - - - - - - - - - Image preview container - - - - - - - - - - - - - - - - -->
+
+    <div class="image_preview_container">
+
+        <img id="img_zoom" data-zoom-image="" src="@Model.Image" alt="">
+
+        <button class="button_grey_2 icon_btn middle_btn open_qv"><i class="icon-resize-full-6"></i></button>
+
+    </div><!--/ .image_preview_container-->
+    <!-- - - - - - - - - - - - - - End of image preview container - - - - - - - - - - - - - - - - -->
+    <!-- - - - - - - - - - - - - - Prodcut thumbs carousel - - - - - - - - - - - - - - - - -->
+
+   <!--/ .product_preview-->
+    <!-- - - - - - - - - - - - - - End of prodcut thumbs carousel - - - - - - - - - - - - - - - - -->
+    <!-- - - - - - - - - - - - - - Share - - - - - - - - - - - - - - - - -->
+
+    <div class="v_centered">
+
+        <span class="title">Chia sẻ:</span>
+
+        <div class="addthis_widget_container">
+            <!-- AddThis Button BEGIN -->
+            <div class="addthis_toolbox addthis_default_style addthis_32x32_style">
+
+                <a class="addthis_button_preferred_1"></a>
+                <a class="addthis_button_preferred_2"></a>
+                @*<a class="addthis_button_preferred_3"></a>
+                <a class="addthis_button_preferred_4"></a>
+                <a class="addthis_button_compact"></a>
+                <a class="addthis_counter addthis_bubble_style"></a>*@
+            </div>
+            <!-- AddThis Button END -->
+        </div>
+
+    </div>
+
+    <!-- - - - - - - - - - - - - - End of share - - - - - - - - - - - - - - - - -->
+
+</div>

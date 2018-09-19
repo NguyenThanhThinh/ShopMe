@@ -87,6 +87,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ShopMe.Domains\ShopMe.Domains.csproj">
+      <Project>{2d80a30b-6a2e-46fc-ab2a-8d2d78792bfd}</Project>
+      <Name>ShopMe.Domains</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ShopMe.Entities\ShopMe.Entities.csproj">
       <Project>{0984079c-3467-4754-8bdb-8e547e72a233}</Project>
       <Name>ShopMe.Entities</Name>

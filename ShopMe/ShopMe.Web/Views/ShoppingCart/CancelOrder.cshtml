@@ -1,0 +1,55 @@
+﻿
+@{
+    Layout = null;
+    ViewBag.Title = "Hủy đơn hàng";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+  <div class="container order__cancel">
+      <div class="row">
+          <div class="modal fade ordercancel" tabindex="-1" role="dialog">
+              <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          <h4 class="modal-title">Hủy đơn hàng</h4>
+                      </div>
+                      <div class="modal-body">
+                          <p>Hủy đơn hàng thành công từ <strong>Ngân lượng</strong> Vui lòng chọn Ok để về trang chủ</p>
+                      </div>
+                      <div class="modal-footer">
+                       
+                          <button type="button" class="btn btn-info btnhome">OK</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+    <script>
+        $(document).ready(function () {
+            $('.ordercancel').modal('show');
+
+            $('.btnhome').click(function () {
+                window.location.href = '/trang-chu.html';
+            });
+        });
+        
+
+    </script>
+</body>
+
+</html>
+
+

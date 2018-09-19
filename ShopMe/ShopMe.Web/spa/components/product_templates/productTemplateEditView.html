@@ -1,0 +1,68 @@
+﻿<section class="content-header">
+    <h1>
+        CẬP NHẬT MẪU THUỘC TÍNH
+    </h1>
+    <ol class="breadcrumb">
+        <li><a ui-sref="home"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
+        <li><a ui-sref="product_templates">DANH SÁCH MẪU THUỘC TÍNH</a></li>
+        <li class="active">Cập nhật</li>
+    </ol>
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Cập nhật mẫu: <b>{{productTemplate.Name}}</b></h3>
+                </div><!-- /.box-header -->
+                <!-- form start -->
+                <form class="form-horizontal" role="form" novalidate name="frmUpdateProductTemplate" ng-submit="updateProductTemplate()">
+                    <div class="box-body">
+                        <div class="col-md-12">
+                            <div class="form-group" ng-class="{ 'has-error' : frmUpdateProductTemplate.name.$invalid && !frmUpdateProductTemplate.name.$pristine }">
+                                <label class="col-sm-2 control-label">Tên mẫu:</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="name" class="form-control" ng-maxlength="256" required ng-model="productTemplate.Name">
+                                    <span ng-show="frmUpdateProductTemplate.name.$invalid && !frmUpdateProductTemplate.name.$pristine" class="has-error">Tên mẫu là bắt buộc.</span>
+                                    <span ng-show="frmUpdateProductTemplate.name.$error.maxlength" class="has-error">Tên mẫu tối đa 256 ký tự.</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Thuộc tính:</label>
+                                <div class="col-sm-10">
+                                    <div class="form-group row">
+                                        <div class="col-md-3">
+                                            <select class="form-control" ng-model="addingAttribute" ng-options="attr as attr.Name group by attr.ProductAttributeGroup.Name for attr in ProductAttributes">
+                                                <option value="" style="font-weight:bold">Chọn thuộc tính</option>
+                                            </select>
+                                        </div>
+                                        <button type="button" class="btn btn-primary" ng-disabled="!addingAttribute" ng-click="addAttribute(addingAttribute)"><span class="glyphicon glyphicon-plus"></span></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Danh sách:</label>
+                                <div class="col-sm-10">
+                                    <div class="form-group row" ng-repeat="attribute in productTemplate.ProductAttributes">
+                                        <div class="col-md-3">
+                                            {{attribute.Name}}
+                                        </div>
+                                        <button ng-click="removeAttribute(attribute)" type="button" class="btn btn-danger btn-xs">
+                                            <span class="glyphicon glyphicon-remove"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <input type="submit" ng-disabled="frmUpdateProductAttributeGroup.$invalid" class="btn btn-primary" value="Lưu lại" />
+                                    <a ui-sref="product_templates" class="btn btn-default">Hủy bỏ</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- /.box-body -->
+                </form>
+            </div><!-- /.box -->
+        </div>
+    </div>
+</section>

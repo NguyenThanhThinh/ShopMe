@@ -1,0 +1,277 @@
+﻿@using ShopMe.Domains
+@model IEnumerable<ShopMe.Domains.ProductCategoryViewModel>
+@{
+    var model = Model;
+    var listBrand = ViewBag.BrandProduct as IEnumerable<ProductBrandViewModel>;
+}
+
+<style>
+
+    
+</style>
+<div id="main_navigation_wrap">
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-xs-12">
+
+                <!-- - - - - - - - - - - - - - Sticky container - - - - - - - - - - - - - - - - -->
+
+                <div class="sticky_inner type_2">
+
+                    <!-- - - - - - - - - - - - - - Navigation item - - - - - - - - - - - - - - - - -->
+
+                    <div class="nav_item size_3">
+
+                        <button class="open_categories_sticky" style="width: 262px;">Danh mục sản phẩm</button>
+
+                        <!-- - - - - - - - - - - - - - Main navigation - - - - - - - - - - - - - - - - -->
+                        <ul class="theme_menu cats dropdown">
+
+                            @foreach (var category in model.Where(x => x.ParentID == null))
+                            {
+                                var url = "/" + category.Alias + ".pc-" + category.CategoryID + ".html";
+                                var childCategories = model.Where(x => x.ParentID == category.CategoryID);
+                                <li class="has_megamenu animated_item">
+
+                                    <a href="@url">@category.Name</a>
+
+
+                                    <!-- - - - - - - - - - - - - - Mega menu - - - - - - - - - - - - - - - - -->
+
+                                    <div class="mega_menu clearfix">
+
+                                        <!-- - - - - - - - - - - - - - Mega menu item - - - - - - - - - - - - - - - - -->
+                                        @if (childCategories.Count() > 0)
+                                        {
+                                            <div class="mega_menu_item">
+
+                                                <ul class="list_of_links">
+                                                    @foreach (var childCategory in childCategories)
+                                                    {
+                                                        var childUrl = "/" + childCategory.Alias + ".pc-" + childCategory.CategoryID + ".html";
+                                                        <li>
+                                                            <a href="@childUrl">@childCategory.Name</a>
+                                                        </li>
+                                                    }
+                                                </ul>
+
+                                            </div><!--/ .mega_menu_item-->
+                                        }
+
+
+                                    </div><!--/ .mega_menu-->
+                                    <!-- - - - - - - - - - - - - - End of mega menu - - - - - - - - - - - - - - - - -->
+
+                                </li>
+                            }
+
+
+                        </ul>
+
+                    </div><!--/ .nav_item-->
+
+
+                    <div class="nav_item">
+
+                        <nav class="main_navigation">
+
+                            <ul>
+
+
+                                @if (Request.IsAuthenticated)
+                                {
+                                    <li class="has_submenu " style="margin-left: 70px">
+                                        <a href="#">Quản lý tài khoản</a>
+                                        <ul class="theme_menu submenu">
+
+                                            <li>
+                                                <a href="#" class="myModal7">Đổi mật khẩu</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Cập nhật thông tin</a>
+                                            </li>
+
+                                        </ul>
+                                    </li>
+                                    <li class="has_submenu">
+                                        <a href="#">Quản lý đơn hàng</a>
+                                        <ul class="theme_menu submenu">
+
+                                            <li>
+                                                <a href="/order-history.html">Đơn hàng của tôi</a>
+                                            </li>
+
+
+                                        </ul>
+                                    </li>
+                                }
+
+                            </ul>
+
+                        </nav><!--/ .main_navigation-->
+
+                    </div>
+
+                    <!-- - - - - - - - - - - - - - End of navigation item - - - - - - - - - - - - - - - - -->
+                    <!-- - - - - - - - - - - - - - Navigation item - - - - - - - - - - - - - - - - -->
+
+
+                </div><!--/ .sticky_inner -->
+                <!-- - - - - - - - - - - - - - End of sticky container - - - - - - - - - - - - - - - - -->
+
+            </div><!--/ ifol]-->
+
+        </div><!--/ .row-->
+
+    </div><!--/ .container-->
+
+</div><!--/ .main_navigation_wrap-->
+
+
+@if (Request.IsAuthenticated)
+{
+    <div class="modal fade popupdate" id="myModal7" role="dialog">
+        <div class="modal-dialog modal-sm">
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"></button>
+                    <h4 style="text-align: center;" class="modal-title">Cập nhật</h4><br/>
+
+                    <p style="text-align: center; color: red" id="thongbaodn"></p>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            @*<h5>Tài khoản</h5>
+            <input type="text" class="form-control" placeholder="Tên đăng nhập" id="dn_tendangnhap" name="username" required maxlength="20">*@
+                            <div class="form-group">
+                                <label class="control-label">Mật khẩu cũ</label>
+                                <input class="form-control" type="password" placeholder="Mật khẩu cũ" id="password1" name="username" required>
+
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="col-md-12">
+                            @*<h5>Tài khoản</h5>
+                                <input type="text" class="form-control" placeholder="Tên đăng nhập" id="dn_tendangnhap" name="username" required maxlength="20">*@
+                            <div class="form-group ">
+                                <label class="control-label">Mật khẩu mới</label>
+                                <input class="form-control" type="password" placeholder="Mật khẩu mới" id="passwordnew" name="username" required>
+
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-md-12">
+                            @*<h5>Mật khẩu</h5>
+                                <input type="password" class="form-control" placeholder="Nhập mật khẩu" id="dn_matkhau" name="password" required min="6" max="30">*@
+                            <div class="form-group">
+                                <label class="control-label">Nhập lại khẩu</label>
+                                <input class="form-control" type="password" placeholder="Nhập lại khẩu" id="passwordreplace" name="password" required>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+
+                    <input type="hidden" name="url" value=""/>
+
+                    <input type="submit" style="width: 100%;" class="btn btn-success phongrass" value="Cập nhật" id="btnupdate"><br/><br/>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script src="~/Content/js/jquery-2.1.1.min.js"></script>
+
+    <script src="~/Content/js/toastr.js"></script>
+
+    <script src="~/Scripts/app/changepass.js"></script>
+}
+<script src="~/Content/js/jquery-2.1.1.min.js"></script>
+<script src="~/Content/js/toastr.js"></script>
+<script>
+    $(document).ready(function() {
+
+        $('.myModal7').click(function() {
+            $("#myModal7").modal("show");
+
+
+        });
+    });
+
+</script>
+<script src="~/Scripts/app/changepass.js"></script>
+<div class="modal fade popupdate" id="myModal7" role="dialog">
+    <div class="modal-dialog modal-sm">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"></button>
+                <h4 style="text-align: center;" class="modal-title">Cập nhật</h4><br/>
+
+                <p style="text-align: center; color: red" id="thongbaodn"></p>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        @*<h5>Tài khoản</h5>
+                            <input type="text" class="form-control" placeholder="Tên đăng nhập" id="dn_tendangnhap" name="username" required maxlength="20">*@
+                        <div class="form-group">
+                            <label class="control-label">Mật khẩu cũ</label>
+                            <input class="form-control" type="password" placeholder="Mật khẩu cũ" id="password1" name="username" required>
+
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="col-md-12">
+                        @*<h5>Tài khoản</h5>
+                            <input type="text" class="form-control" placeholder="Tên đăng nhập" id="dn_tendangnhap" name="username" required maxlength="20">*@
+                        <div class="form-group ">
+                            <label class="control-label">Mật khẩu mới</label>
+                            <input class="form-control" type="password" placeholder="Mật khẩu mới" id="passwordnew" name="username" required>
+
+                        </div>
+                    </div>
+                </div>
+                <br/>
+                <div class="row">
+                    <div class="col-md-12">
+                        @*<h5>Mật khẩu</h5>
+                            <input type="password" class="form-control" placeholder="Nhập mật khẩu" id="dn_matkhau" name="password" required min="6" max="30">*@
+                        <div class="form-group">
+                            <label class="control-label">Nhập lại khẩu</label>
+                            <input class="form-control" type="password" placeholder="Nhập lại khẩu" id="passwordreplace" name="password" required>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+
+                <input type="hidden" name="url" value=""/>
+
+                <input type="submit" style="width: 100%;" class="btn btn-success phongrass" value="Cập nhật" id="btnupdate"><br/><br/>
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
