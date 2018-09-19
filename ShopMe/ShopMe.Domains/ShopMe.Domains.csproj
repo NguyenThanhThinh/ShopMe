@@ -75,11 +75,66 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CategoryViewModel.cs" />
+    <Compile Include="ChangePasswordViewModel.cs" />
+    <Compile Include="Common\CommonConstants.cs" />
+    <Compile Include="Common\CommonNotification.cs" />
+    <Compile Include="Common\ConfigHelper.cs" />
+    <Compile Include="Common\EnumHelper.cs" />
+    <Compile Include="Common\MailHelper.cs" />
+    <Compile Include="Common\NameDuplicatedException.cs" />
+    <Compile Include="Common\PaginationSet.cs" />
+    <Compile Include="CustomerNeedViewModel.cs" />
+    <Compile Include="DistrictsViewModel.cs" />
+    <Compile Include="Extensions\EntityExtensions.cs" />
+    <Compile Include="Extensions\ExtensionMethods.cs" />
+    <Compile Include="ExternalLoginListViewModel.cs" />
+    <Compile Include="FacebookOauthResponse.cs" />
+    <Compile Include="FeedbackViewModel.cs" />
+    <Compile Include="GroupViewModel.cs" />
+    <Compile Include="HistoryViewModel.cs" />
+    <Compile Include="HomeViewModel.cs" />
+    <Compile Include="LoginViewModel.cs" />
+    <Compile Include="NeedViewModel.cs" />
+    <Compile Include="OrderDefaultViewModel.cs" />
+    <Compile Include="OrderDetailCart.cs" />
+    <Compile Include="OrderDetailViewModel.cs" />
+    <Compile Include="OrderStatus.cs" />
+    <Compile Include="OrderViewModel.cs" />
+    <Compile Include="PaymentStatus.cs" />
+    <Compile Include="ProductBrandViewModel.cs" />
+    <Compile Include="ProductCategoryViewModel.cs" />
+    <Compile Include="ProductDetailViewModel.cs" />
+    <Compile Include="ProductNeedViewModel.cs" />
+    <Compile Include="ProductTypeSkinViewModel.cs" />
+    <Compile Include="ProductUnitViewModel.cs" />
+    <Compile Include="ProductViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProvincesViewModel.cs" />
+    <Compile Include="RatingProductViewModel.cs" />
+    <Compile Include="RegisterViewModel.cs" />
+    <Compile Include="ReportInfoViewModel.cs" />
+    <Compile Include="ResetPasswordViewModel.cs" />
+    <Compile Include="RoleViewModel.cs" />
+    <Compile Include="ShoppingCartAdmin.cs" />
+    <Compile Include="ShoppingCartViewModel.cs" />
+    <Compile Include="SliderViewModel.cs" />
+    <Compile Include="StatisticPriceQuantity.cs" />
+    <Compile Include="SupplierViewModel.cs" />
+    <Compile Include="SystemConfigViewModel.cs" />
+    <Compile Include="TypeSkinViewModel.cs" />
+    <Compile Include="UserRatingViewModel.cs" />
+    <Compile Include="UserViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ShopMe.Entities\ShopMe.Entities.csproj">
+      <Project>{0984079c-3467-4754-8bdb-8e547e72a233}</Project>
+      <Name>ShopMe.Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
