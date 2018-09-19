@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopMe.Entities", "ShopMe.E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopMe.Domains", "ShopMe.Domains\ShopMe.Domains.csproj", "{2D80A30B-6A2E-46FC-AB2A-8D2D78792BFD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopMe.Reository", "ShopMe.Reository\ShopMe.Reository.csproj", "{ED223243-E081-4AB2-8BA5-993D766FFD1E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{2D80A30B-6A2E-46FC-AB2A-8D2D78792BFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D80A30B-6A2E-46FC-AB2A-8D2D78792BFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D80A30B-6A2E-46FC-AB2A-8D2D78792BFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED223243-E081-4AB2-8BA5-993D766FFD1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED223243-E081-4AB2-8BA5-993D766FFD1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED223243-E081-4AB2-8BA5-993D766FFD1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED223243-E081-4AB2-8BA5-993D766FFD1E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
