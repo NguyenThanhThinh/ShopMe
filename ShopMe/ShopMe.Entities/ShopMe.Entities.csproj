@@ -54,6 +54,43 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Migrations\201704060658324_adddata.cs" />
+    <Compile Include="Migrations\201704060658324_adddata.Designer.cs">
+      <DependentUpon>201704060658324_adddata.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704060707507_addSP.cs" />
+    <Compile Include="Migrations\201704060707507_addSP.Designer.cs">
+      <DependentUpon>201704060707507_addSP.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704091342043_addfeed.cs" />
+    <Compile Include="Migrations\201704091342043_addfeed.Designer.cs">
+      <DependentUpon>201704091342043_addfeed.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704111948568_addstatic.cs" />
+    <Compile Include="Migrations\201704111948568_addstatic.Designer.cs">
+      <DependentUpon>201704111948568_addstatic.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704112152500_addsphot.cs" />
+    <Compile Include="Migrations\201704112152500_addsphot.Designer.cs">
+      <DependentUpon>201704112152500_addsphot.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704151224334_addProdcutcapcity.cs" />
+    <Compile Include="Migrations\201704151224334_addProdcutcapcity.Designer.cs">
+      <DependentUpon>201704151224334_addProdcutcapcity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704170911494_addorder.cs" />
+    <Compile Include="Migrations\201704170911494_addorder.Designer.cs">
+      <DependentUpon>201704170911494_addorder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705020919039_updateuser.cs" />
+    <Compile Include="Migrations\201705020919039_updateuser.Designer.cs">
+      <DependentUpon>201705020919039_updateuser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705021522542_addupdateuser2.cs" />
+    <Compile Include="Migrations\201705021522542_addupdateuser2.Designer.cs">
+      <DependentUpon>201705021522542_addupdateuser2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Capacity.cs" />
     <Compile Include="Models\DanhSachGoiSanPham.cs" />
     <Compile Include="Models\Districts.cs" />
@@ -91,6 +128,34 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201704060658324_adddata.resx">
+      <DependentUpon>201704060658324_adddata.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704060707507_addSP.resx">
+      <DependentUpon>201704060707507_addSP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704091342043_addfeed.resx">
+      <DependentUpon>201704091342043_addfeed.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704111948568_addstatic.resx">
+      <DependentUpon>201704111948568_addstatic.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704112152500_addsphot.resx">
+      <DependentUpon>201704112152500_addsphot.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704151224334_addProdcutcapcity.resx">
+      <DependentUpon>201704151224334_addProdcutcapcity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704170911494_addorder.resx">
+      <DependentUpon>201704170911494_addorder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705020919039_updateuser.resx">
+      <DependentUpon>201705020919039_updateuser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705021522542_addupdateuser2.resx">
+      <DependentUpon>201705021522542_addupdateuser2.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
