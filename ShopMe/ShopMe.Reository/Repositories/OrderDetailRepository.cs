@@ -21,8 +21,8 @@ namespace ShopMe.Reository.Repositories
         public IEnumerable<OrderDetail> GetDetailByOrderId(int id)
         {
             var query = from o in DbContext.OrderDetails
-                        where o.OrderID == id
-                        select o;
+                where o.OrderID == id
+                select o;
             return query.Include(a => a.Product).OrderBy(x => x.ProductID);
         }
     }
