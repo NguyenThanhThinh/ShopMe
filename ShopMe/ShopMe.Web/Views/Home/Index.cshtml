@@ -6,7 +6,7 @@
     var listHot = ViewBag.getShowHot as IEnumerable<ShopMe.Entities.Models.ProductShowViewModel>;
 }
 
-<link href="~/Content/index-home.css" rel="stylesheet"/>
+<link href="~/Content/index-home.css" rel="stylesheet" />
 
 <div class="container">
 
@@ -851,7 +851,7 @@
 
                                     <p class="product_price alignleft">
 
-                                        <b>@</b>
+                                        <b>@item.Price.ToString("N0")</b>
                                     </p>
 
                                 </div><!--/ .clearfix.product_info-->
@@ -896,14 +896,14 @@
                                 <div class="table_wrap">
                                     <table class="table_type_1 shopping_cart_table">
                                         <thead>
-                                        <tr>
-                                            <th class="product_image_col">Hình ảnh</th>
-                                            <th class="product_title_col">Tên Sản Phẩm</th>
-                                            <th>Đơn giá</th>
-                                            <th class="product_qty_col">Số lượng</th>
-                                            <th>Tổng</th>
+                                            <tr>
+                                                <th class="product_image_col">Hình ảnh</th>
+                                                <th class="product_title_col">Tên Sản Phẩm</th>
+                                                <th>Đơn giá</th>
+                                                <th class="product_qty_col">Số lượng</th>
+                                                <th>Tổng</th>
 
-                                        </tr>
+                                            </tr>
                                         </thead>
                                         <tbody id="cartBody"></tbody>
 
@@ -937,10 +937,10 @@
 
                             @*<ul class="sc_product_info">
 
-                        <li>Size: Big</li>
-                        <li>Color: Red</li>
+                                    <li>Size: Big</li>
+                                    <li>Color: Red</li>
 
-                    </ul>*@
+                                </ul>*@
 
                         </td>
 
@@ -981,8 +981,6 @@
 
                         <!-- - - - - - - - - - - - - - End of total - - - - - - - - - - - - - - - - -->
                         <!-- - - - -ch - - - - - - - - - Action - - - - - - - - - - - - - - - - -->
-
-
                         <!-- - - - - - - - - - - - - - End of action - - - - - - - - - - - - - - - - -->
 
                     </tr>

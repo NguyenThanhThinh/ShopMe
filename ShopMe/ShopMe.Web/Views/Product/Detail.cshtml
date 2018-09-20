@@ -314,7 +314,7 @@
                                                 </div>
 
                                                 <script>
-                                $('.container1').rating();
+                                                    $('.container1').rating();
                                                 </script>
 
                                             </div>
@@ -488,7 +488,7 @@
     <script src="~/Content/js/fancybox/source/helpers/jquery.fancybox-thumbs.js"></script>
 
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
 
             $('.width_commonrating').hide();
 
@@ -502,15 +502,15 @@
         <script>
             var rating =
             {
-                init: function() {
+                init: function () {
 
                     rating.registerEvent();
                 },
-                registerEvent: function() {
+                registerEvent: function () {
 
 
                     $('.btntfeedback').on('click',
-                        function() {
+                        function () {
                             var productId = parseInt($(this).data('productrating'));
 
                             $.ajax({
@@ -520,7 +520,7 @@
                                 },
                                 type: 'POST',
                                 dataType: 'json',
-                                success: function(response) {
+                                success: function (response) {
                                     if (response.status == false) {
                                         toastr.success(response.message);
 
@@ -536,7 +536,7 @@
 
                         });
                     $('.btntfeedbackclose').on('click',
-                        function() {
+                        function () {
 
                             $('.width_commonrating').css("display", "none");
                             $('.btntfeedback').css("display", "block");
@@ -544,7 +544,7 @@
 
                         });
                     $('.ratingCourse').on('click',
-                        function() {
+                        function () {
 
                             var rating = $("input[type='radio']:checked").val();
                             $('#ratinghtml').html(rating);
@@ -554,7 +554,7 @@
                         });
 
                     $(".btnsubmitRating").off('click').on('click',
-                        function() {
+                        function () {
 
                             var nanValue = NaN;
                             var product = parseInt($('#productrating').val());
@@ -600,7 +600,7 @@
                                     },
                                     type: 'POST',
                                     dataType: 'json',
-                                    success: function(response) {
+                                    success: function (response) {
                                         if (response.status == true) {
                                             toastr.success("Góp ý nhận xét thành công");
                                             window.location.reload();
@@ -612,7 +612,7 @@
 
                         });
 
-                    $("#btnrating").click(function() {
+                    $("#btnrating").click(function () {
 
                         bootbox.confirm({
                             message: "Bạn phải Login mới đánh giá được!Bạn có muốn làm điều đó không ?",
@@ -626,7 +626,7 @@
                                     className: 'btn-danger'
                                 }
                             },
-                            callback: function(result) {
+                            callback: function (result) {
                                 console.log('This was logged in the callback: ' + result);
                                 if (result == true) {
                                     $("#myModal5").modal("show");
@@ -646,9 +646,9 @@
     else
     {
         <script>
-            (function() {
+            (function () {
 
-                $(".btntfeedback").click(function() {
+                $(".btntfeedback").click(function () {
 
                     bootbox.confirm({
                         message: "Bạn phải Login mới đánh giá được ! Bạn có muốn làm điều đó không ?",
@@ -662,7 +662,7 @@
                                 className: 'btn-danger'
                             }
                         },
-                        callback: function(result) {
+                        callback: function (result) {
                             console.log('This was logged in the callback: ' + result);
                             if (result == true) {
                                 $("#myModal5").modal("show");
