@@ -17,19 +17,19 @@ Error handling and data validation - Client and Server side.
 
 Source control - Github.
 
-##Guest users :
+## Guest users :
 
 Can visit  of all pages anonymously.
 Can add to shopping cart even without account.
 Can read articles, reviews, comments...etc
 Their shopping cart items are kept after they register. 
-##Customers :
+## Customers :
 Can continue to checkout to see the final cost of their purchase.
 Can product rating. 
 Can  once per review...etc
 
 
-##Admins :
+## Admins :
 
 Can add new products,categories,brand...
 Can edit all user roles.
