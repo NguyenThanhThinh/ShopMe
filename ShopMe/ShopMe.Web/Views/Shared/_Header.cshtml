@@ -97,20 +97,20 @@
 
                     <div class="call_us">
 
-                        <span>Liên hệ chúng tôi:</span> <b>+0965899230</b>
+                        <span> Contact us:</span> <b>+0965899230</b>
 
                     </div><!--/ .call_us-->
 
 
                     <form class="clearfix search" method="get" action="/tim-kiem.html">
 
-                        <input type="text" id="txtKeyword" name="keyword" tabindex="1" placeholder="Tìm kiếm..." class="alignleft">
+                        <input type="text" id="txtKeyword" name="keyword" tabindex="1" placeholder="Search..." class="alignleft">
 
 
                         <div class="search_category alignleft">
 
                             <div class="open_categories" style="opacity: 3;">
-                                <a href="" data-toggle="tooltip" title="vui lòng click vào chọn tìm theo loại!">Chọn</a>
+                                <a href="" data-toggle="tooltip" title="vui lòng click vào chọn tìm theo loại!">All Categories</a>
                             </div>
 
                             <ul class="categories_list dropdown find">
@@ -165,14 +165,14 @@
                                     else
                                     {
                                         <div class="login_box">
-                                            <div class="login_box_inner"> <a data-toggle="modal" data-target="#myModal5" href="#">Đăng nhập</a> hoặc <a data-toggle="modal" data-target="#myModal6" href="#">Đăng ký</a></div>
+                                            <div class="login_box_inner"> <a data-toggle="modal" data-target="#myModal5" href="#">Login</a> hoặc <a data-toggle="modal" data-target="#myModal6" href="#">Register</a></div>
                                         </div>
                                     }
                                 }
                             </li>
                             <li>
 
-                                <a href="#" data-toggle="tooltip" title="xem chi tiết giỏ hàng!" class="wishlist_button adds">
+                                <a href="#" data-toggle="tooltip" title="Quick View giỏ hàng!" class="wishlist_button adds">
                                     <i class="fa fa-cart-arrow-down" aria-hidden="true" style="font-size: 32px; margin: 3px;"></i><span class="cart-count" id="lblQuantity"></span>
                                 </a>
 
@@ -203,25 +203,25 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"></button>
                 <div class="login__title">
-                    <h2>Đăng nhập</h2>
+                    <h2>Login</h2>
                     <p>
                         <span>Bạn chưa có tài khoản ? </span>
-                        <a href="#" id="btnregister1">Đăng ký</a>
+                        <a href="#" id="btnregister1">Register</a>
                     </p>
                 </div>
                 <p style="text-align: center; color: red" id="thongbaodn"></p>
-                @*<h4 style="text-align:center;" class="modal-title">Đăng nhập</h4><br />
-                    <strong style="float:left">Bạn chưa có tài khoản ?</strong> <a href="#" id="btnregister1"> <strong style="color:red;">Đăng ký ngay</strong></a>
+                @*<h4 style="text-align:center;" class="modal-title">Login</h4><br />
+                    <strong style="float:left">Bạn chưa có tài khoản ?</strong> <a href="#" id="btnregister1"> <strong style="color:red;">Register ngay</strong></a>
                     <p style="text-align:center;color:red" id="thongbaodn"></p>*@
             </div>
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-12">
                         @*<h5>Tài khoản</h5>
-                            <input type="text" class="form-control" placeholder="Tên đăng nhập" id="dn_tendangnhap" name="username" required maxlength="20">*@
+                            <input type="text" class="form-control" placeholder="Tên Login" id="dn_tendangnhap" name="username" required maxlength="20">*@
                         <div class="form-group">
                             <label class="control-label">Tài khoản</label>
-                            <input class="form-control login__boder" type="text" placeholder="Tên đăng nhập" id="Username_1" name="Username_1" required>
+                            <input class="form-control login__boder" type="text" placeholder="Tên Login" id="Username_1" name="Username_1" required>
 
                         </div>
                     </div>
@@ -245,12 +245,12 @@
                 <input type="hidden" name="url" value=""/>
 
                 <button style="width: 100%;" class="ladda-button btn btn-success phongrass loginshopme" id="btndangnhap" data-color="blue" data-style="slide-right">
-                    <abbr title="Sau khi đăng nhập khách hàng  đánh giá sản phẩm hệ thống sẽ gợi ý cho bạn những sản phẩm tốt !">Đăng nhập</abbr>
+                    <abbr title="Sau khi Login khách hàng  Rating sản phẩm hệ thống sẽ gợi ý cho bạn những sản phẩm tốt !">Login</abbr>
                 </button><br/><br/>
 
 
                 <br/>
-                <strong class="mb+" style="float: left">Bạn có thể đăng nhập bằng: </strong>
+                <strong class="mb+" style="float: left">Bạn có thể Login bằng: </strong>
                 <br/>
 
                 @{
@@ -285,10 +285,10 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"></button>
                 <div class="login__title1">
-                    <h2>Đăng ký tài khoản</h2>
+                    <h2>Register tài khoản</h2>
                     <p>
 
-                        <span style="float: left">Đã có tài khoản ?</span> <a href="#" id="btnlogin">Đăng nhập</a>
+                        <span style="float: left">Đã có tài khoản ?</span> <a href="#" id="btnlogin">Login</a>
                     </p>
                 </div>
 
@@ -297,7 +297,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         @*<h5>Tài khoản</h5>
-                                <input type="text" class="form-control" placeholder="Tên đăng nhập" id="dn_tendangnhap" name="username" required maxlength="20">*@
+                                <input type="text" class="form-control" placeholder="Tên Login" id="dn_tendangnhap" name="username" required maxlength="20">*@
                         <div class="form-group">
                             <label class="control-label">Họ tên</label>
                             <input class="form-control" type="text" placeholder="Họ tên" id="FullName" name="FullName" required>
@@ -360,9 +360,9 @@
 
                 <input type="hidden" name="url" value=""/>
 
-                <input type="submit" style="width: 100%;" class="ladda-button btn btn-success phongrass" value="Đăng ký" id="register" data-color="blue" data-style="slide-right"><br/><br/>
+                <input type="submit" style="width: 100%;" class="ladda-button btn btn-success phongrass" value="Register" id="register" data-color="blue" data-style="slide-right"><br/><br/>
 
-                <strong class="mb+" style="float: left">Bạn có thể đăng nhập bằng: </strong>
+                <strong class="mb+" style="float: left">Bạn có thể Login bằng: </strong>
                 <br/>
                 @{
 

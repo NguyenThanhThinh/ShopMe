@@ -294,7 +294,7 @@
                                     <div class="DiemDanhGiaTB col-md-4">
                                         <h4>Chia sẻ nhận xét về sản phẩm</h4>
 
-                                        <button type="button" data-toggle="tooltip" title="bạn phải đăng nhập trước khi sử dụng chức năng này!" data-productrating="@Model.ProductID" class="btn btn-info btntfeedback">Viết nhận xét của bạn</button>
+                                        <button type="button" data-toggle="tooltip" title="bạn phải Login trước khi sử dụng chức năng này!" data-productrating="@Model.ProductID" class="btn btn-info btntfeedback">Viết nhận xét của bạn</button>
                                         <button type="button" class="btn btn-info btntfeedbackclose " style="width: 70%;">Đóng</button>
                                     </div>
                                     <div class="clearfix"></div>
@@ -615,7 +615,7 @@
                     $("#btnrating").click(function() {
 
                         bootbox.confirm({
-                            message: "Bạn phải đăng nhập mới đánh giá được!Bạn có muốn làm điều đó không ?",
+                            message: "Bạn phải Login mới đánh giá được!Bạn có muốn làm điều đó không ?",
                             buttons: {
                                 confirm: {
                                     label: 'Yes',
@@ -651,7 +651,7 @@
                 $(".btntfeedback").click(function() {
 
                     bootbox.confirm({
-                        message: "Bạn phải đăng nhập mới đánh giá được ! Bạn có muốn làm điều đó không ?",
+                        message: "Bạn phải Login mới đánh giá được ! Bạn có muốn làm điều đó không ?",
                         buttons: {
                             confirm: {
                                 label: 'Có',

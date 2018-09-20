@@ -228,7 +228,7 @@ namespace Shop.Web.Controllers
                     return Json(new
                     {
                         status = false,
-                        message = "Bạn đã đánh giá sản phẩm này rồi"
+                        message = "Bạn đã Rating sản phẩm này rồi"
                     }, JsonRequestBehavior.AllowGet);
                 return Json(new
                 {

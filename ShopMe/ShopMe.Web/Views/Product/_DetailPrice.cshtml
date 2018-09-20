@@ -56,7 +56,7 @@
                     {
                         <i class="fa fa-star-o"></i>
                     }
-                    <span class="likes ml+">@Model.ViewRating (đánh giá)</span>
+                    <span class="likes ml+">@Model.ViewRating (Rating)</span>
                 }
 
 
@@ -130,8 +130,8 @@
 
        @if (Model.Quantity > 0)
        {
-            <button class="button_blue middle_btn " id="AddCartQuantity" data-id="@Model.ProductID">Thêm vào giỏ hàng</button>
-            <a class="button_blue middle_btn AddCartQuantityMuaNgay " href="#" data-id="@Model.ProductID">Mua ngay</a>
+            <button class="button_blue middle_btn " id="AddCartQuantity" data-id="@Model.ProductID">Add Cart</button>
+            <a class="button_blue middle_btn AddCartQuantityMuaNgay " href="#" data-id="@Model.ProductID">Shop Now !</a>
        }
        else
        {
