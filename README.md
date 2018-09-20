@@ -16,3 +16,7 @@ Users and Roles - ASP.NET Identity System.
 Error handling and data validation - Client and Server side.
 
 Source control - Github
+
+# Hints
+  backup database
+  Change datasource (server) App.config,ConnectionStrings.config layer ShopMe.Entities,ShopMe.Web
