@@ -15,8 +15,26 @@ Users and Roles - ASP.NET Identity System.
 
 Error handling and data validation - Client and Server side.
 
-Source control - Github
+Source control - Github.
 
+##Guest users :
+
+Can visit  of all pages anonymously.
+Can add to shopping cart even without account.
+Can read articles, reviews, comments...etc
+Their shopping cart items are kept after they register. 
+##Customers :
+Can continue to checkout to see the final cost of their purchase.
+Can product rating. 
+Can  once per review...etc
+
+
+##Admins :
+
+Can add new products,categories,brand...
+Can edit all user roles.
+Can control all the current products that are in the store. Enable/Disable or edit information
+...etc
 # Hints
-  backup database
-  Change datasource (server) App.config,ConnectionStrings.config layer ShopMe.Entities,ShopMe.Web
+Backup database.
+Change datasource (server) App.config,ConnectionStrings.config layer ShopMe.Entities,ShopMe.Web.
